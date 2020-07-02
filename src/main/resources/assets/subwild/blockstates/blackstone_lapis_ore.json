@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/blackstone_lapis_ore"
+		}
+	}
+}

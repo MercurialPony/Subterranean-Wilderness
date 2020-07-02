@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_redstone_ore",
+		"subwild:smooth_sandstone_redstone_ore",
+		"subwild:red_sandstone_redstone_ore",
+		"subwild:smooth_red_sandstone_redstone_ore",
+		"subwild:terracotta_redstone_ore",
+		"subwild:white_terracotta_redstone_ore",
+		"subwild:orange_terracotta_redstone_ore",
+		"subwild:yellow_terracotta_redstone_ore",
+		"subwild:light_gray_terracotta_redstone_ore",
+		"subwild:brown_terracotta_redstone_ore",
+		"subwild:red_terracotta_redstone_ore",
+		"subwild:ice_redstone_ore",
+		"subwild:blackstone_redstone_ore"
+	]
+}

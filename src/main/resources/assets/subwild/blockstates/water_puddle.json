@@ -1,0 +1,10 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/water_puddle",
+			"uvlock": true
+		}
+	}
+}

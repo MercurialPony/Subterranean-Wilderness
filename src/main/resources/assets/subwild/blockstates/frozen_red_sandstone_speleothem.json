@@ -1,0 +1,40 @@
+{
+	"multipart":
+	[
+		{
+			"apply": { "model": "block/ice" }
+		},
+		{
+			"when": { "up": false, "down": false, "facing": "up" },
+			"apply": { "model": "subwild:block/medium_red_sandstone_stalagmite" }
+		},
+		{
+			"when": { "up": false, "down": false, "facing": "down" },
+			"apply": { "model": "subwild:block/medium_red_sandstone_stalagmite", "x": 180 }
+		},
+		{
+			"when": { "up": false, "down": true, "facing": "up" },
+			"apply": { "model": "subwild:block/small_red_sandstone_stalagmite" }
+		},
+		{
+			"when": { "up": true, "down": false, "facing": "down" },
+			"apply": { "model": "subwild:block/small_red_sandstone_stalagmite", "x": 180 }
+		},
+		{
+			"when": { "up": true, "down": false, "facing": "up" },
+			"apply": { "model": "subwild:block/large_red_sandstone_stalagmite" }
+		},
+		{
+			"when": { "up": false, "down": true, "facing": "down" },
+			"apply": { "model": "subwild:block/large_red_sandstone_stalagmite", "x": 180 }
+		},
+		{
+			"when": { "up": true, "down": true, "facing": "up" },
+			"apply": { "model": "subwild:block/red_sandstone_column" }
+		},
+		{
+			"when": { "up": true, "down": true, "facing": "down" },
+			"apply": { "model": "subwild:block/red_sandstone_column" }
+		}
+	]
+}

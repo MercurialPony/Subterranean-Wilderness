@@ -1,0 +1,11 @@
+{
+	"parent": "subwild:block/base/cube_bottom_top_overlay_all",
+	"textures":
+	{
+		"bottom": "block/sandstone_bottom",
+		"top": "block/sandstone_top",
+		"side": "block/sandstone",
+		"mask": "subwild:block/lava_overlay",
+		"particle": "#side"
+	}
+}

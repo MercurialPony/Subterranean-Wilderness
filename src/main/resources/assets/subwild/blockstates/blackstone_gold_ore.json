@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/blackstone_gold_ore"
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"variants":
+	{
+		"type=bottom":
+		{
+			"model": "subwild:block/blackstone_slab"
+		},
+		"type=double":
+		{
+			"model": "subwild:block/blackstone"
+		},
+		"type=top":
+		{
+			"model": "subwild:block/blackstone_slab_top"
+		}
+	}
+}

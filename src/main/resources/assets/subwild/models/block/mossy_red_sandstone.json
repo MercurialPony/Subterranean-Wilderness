@@ -1,0 +1,9 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures":
+	{
+		"bottom": "subwild:block/mossy_red_sandstone_bottom",
+		"top": "subwild:block/mossy_red_sandstone_top",
+		"side": "subwild:block/mossy_red_sandstone"
+	}
+}

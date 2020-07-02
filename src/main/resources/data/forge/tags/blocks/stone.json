@@ -1,0 +1,25 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:molten_stone",
+		"subwild:molten_granite",
+		"subwild:molten_diorite",
+		"subwild:molten_andesite",
+
+		"subwild:mossy_stone",
+		"subwild:mossy_granite",
+		"subwild:mossy_diorite",
+		"subwild:mossy_andesite",
+
+		"subwild:wet_stone",
+		"subwild:wet_granite",
+		"subwild:wet_diorite",
+		"subwild:wet_andesite",
+
+		"subwild:hot_stone",
+		"subwild:hot_granite",
+		"subwild:hot_diorite",
+		"subwild:hot_andesite"
+	]
+}

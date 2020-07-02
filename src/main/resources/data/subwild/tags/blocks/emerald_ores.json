@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_emerald_ore",
+		"subwild:smooth_sandstone_emerald_ore",
+		"subwild:red_sandstone_emerald_ore",
+		"subwild:smooth_red_sandstone_emerald_ore",
+		"subwild:terracotta_emerald_ore",
+		"subwild:white_terracotta_emerald_ore",
+		"subwild:orange_terracotta_emerald_ore",
+		"subwild:yellow_terracotta_emerald_ore",
+		"subwild:light_gray_terracotta_emerald_ore",
+		"subwild:brown_terracotta_emerald_ore",
+		"subwild:red_terracotta_emerald_ore",
+		"subwild:ice_emerald_ore",
+		"subwild:blackstone_emerald_ore"
+	]
+}

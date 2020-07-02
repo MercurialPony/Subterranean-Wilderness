@@ -1,0 +1,7 @@
+{
+	"parent": "block/cross",
+	"textures":
+	{
+		"cross": "subwild:block/glowing_short_foxfire"
+	}
+}

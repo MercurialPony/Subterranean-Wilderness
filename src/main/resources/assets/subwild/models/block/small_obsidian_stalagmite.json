@@ -1,0 +1,7 @@
+{
+	"parent": "subwild:block/base/small_stalagmite",
+	"textures":
+	{
+		"all": "block/obsidian"
+	}
+}

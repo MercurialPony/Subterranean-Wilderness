@@ -1,0 +1,8 @@
+{
+	"parent": "block/cube_column",
+	"textures":
+	{
+		"end": "subwild:block/mossy_blackstone_top",
+		"side": "subwild:block/mossy_blackstone"
+	}
+}

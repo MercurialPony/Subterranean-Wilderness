@@ -1,0 +1,7 @@
+{
+	"parent": "subwild:block/base/column",
+	"textures":
+	{
+		"all": "block/red_sandstone"
+	}
+}

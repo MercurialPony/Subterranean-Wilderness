@@ -1,0 +1,17 @@
+{
+	"variants":
+	{
+		"glowing=false,facing=north": { "model": "subwild:block/long_foxfire", "x": 90 },
+		"glowing=false,facing=east":  { "model": "subwild:block/long_foxfire", "x": -90, "y": -90 },
+		"glowing=false,facing=south": { "model": "subwild:block/long_foxfire", "x": -90 },
+		"glowing=false,facing=west":  { "model": "subwild:block/long_foxfire", "x": -90, "y": 90 },
+		"glowing=false,facing=up":    { "model": "subwild:block/long_foxfire" },
+		"glowing=false,facing=down":  { "model": "subwild:block/long_foxfire", "x": 180 },
+		"glowing=true,facing=north":  { "model": "subwild:block/glowing_long_foxfire", "x": 90 },
+		"glowing=true,facing=east":   { "model": "subwild:block/glowing_long_foxfire", "x": -90, "y": -90 },
+		"glowing=true,facing=south":  { "model": "subwild:block/glowing_long_foxfire", "x": -90 },
+		"glowing=true,facing=west":   { "model": "subwild:block/glowing_long_foxfire", "x": -90, "y": 90 },
+		"glowing=true,facing=up":     { "model": "subwild:block/glowing_long_foxfire" },
+		"glowing=true,facing=down":   { "model": "subwild:block/glowing_long_foxfire", "x": 180 }
+	}
+}

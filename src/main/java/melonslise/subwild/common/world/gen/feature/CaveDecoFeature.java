@@ -1,0 +1,81 @@
+package melonslise.subwild.common.world.gen.feature;
+
+import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
+
+import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.init.SubWildCapabilities;
+import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.Feature;
+
+public class CaveDecoFeature extends Feature<CaveRangeConfig>
+{
+	public CaveDecoFeature(Function<Dynamic<?>, ? extends CaveRangeConfig> factory)
+	{
+		super(factory);
+	}
+
+	@Override
+	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> gen, Random rand, BlockPos pos, CaveRangeConfig profile)
+	{
+		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
+		if(noise == null)
+			return false;
+		float depth = depthAt(world, pos);
+		if(depth < 0f)
+			return false;
+		CaveType type = profile.getCaveTypeAt(depth);
+		if(type == null)
+			return false;
+		BlockPos.Mutable adjPos = new BlockPos.Mutable();
+		for(int pass = 0; pass < type.getPasses(); ++pass)
+		{
+			for(Direction dir : type.getGenOrder(pass))
+			{
+				adjPos.setPos(pos).move(dir);
+				if(type.canGenSide(world, adjPos, world.getBlockState(adjPos), depth, pass, dir))
+					switch (dir)
+					{
+					case UP:
+						type.genCeil(world, noise, adjPos, depth, pass, rand);
+						break;
+					case DOWN:
+						type.genFloor(world, noise, adjPos, depth, pass, rand);
+						break;
+					default:
+						type.genWall(world, noise, adjPos, depth, pass, rand);
+						break;
+					}
+				if(type.canGenExtra(world, pos, world.getBlockState(pos), adjPos, world.getBlockState(adjPos), depth, pass, dir))
+					switch(dir)
+					{
+					case UP:
+						type.genCeilExtra(world, noise, pos, depth, pass, rand);
+						break;
+					case DOWN:
+						type.genFloorExtra(world, noise, pos, depth, pass, rand);
+						break;
+					default:
+						type.genWallExtra(world, noise, pos, dir, depth, pass, rand);
+						break;
+					}
+			}
+			if(type.canGenFill(world, pos, world.getBlockState(pos), depth, pass))
+				type.genFill(world, noise, pos, depth, pass, rand);
+		}
+		return false;
+	}
+
+	public static float depthAt(IWorld world, BlockPos pos)
+	{
+		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ());
+	}
+}

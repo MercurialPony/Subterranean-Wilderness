@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_lapis_ore",
+		"subwild:smooth_sandstone_lapis_ore",
+		"subwild:red_sandstone_lapis_ore",
+		"subwild:smooth_red_sandstone_lapis_ore",
+		"subwild:terracotta_lapis_ore",
+		"subwild:white_terracotta_lapis_ore",
+		"subwild:orange_terracotta_lapis_ore",
+		"subwild:yellow_terracotta_lapis_ore",
+		"subwild:light_gray_terracotta_lapis_ore",
+		"subwild:brown_terracotta_lapis_ore",
+		"subwild:red_terracotta_lapis_ore",
+		"subwild:ice_lapis_ore",
+		"subwild:blackstone_lapis_ore"
+	]
+}

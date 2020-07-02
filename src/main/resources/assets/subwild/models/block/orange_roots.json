@@ -1,0 +1,7 @@
+{
+	"parent": "subwild:block/base/roots",
+	"textures":
+	{
+		"all": "block/stripped_acacia_log"
+	}
+}

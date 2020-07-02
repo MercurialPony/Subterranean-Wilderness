@@ -1,0 +1,12 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{ "model": "subwild:block/mossy_stone" },
+			{ "model": "subwild:block/mossy_stone_mirrored" },
+			{ "model": "subwild:block/mossy_stone", "y": 180 },
+			{ "model": "subwild:block/mossy_stone_mirrored", "y": 180 }
+		]
+	}
+}

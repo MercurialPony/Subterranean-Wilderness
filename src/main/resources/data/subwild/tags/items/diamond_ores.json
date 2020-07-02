@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_diamond_ore",
+		"subwild:smooth_sandstone_diamond_ore",
+		"subwild:red_sandstone_diamond_ore",
+		"subwild:smooth_red_sandstone_diamond_ore",
+		"subwild:terracotta_diamond_ore",
+		"subwild:white_terracotta_diamond_ore",
+		"subwild:orange_terracotta_diamond_ore",
+		"subwild:yellow_terracotta_diamond_ore",
+		"subwild:light_gray_terracotta_diamond_ore",
+		"subwild:brown_terracotta_diamond_ore",
+		"subwild:red_terracotta_diamond_ore",
+		"subwild:ice_diamond_ore",
+		"subwild:blackstone_diamond_ore"
+	]
+}

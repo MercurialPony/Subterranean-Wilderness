@@ -1,0 +1,4 @@
+{
+	"parent": "block/cube_all",
+	"textures": { "all": "subwild:block/white_terracotta_emerald_ore" }
+}

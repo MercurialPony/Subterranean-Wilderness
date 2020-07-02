@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:blasting",
+	"ingredient":
+	{
+		"tag": "subwild:lapis_ores"
+	},
+	"result": "minecraft:lapis_lazuli",
+	"experience": 0.2,
+	"cookingtime": 100
+}

@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/sandstone_emerald_ore"
+		}
+	}
+}

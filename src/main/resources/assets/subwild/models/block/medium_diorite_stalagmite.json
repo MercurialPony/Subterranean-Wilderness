@@ -1,0 +1,7 @@
+{
+	"parent": "subwild:block/base/medium_stalagmite",
+	"textures":
+	{
+		"all": "block/diorite"
+	}
+}

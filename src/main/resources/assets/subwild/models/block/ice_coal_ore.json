@@ -1,0 +1,8 @@
+{
+	"parent": "subwild:block/base/ore_chunks",
+	"textures":
+	{
+		"ore": "block/coal_block",
+		"case": "block/ice"
+	}
+}

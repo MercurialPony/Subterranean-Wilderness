@@ -1,0 +1,4 @@
+{
+	"parent": "block/cube_all",
+	"textures": { "all": "subwild:block/sandstone_gold_ore" }
+}

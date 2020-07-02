@@ -1,0 +1,25 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:stone_speleothem",
+		"subwild:granite_speleothem",
+		"subwild:diorite_speleothem",
+		"subwild:andesite_speleothem",
+		"subwild:sandstone_speleothem",
+		"subwild:red_sandstone_speleothem",
+		"subwild:obsidian_speleothem",
+		"subwild:blackstone_speleothem",
+
+		"subwild:frozen_stone_speleothem",
+		"subwild:frozen_granite_speleothem",
+		"subwild:frozen_diorite_speleothem",
+		"subwild:frozen_andesite_speleothem",
+		"subwild:frozen_sandstone_speleothem",
+		"subwild:frozen_red_sandstone_speleothem",
+		"subwild:frozen_obsidian_speleothem",
+		"subwild:frozen_blackstone_speleothem",
+
+		"subwild:icicle"
+	]
+}

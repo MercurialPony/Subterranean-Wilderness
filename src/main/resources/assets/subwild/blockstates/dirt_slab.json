@@ -1,0 +1,17 @@
+{
+	"variants":
+	{
+		"type=bottom":
+		{
+			"model": "subwild:block/dirt_slab"
+		},
+		"type=double":
+		{
+			"model": "block/dirt"
+		},
+		"type=top":
+		{
+			"model": "subwild:block/dirt_slab_top"
+		}
+	}
+}

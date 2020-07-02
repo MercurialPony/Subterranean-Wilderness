@@ -1,0 +1,7 @@
+{
+	"parent": "subwild:block/base/large_stalagmite",
+	"textures":
+	{
+		"all": "block/sandstone"
+	}
+}

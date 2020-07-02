@@ -1,0 +1,9 @@
+{
+	"parent": "subwild:block/base/cube_all_overlay_all",
+	"textures":
+	{
+		"base": "block/stone",
+		"mask": "subwild:block/lava_overlay",
+		"particle": "#base"
+	}
+}

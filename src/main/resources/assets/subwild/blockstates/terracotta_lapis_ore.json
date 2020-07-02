@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/terracotta_lapis_ore"
+		}
+	}
+}

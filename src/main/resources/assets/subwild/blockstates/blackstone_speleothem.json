@@ -1,0 +1,13 @@
+{
+	"variants":
+	{
+		"up=false,down=false,facing=up":   { "model": "subwild:block/medium_blackstone_stalagmite" },
+		"up=false,down=false,facing=down": { "model": "subwild:block/medium_blackstone_stalagmite", "x": 180 },
+		"up=false,down=true,facing=up":    { "model": "subwild:block/small_blackstone_stalagmite" },
+		"up=true,down=false,facing=down":  { "model": "subwild:block/small_blackstone_stalagmite", "x": 180 },
+		"up=true,down=false,facing=up":    { "model": "subwild:block/large_blackstone_stalagmite" },
+		"up=false,down=true,facing=down":  { "model": "subwild:block/large_blackstone_stalagmite", "x": 180 },
+		"up=true,down=true,facing=up":     { "model": "subwild:block/blackstone_column" },
+		"up=true,down=true,facing=down":   { "model": "subwild:block/blackstone_column" }
+	}
+}

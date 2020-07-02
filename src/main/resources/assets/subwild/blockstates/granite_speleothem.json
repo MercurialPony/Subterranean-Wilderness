@@ -1,0 +1,13 @@
+{
+	"variants":
+	{
+		"up=false,down=false,facing=up":   { "model": "subwild:block/medium_granite_stalagmite" },
+		"up=false,down=false,facing=down": { "model": "subwild:block/medium_granite_stalagmite", "x": 180 },
+		"up=false,down=true,facing=up":    { "model": "subwild:block/small_granite_stalagmite" },
+		"up=true,down=false,facing=down":  { "model": "subwild:block/small_granite_stalagmite", "x": 180 },
+		"up=true,down=false,facing=up":    { "model": "subwild:block/large_granite_stalagmite" },
+		"up=false,down=true,facing=down":  { "model": "subwild:block/large_granite_stalagmite", "x": 180 },
+		"up=true,down=true,facing=up":     { "model": "subwild:block/granite_column" },
+		"up=true,down=true,facing=down":   { "model": "subwild:block/granite_column" }
+	}
+}

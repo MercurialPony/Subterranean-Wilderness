@@ -1,0 +1,13 @@
+{
+	"variants":
+	{
+		"up=false,down=false,facing=up":   { "model": "subwild:block/medium_stone_stalagmite" },
+		"up=false,down=false,facing=down": { "model": "subwild:block/medium_stone_stalagmite", "x": 180 },
+		"up=false,down=true,facing=up":    { "model": "subwild:block/small_stone_stalagmite" },
+		"up=true,down=false,facing=down":  { "model": "subwild:block/small_stone_stalagmite", "x": 180 },
+		"up=true,down=false,facing=up":    { "model": "subwild:block/large_stone_stalagmite" },
+		"up=false,down=true,facing=down":  { "model": "subwild:block/large_stone_stalagmite", "x": 180 },
+		"up=true,down=true,facing=up":     { "model": "subwild:block/stone_column" },
+		"up=true,down=true,facing=down":   { "model": "subwild:block/stone_column" }
+	}
+}

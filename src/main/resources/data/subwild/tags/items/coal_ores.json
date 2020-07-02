@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_coal_ore",
+		"subwild:smooth_sandstone_coal_ore",
+		"subwild:red_sandstone_coal_ore",
+		"subwild:smooth_red_sandstone_coal_ore",
+		"subwild:terracotta_coal_ore",
+		"subwild:white_terracotta_coal_ore",
+		"subwild:orange_terracotta_coal_ore",
+		"subwild:yellow_terracotta_coal_ore",
+		"subwild:light_gray_terracotta_coal_ore",
+		"subwild:brown_terracotta_coal_ore",
+		"subwild:red_terracotta_coal_ore",
+		"subwild:ice_coal_ore",
+		"subwild:blackstone_coal_ore"
+	]
+}

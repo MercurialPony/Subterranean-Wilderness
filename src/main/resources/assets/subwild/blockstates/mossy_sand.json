@@ -1,0 +1,12 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{ "model": "subwild:block/mossy_sand" },
+			{ "model": "subwild:block/mossy_sand", "y": 90 },
+			{ "model": "subwild:block/mossy_sand", "y": 180 },
+			{ "model": "subwild:block/mossy_sand", "y": 270 }
+		]
+	}
+}

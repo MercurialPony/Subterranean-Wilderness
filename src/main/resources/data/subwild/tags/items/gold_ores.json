@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_gold_ore",
+		"subwild:smooth_sandstone_gold_ore",
+		"subwild:red_sandstone_gold_ore",
+		"subwild:smooth_red_sandstone_gold_ore",
+		"subwild:terracotta_gold_ore",
+		"subwild:white_terracotta_gold_ore",
+		"subwild:orange_terracotta_gold_ore",
+		"subwild:yellow_terracotta_gold_ore",
+		"subwild:light_gray_terracotta_gold_ore",
+		"subwild:brown_terracotta_gold_ore",
+		"subwild:red_terracotta_gold_ore",
+		"subwild:ice_gold_ore",
+		"subwild:blackstone_gold_ore"
+	]
+}

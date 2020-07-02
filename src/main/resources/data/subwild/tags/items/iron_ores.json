@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values":
+	[
+		"subwild:sandstone_iron_ore",
+		"subwild:smooth_sandstone_iron_ore",
+		"subwild:red_sandstone_iron_ore",
+		"subwild:smooth_red_sandstone_iron_ore",
+		"subwild:terracotta_iron_ore",
+		"subwild:white_terracotta_iron_ore",
+		"subwild:orange_terracotta_iron_ore",
+		"subwild:yellow_terracotta_iron_ore",
+		"subwild:light_gray_terracotta_iron_ore",
+		"subwild:brown_terracotta_iron_ore",
+		"subwild:red_terracotta_iron_ore",
+		"subwild:ice_iron_ore",
+		"subwild:blackstone_iron_ore"
+	]
+}
