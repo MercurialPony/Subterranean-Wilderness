@@ -21,9 +21,10 @@ archivesBaseName = 'subwild'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft
 {
-	mappings channel: 'snapshot', version: '20200514-1.15.1'
+	mappings channel: 'snapshot', version: '20200707-1.16.1'
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 	runs
 	{
@@ -74,7 +75,7 @@ minecraft
 
 dependencies
 {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.63'
 }
 
 jar
@@ -95,3 +96,5 @@ jar
 		)
 	}
 }
+
+jar.finalizedBy('reobfJar')

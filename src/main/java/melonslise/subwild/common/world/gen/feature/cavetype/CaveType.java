@@ -6,8 +6,9 @@ import java.util.Random;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.Dynamic;
+import com.mojang.serialization.DynamicOps;
 
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.init.SubWildBlocks;
@@ -21,14 +22,16 @@ import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IDynamicSerializable;
+//import net.minecraft.util.IDynamicSerializable; // replaced with com.mojang.serialization.Codec
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.common.Tags;
 
-public abstract class CaveType implements IDynamicSerializable
+public abstract class CaveType //implements IDynamicSerializable
 {
+	//public static final Codec<CaveType> caveTypeCodec; // todo
+
 	public final ResourceLocation name;
 
 	public static final Block[] ROOTS = new Block[] { SubWildBlocks.LIGHT_BROWN_ROOTS, SubWildBlocks.BROWN_ROOTS, SubWildBlocks.WHITE_ROOTS, SubWildBlocks.LIGHT_ORANGE_ROOTS, SubWildBlocks.ORANGE_ROOTS, SubWildBlocks.DARK_BROWN_ROOTS };
