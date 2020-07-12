@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.0.1'
 group = 'melonslise.subwild'
 archivesBaseName = 'subwild'
 
@@ -23,7 +23,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft
 {
-	mappings channel: 'snapshot', version: '20200225-1.15.1'
+	mappings channel: 'snapshot', version: '20200514-1.15.1'
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 	runs
 	{
@@ -60,7 +60,7 @@ minecraft
 			workingDirectory project.file('run')
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
-			args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
+			args '--mod', 'subwild', '--all', '--output', file('src/generated/resources/')
 			mods
 			{
 				subwild
@@ -74,7 +74,7 @@ minecraft
 
 dependencies
 {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.46'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
 }
 
 jar
