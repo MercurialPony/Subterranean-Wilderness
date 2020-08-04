@@ -20,7 +20,7 @@ import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 import net.minecraftforge.common.Tags;
 
 public class BasicCaveType extends CaveType
@@ -46,10 +46,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genFloor(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genFloorExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -65,10 +65,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genCeil(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genCeilExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -89,10 +89,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genWall(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genWallExtra(IWorld world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -107,22 +107,22 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genFill(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public boolean canGenSide(IWorld world, BlockPos pos, BlockState state, float depth, int pass, Direction dir)
+	public boolean canGenSide(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass, Direction dir)
 	{
 		return pass == 0 && (state.isIn(Tags.Blocks.STONE) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL)) || state.isIn(Tags.Blocks.ORES);
 	}
 
 	@Override
-	public boolean canGenExtra(IWorld world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
+	public boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
 	{
 		return pass == 1 && state.isAir() && (sideState.isIn(Tags.Blocks.ORES) || sideState.getMaterial() == Material.WOOD || this.isNatural(world, sidePos, sideState));
 	}
 
 	@Override
-	public boolean canGenFill(IWorld world, BlockPos pos, BlockState state, float depth, int pass)
+	public boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass)
 	{
 		return pass == 1 && state.isAir();
 	}
@@ -144,14 +144,14 @@ public class BasicCaveType extends CaveType
 		return (float) rand.nextInt(100) < baseCh + depth * 3f;
 	}
 
-	public void genRandSpel(IWorld world, BlockPos pos, BlockState state, float depth, Random rand)
+	public void genRandSpel(ISeedReader world, BlockPos pos, BlockState state, float depth, Random rand)
 	{
 		this.genSpel(world, pos, state, 1 + rand.nextInt(2) + rand.nextInt((int) (depth * 10f) + 1));
 	}
 
-	public void genSlope(IWorld world, BlockPos pos, Direction wallDir, Random rand)
+	public void genSlope(ISeedReader world, BlockPos pos, Direction wallDir, Random rand)
 	{
-		BlockPos.Mutable mutPos = new BlockPos.Mutable(pos);
+		BlockPos.Mutable mutPos = new BlockPos.Mutable().setPos(pos);
 		Block wall = world.getBlockState(mutPos.setPos(pos).move(wallDir)).getBlock();
 		boolean isDown = this.isNatural(world, mutPos.setPos(pos).move(0, -1, 0), world.getBlockState(mutPos));
 		boolean isUp = this.isNatural(world, mutPos.setPos(pos).move(0, 1, 0), world.getBlockState(mutPos));

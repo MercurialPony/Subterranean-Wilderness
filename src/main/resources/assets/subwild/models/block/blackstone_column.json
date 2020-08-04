@@ -2,6 +2,6 @@
 	"parent": "subwild:block/base/column",
 	"textures":
 	{
-		"all": "subwild:block/blackstone"
+		"all": "block/blackstone"
 	}
 }

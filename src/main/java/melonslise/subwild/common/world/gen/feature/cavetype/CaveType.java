@@ -5,13 +5,12 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
 
-import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.Dynamic;
-import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.init.SubWildBlocks;
+import melonslise.subwild.common.init.SubWildFeatures;
 import melonslise.subwild.common.init.SubWildLookups;
 import melonslise.subwild.common.init.SubWildProperties;
 import melonslise.subwild.common.init.SubWildTags;
@@ -22,15 +21,17 @@ import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
-//import net.minecraft.util.IDynamicSerializable; // replaced with com.mojang.serialization.Codec
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 import net.minecraftforge.common.Tags;
 
-public abstract class CaveType //implements IDynamicSerializable
+public abstract class CaveType
 {
-	//public static final Codec<CaveType> caveTypeCodec; // todo
+	public static final Codec<CaveType> CODEC = RecordCodecBuilder.create(record -> record
+		.group(
+			Codec.STRING.fieldOf("name").forGetter(inst -> inst.name.toString()))
+		.apply(record, str -> SubWildFeatures.CAVE_TYPES.get(new ResourceLocation(str))));
 
 	public final ResourceLocation name;
 
@@ -46,36 +47,36 @@ public abstract class CaveType //implements IDynamicSerializable
 		this(new ResourceLocation(domain, path));
 	}
 
-	public abstract void genFloor(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract void genFloorExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract void genCeil(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract void genCeilExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract void genWall(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract void genWallExtra(IWorld world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand);
+	public abstract void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand);
 
-	public abstract void genFill(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
 
-	public abstract boolean canGenSide(IWorld world, BlockPos pos, BlockState state, float depth, int pass, Direction dir);
+	public abstract boolean canGenSide(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass, Direction dir);
 
-	public abstract boolean canGenExtra(IWorld world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir);
+	public abstract boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir);
 
-	public abstract boolean canGenFill(IWorld world, BlockPos pos, BlockState state, float depth, int pass);
+	public abstract boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass);
 
 	public abstract Set<Direction> getGenOrder(int pass);
 
 	public abstract int getPasses();
 
-	public boolean isNatural(IWorld world, BlockPos pos, BlockState state)
+	public boolean isNatural(ISeedReader world, BlockPos pos, BlockState state)
 	{
-		return state.isIn(Tags.Blocks.STONE) || state.getBlock() == SubWildBlocks.BLACKSTONE || state.getBlock() == Blocks.MAGMA_BLOCK || state.isIn(Tags.Blocks.COBBLESTONE) || state.isIn(BlockTags.CORAL_BLOCKS) || state.getBlock() == Blocks.SNOW_BLOCK || state.getBlock() == Blocks.PRISMARINE || state.isIn(BlockTags.ICE) || state.isIn(Tags.Blocks.SANDSTONE) || state.isIn(SubWildTags.TERRACOTTA) || state.isIn(Tags.Blocks.SAND) || state.isIn(Tags.Blocks.GRAVEL) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.OBSIDIAN);
+		return state.isIn(Tags.Blocks.STONE) || state.getBlock() == Blocks.BLACKSTONE || state.getBlock() == Blocks.MAGMA_BLOCK || state.isIn(Tags.Blocks.COBBLESTONE) || state.isIn(BlockTags.CORAL_BLOCKS) || state.getBlock() == Blocks.SNOW_BLOCK || state.getBlock() == Blocks.PRISMARINE || state.isIn(BlockTags.ICE) || state.isIn(Tags.Blocks.SANDSTONE) || state.isIn(SubWildTags.TERRACOTTA) || state.isIn(Tags.Blocks.SAND) || state.isIn(Tags.Blocks.GRAVEL) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.OBSIDIAN);
 	}
 
-	public boolean genBlock(IWorld world, BlockPos pos, BlockState state)
+	public boolean genBlock(ISeedReader world, BlockPos pos, BlockState state)
 	{
 		if(!state.isValidPosition(world, pos))
 			return false;
@@ -83,7 +84,7 @@ public abstract class CaveType //implements IDynamicSerializable
 		return true;
 	}
 
-	public boolean replaceBlock(IWorld world, BlockPos pos, BlockState state)
+	public boolean replaceBlock(ISeedReader world, BlockPos pos, BlockState state)
 	{
 		Block block = world.getBlockState(pos).getBlock();
 		if(!block.isIn(Tags.Blocks.ORES))
@@ -95,7 +96,7 @@ public abstract class CaveType //implements IDynamicSerializable
 				.orElse(false);
 	}
 
-	public boolean modifyBlock(IWorld world, BlockPos pos, Map<Block, Block> lookup)
+	public boolean modifyBlock(ISeedReader world, BlockPos pos, Map<Block, Block> lookup)
 	{
 		Block block = world.getBlockState(pos).getBlock();
 		Block newBlock = lookup.get(block);
@@ -104,7 +105,7 @@ public abstract class CaveType //implements IDynamicSerializable
 		return this.replaceBlock(world, pos, newBlock.getDefaultState());
 	}
 
-	public boolean genLayer(IWorld world, BlockPos pos, BlockState state, double noise, double min, double max, int maxHgt)
+	public boolean genLayer(ISeedReader world, BlockPos pos, BlockState state, double noise, double min, double max, int maxHgt)
 	{
 		if(noise < min || noise > max)
 			return false;
@@ -115,14 +116,14 @@ public abstract class CaveType //implements IDynamicSerializable
 		return true;
 	}
 
-	public void genRoots(IWorld world, INoise noise, BlockPos pos)
+	public void genRoots(ISeedReader world, INoise noise, BlockPos pos)
 	{
 		this.genBlock(world, pos, ROOTS[(int) (this.getClampedNoise(noise, pos, 0.0625d) * (double) ROOTS.length)].getDefaultState());
 	}
 
-	public void genVines(IWorld world, BlockPos pos, Direction mainDir, int len)
+	public void genVines(ISeedReader world, BlockPos pos, Direction mainDir, int len)
 	{
-		BlockPos.Mutable next = new BlockPos.Mutable(pos);
+		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < len; ++a)
 		{
 			BlockState newState = world.getBlockState(next);
@@ -137,9 +138,9 @@ public abstract class CaveType //implements IDynamicSerializable
 		}
 	}
 
-	public void genKelp(IWorld world, BlockPos pos, int len)
+	public void genKelp(ISeedReader world, BlockPos pos, int len)
 	{
-		BlockPos.Mutable next = new BlockPos.Mutable(pos);
+		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < len; ++a)
 		{
 			this.genBlock(world, next, (a == len - 1 ? Blocks.KELP : Blocks.KELP_PLANT).getDefaultState());
@@ -149,10 +150,10 @@ public abstract class CaveType //implements IDynamicSerializable
 		}
 	}
 
-	public void genSpel(IWorld world, BlockPos pos, BlockState state, int size)
+	public void genSpel(ISeedReader world, BlockPos pos, BlockState state, int size)
 	{
 		Direction dir = state.get(SubWildProperties.VERTICAL_FACING);
-		BlockPos.Mutable next = new BlockPos.Mutable(pos);
+		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < size; ++a)
 		{
 			BlockState nextState = world.getBlockState(next.move(dir));
@@ -170,11 +171,11 @@ public abstract class CaveType //implements IDynamicSerializable
 		}
 	}
 
-	public void genBigBrownShroom(IWorld world, BlockPos pos, int len)
+	public void genBigBrownShroom(ISeedReader world, BlockPos pos, int len)
 	{
 		if(len < 1)
 			len = 1;
-		BlockPos.Mutable next = new BlockPos.Mutable(pos).move(0, -1, 0);
+		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos).move(0, -1, 0);
 		for(int a = 0; a < len + 1; ++a)
 			this.genBlock(world, next.move(Direction.UP), Blocks.MUSHROOM_STEM.getDefaultState());
 		next.setPos(pos).move(-2, len, 0);
@@ -197,11 +198,11 @@ public abstract class CaveType //implements IDynamicSerializable
 			this.genBlock(world, next, Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState());
 	}
 
-	public void genBigRedShroom(IWorld world, BlockPos pos, int len)
+	public void genBigRedShroom(ISeedReader world, BlockPos pos, int len)
 	{
 		if(len < 1)
 			len = 1;
-		BlockPos.Mutable next = new BlockPos.Mutable(pos).move(0, -1, 0);
+		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos).move(0, -1, 0);
 		for(int a = 0; a < len + 2; ++a)
 			this.genBlock(world, next.move(Direction.UP), Blocks.MUSHROOM_STEM.getDefaultState());
 		next.setPos(pos).move(-1, len, 0);
@@ -231,12 +232,5 @@ public abstract class CaveType //implements IDynamicSerializable
 	public double getClampedNoise(INoise noise, BlockPos pos, double frequency)
 	{
 		return this.getNoise(noise, pos, frequency) / 2d + 0.5d;
-	}
-
-	@Override
-	public <T> T serialize(DynamicOps<T> ops)
-	{
-		return new Dynamic<>(ops,
-			ops.createMap(ImmutableMap.of(ops.createString("name"), ops.createString(this.name.toString())))).getValue();
 	}
 }

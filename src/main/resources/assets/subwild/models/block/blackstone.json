@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/cube_column",
-	"textures":
-	{
-		"end": "subwild:block/blackstone_top",
-		"side": "subwild:block/blackstone"
-	}
-}

@@ -28,7 +28,7 @@ public final class SubWildClientForgeEvents
 		Minecraft mc = Minecraft.getInstance();
 		if(!mc.gameSettings.showDebugInfo || mc.isReducedDebug())
 			return;
-		BlockPos pos = mc.player.getPosition();
+		BlockPos pos = mc.player.func_233580_cy_(); // getPosition
 		CaveType cave = null;
 		for(ConfiguredFeature cf : mc.world.getBiome(pos).getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION))
 			if(cf.config instanceof DecoratedFeatureConfig)

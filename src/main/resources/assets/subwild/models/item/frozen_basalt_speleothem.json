@@ -1,0 +1,8 @@
+{
+	"parent": "subwild:block/base/encased_medium_stalagmite",
+	"textures":
+	{
+		"base": "block/basalt_top",
+		"case": "block/ice"
+	}
+}

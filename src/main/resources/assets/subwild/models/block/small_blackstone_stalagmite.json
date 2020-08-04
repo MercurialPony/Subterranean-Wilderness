@@ -2,6 +2,6 @@
 	"parent": "subwild:block/base/small_stalagmite",
 	"textures":
 	{
-		"all": "subwild:block/blackstone"
+		"all": "block/blackstone"
 	}
 }

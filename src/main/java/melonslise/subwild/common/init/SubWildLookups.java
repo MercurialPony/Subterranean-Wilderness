@@ -1,3 +1,4 @@
+
 package melonslise.subwild.common.init;
 
 import java.util.HashMap;
@@ -6,27 +7,28 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ITag;
 import net.minecraftforge.common.Tags;
 
+// FIXME Use tag sizes for map init
 public final class SubWildLookups
 {
 	private SubWildLookups() {}
 
 	public static HashMap<Block, Block> STAIRS, SLABS, SPELEOS, FROZEN_SPELEOS, MOLTEN, MOSSY, WET, HOT;
 
-	public static HashMap<Block, HashMap<Block, Block>> ORE_TABLE = new HashMap<>(12);
+	public static HashMap<Block, HashMap<Block, Block>> ORE_TABLE = new HashMap<>(13 + 4); // 4 for ice
 
 	public static void init()
 	{
 		STAIRS = new HashMap<>(13);
 		SLABS = new HashMap<>(13);
-		SPELEOS = new HashMap<>(8);
-		FROZEN_SPELEOS = new HashMap<>(8 + 1 * 4); // 1 icicle and 4 tagged ice blocks
-		MOLTEN = new HashMap<>(10);
-		MOSSY = new HashMap<>(14);
+		SPELEOS = new HashMap<>(9);
+		FROZEN_SPELEOS = new HashMap<>(9 + 1 * 4); // 1 icicle and 4 tagged ice blocks
+		MOLTEN = new HashMap<>(11);
+		MOSSY = new HashMap<>(15);
 		WET = new HashMap<>(5);
-		HOT = new HashMap<>(5);
+		HOT = new HashMap<>(11);
 
 		ORE_TABLE.put(Blocks.SANDSTONE, new HashMap<>(7));
 		ORE_TABLE.put(Blocks.SMOOTH_SANDSTONE, new HashMap<>(7));
@@ -39,7 +41,8 @@ public final class SubWildLookups
 		ORE_TABLE.put(Blocks.LIGHT_GRAY_TERRACOTTA, new HashMap<>(7));
 		ORE_TABLE.put(Blocks.BROWN_TERRACOTTA, new HashMap<>(7));
 		ORE_TABLE.put(Blocks.RED_TERRACOTTA, new HashMap<>(7));
-		ORE_TABLE.put(SubWildBlocks.BLACKSTONE, new HashMap<>(7));
+		ORE_TABLE.put(Blocks.BLACKSTONE, new HashMap<>(7));
+		ORE_TABLE.put(Blocks.BASALT, new HashMap<>(7));
 
 		STAIRS.put(Blocks.STONE, Blocks.STONE_STAIRS);
 		STAIRS.put(Blocks.GRANITE, Blocks.GRANITE_STAIRS);
@@ -52,7 +55,7 @@ public final class SubWildLookups
 		STAIRS.put(Blocks.RED_SANDSTONE, Blocks.RED_SANDSTONE_STAIRS);
 		STAIRS.put(Blocks.SMOOTH_RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE_STAIRS);
 		STAIRS.put(Blocks.PRISMARINE, Blocks.PRISMARINE_STAIRS);
-		STAIRS.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.BLACKSTONE_STAIRS);
+		STAIRS.put(Blocks.BLACKSTONE, Blocks.BLACKSTONE_STAIRS);
 		STAIRS.put(Blocks.DIRT, SubWildBlocks.DIRT_STAIRS);
 
 		SLABS.put(Blocks.STONE, Blocks.STONE_SLAB);
@@ -66,7 +69,7 @@ public final class SubWildLookups
 		SLABS.put(Blocks.RED_SANDSTONE, Blocks.RED_SANDSTONE_SLAB);
 		SLABS.put(Blocks.SMOOTH_RED_SANDSTONE, Blocks.SMOOTH_RED_SANDSTONE_SLAB);
 		SLABS.put(Blocks.PRISMARINE, Blocks.PRISMARINE_SLAB);
-		SLABS.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.BLACKSTONE_SLAB);
+		SLABS.put(Blocks.BLACKSTONE, Blocks.BLACKSTONE_SLAB);
 		SLABS.put(Blocks.DIRT, SubWildBlocks.DIRT_SLAB);
 
 		SPELEOS.put(Blocks.STONE, SubWildBlocks.STONE_SPELEOTHEM);
@@ -76,7 +79,8 @@ public final class SubWildLookups
 		SPELEOS.put(Blocks.SANDSTONE, SubWildBlocks.SANDSTONE_SPELEOTHEM);
 		SPELEOS.put(Blocks.RED_SANDSTONE, SubWildBlocks.RED_SANDSTONE_SPELEOTHEM);
 		SPELEOS.put(Blocks.OBSIDIAN, SubWildBlocks.OBSIDIAN_SPELEOTHEM);
-		SPELEOS.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.BLACKSTONE_SPELEOTHEM);
+		SPELEOS.put(Blocks.BLACKSTONE, SubWildBlocks.BLACKSTONE_SPELEOTHEM);
+		SPELEOS.put(Blocks.BASALT, SubWildBlocks.BASALT_SPELEOTHEM);
 
 		FROZEN_SPELEOS.put(Blocks.STONE, SubWildBlocks.FROZEN_STONE_SPELEOTHEM);
 		FROZEN_SPELEOS.put(Blocks.GRANITE, SubWildBlocks.FROZEN_GRANITE_SPELEOTHEM);
@@ -85,7 +89,8 @@ public final class SubWildLookups
 		FROZEN_SPELEOS.put(Blocks.SANDSTONE, SubWildBlocks.FROZEN_SANDSTONE_SPELEOTHEM);
 		FROZEN_SPELEOS.put(Blocks.RED_SANDSTONE, SubWildBlocks.FROZEN_RED_SANDSTONE_SPELEOTHEM);
 		FROZEN_SPELEOS.put(Blocks.OBSIDIAN, SubWildBlocks.FROZEN_OBSIDIAN_SPELEOTHEM);
-		FROZEN_SPELEOS.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.FROZEN_BLACKSTONE_SPELEOTHEM);
+		FROZEN_SPELEOS.put(Blocks.BLACKSTONE, SubWildBlocks.FROZEN_BLACKSTONE_SPELEOTHEM);
+		FROZEN_SPELEOS.put(Blocks.BASALT, SubWildBlocks.FROZEN_BASALT_SPELEOTHEM);
 
 		put(FROZEN_SPELEOS, BlockTags.ICE, SubWildBlocks.ICICLE);
 
@@ -98,7 +103,8 @@ public final class SubWildLookups
 		MOLTEN.put(Blocks.RED_SANDSTONE, SubWildBlocks.MOLTEN_RED_SANDSTONE);
 		MOLTEN.put(Blocks.SMOOTH_RED_SANDSTONE, SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE);
 		MOLTEN.put(Blocks.OBSIDIAN, SubWildBlocks.MOLTEN_OBSIDIAN);
-		MOLTEN.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.MOLTEN_BLACKSTONE);
+		MOLTEN.put(Blocks.BLACKSTONE, SubWildBlocks.MOLTEN_BLACKSTONE);
+		MOLTEN.put(Blocks.BASALT, SubWildBlocks.MOLTEN_BASALT);
 
 		MOSSY.put(Blocks.DIRT, SubWildBlocks.MOSSY_DIRT);
 		MOSSY.put(Blocks.SAND, SubWildBlocks.MOSSY_SAND);
@@ -113,19 +119,26 @@ public final class SubWildLookups
 		MOSSY.put(Blocks.RED_SANDSTONE, SubWildBlocks.MOSSY_RED_SANDSTONE);
 		MOSSY.put(Blocks.SMOOTH_RED_SANDSTONE, SubWildBlocks.MOSSY_SMOOTH_RED_SANDSTONE);
 		MOSSY.put(Blocks.OBSIDIAN, SubWildBlocks.MOSSY_OBSIDIAN);
-		MOSSY.put(SubWildBlocks.BLACKSTONE, SubWildBlocks.MOSSY_BLACKSTONE);
+		MOSSY.put(Blocks.BLACKSTONE, SubWildBlocks.MOSSY_BLACKSTONE);
+		MOSSY.put(Blocks.BASALT, SubWildBlocks.MOSSY_BASALT);
 
 		WET.put(Blocks.STONE, SubWildBlocks.WET_STONE);
 		WET.put(Blocks.GRANITE, SubWildBlocks.WET_GRANITE);
 		WET.put(Blocks.DIORITE, SubWildBlocks.WET_DIORITE);
 		WET.put(Blocks.ANDESITE, SubWildBlocks.WET_ANDESITE);
-		WET.put(Blocks.DIORITE, SubWildBlocks.WET_OBSIDIAN);
+		WET.put(Blocks.OBSIDIAN, SubWildBlocks.WET_OBSIDIAN);
 
 		HOT.put(Blocks.STONE, SubWildBlocks.HOT_STONE);
 		HOT.put(Blocks.GRANITE, SubWildBlocks.HOT_GRANITE);
 		HOT.put(Blocks.DIORITE, SubWildBlocks.HOT_DIORITE);
 		HOT.put(Blocks.ANDESITE, SubWildBlocks.HOT_ANDESITE);
-		HOT.put(Blocks.DIORITE, SubWildBlocks.HOT_OBSIDIAN);
+		HOT.put(Blocks.SANDSTONE, SubWildBlocks.HOT_SANDSTONE);
+		HOT.put(Blocks.SMOOTH_SANDSTONE, SubWildBlocks.HOT_SMOOTH_SANDSTONE);
+		HOT.put(Blocks.RED_SANDSTONE, SubWildBlocks.HOT_RED_SANDSTONE);
+		HOT.put(Blocks.SMOOTH_RED_SANDSTONE, SubWildBlocks.HOT_SMOOTH_RED_SANDSTONE);
+		HOT.put(Blocks.OBSIDIAN, SubWildBlocks.HOT_OBSIDIAN);
+		HOT.put(Blocks.BLACKSTONE, SubWildBlocks.HOT_BLACKSTONE);
+		HOT.put(Blocks.BASALT, SubWildBlocks.HOT_BASALT);
 
 		put(ORE_TABLE.get(Blocks.SANDSTONE), Tags.Blocks.ORES_COAL, SubWildBlocks.SANDSTONE_COAL_ORE);
 		put(ORE_TABLE.get(Blocks.SANDSTONE), Tags.Blocks.ORES_IRON, SubWildBlocks.SANDSTONE_IRON_ORE);
@@ -225,16 +238,24 @@ public final class SubWildLookups
 		put(lookup, Tags.Blocks.ORES_EMERALD, SubWildBlocks.ICE_EMERALD_ORE);
 		put(ORE_TABLE, BlockTags.ICE, lookup);
 
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_COAL, SubWildBlocks.BLACKSTONE_COAL_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_IRON, SubWildBlocks.BLACKSTONE_IRON_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_GOLD, SubWildBlocks.BLACKSTONE_GOLD_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_LAPIS, SubWildBlocks.BLACKSTONE_LAPIS_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_REDSTONE, SubWildBlocks.BLACKSTONE_REDSTONE_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_DIAMOND, SubWildBlocks.BLACKSTONE_DIAMOND_ORE);
-		put(ORE_TABLE.get(SubWildBlocks.BLACKSTONE), Tags.Blocks.ORES_EMERALD, SubWildBlocks.BLACKSTONE_EMERALD_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_COAL, SubWildBlocks.BLACKSTONE_COAL_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_IRON, SubWildBlocks.BLACKSTONE_IRON_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_GOLD, SubWildBlocks.BLACKSTONE_GOLD_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_LAPIS, SubWildBlocks.BLACKSTONE_LAPIS_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_REDSTONE, SubWildBlocks.BLACKSTONE_REDSTONE_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_DIAMOND, SubWildBlocks.BLACKSTONE_DIAMOND_ORE);
+		put(ORE_TABLE.get(Blocks.BLACKSTONE), Tags.Blocks.ORES_EMERALD, SubWildBlocks.BLACKSTONE_EMERALD_ORE);
+
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_COAL, SubWildBlocks.BASALT_COAL_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_IRON, SubWildBlocks.BASALT_IRON_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_GOLD, SubWildBlocks.BASALT_GOLD_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_LAPIS, SubWildBlocks.BASALT_LAPIS_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_REDSTONE, SubWildBlocks.BASALT_REDSTONE_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_DIAMOND, SubWildBlocks.BASALT_DIAMOND_ORE);
+		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_EMERALD, SubWildBlocks.BASALT_EMERALD_ORE);
 	}
 
-	public static <K, V> void put(Map<K, V> lookup, Tag<K> keys, V value)
+	public static <K, V> void put(Map<K, V> lookup, ITag.INamedTag<K> keys, V value)
 	{
 		for(K key : keys.getAllElements())
 			lookup.put(key, value);

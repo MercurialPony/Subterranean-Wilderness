@@ -10,7 +10,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 import net.minecraftforge.common.Tags;
 
 public class CoralCaveType extends BasicCaveType
@@ -28,7 +28,7 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -42,7 +42,7 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -65,7 +65,7 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -79,10 +79,10 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genWall(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -96,7 +96,7 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(IWorld world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -107,16 +107,16 @@ public class CoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFill(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public boolean canGenExtra(IWorld world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
+	public boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
 	{
 		return pass == 1 && state.getBlock() == Blocks.WATER && (sideState.isIn(Tags.Blocks.ORES) || this.isNatural(world, sidePos, sideState));
 	}
 
 	@Override
-	public boolean canGenFill(IWorld world, BlockPos pos, BlockState state, float depth, int pass)
+	public boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass)
 	{
 		return pass == 1 && state.getBlock() == Blocks.WATER;
 	}

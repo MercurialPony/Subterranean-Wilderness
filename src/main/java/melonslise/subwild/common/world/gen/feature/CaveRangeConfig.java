@@ -2,27 +2,35 @@ package melonslise.subwild.common.world.gen.feature;
 
 import java.util.List;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.DynamicOps;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import melonslise.subwild.common.init.SubWildFeatures;
 import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
-import net.minecraft.util.IDynamicSerializable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 
 public class CaveRangeConfig implements IFeatureConfig
 {
-	public static class DepthRange<A extends IDynamicSerializable> implements IDynamicSerializable
+	public static final Codec<CaveRangeConfig> CODEC = RecordCodecBuilder.create(record -> record
+		.group(
+			CaveRange.CODEC.listOf().fieldOf("cave_ranges").forGetter(inst -> inst.caveRanges))
+		.apply(record, CaveRangeConfig::new));
+
+	public static class CaveRange
 	{
-		public final A inst;
+		public static final Codec<CaveRange> CODEC = RecordCodecBuilder.create(record -> record
+			.group(
+				CaveType.CODEC.fieldOf("cave_type").forGetter(inst -> inst.type),
+				Codec.FLOAT.fieldOf("min").forGetter(inst -> (float) inst.min),
+				Codec.FLOAT.fieldOf("max").forGetter(inst -> (float) inst.max))
+			.apply(record, CaveRange::new));
+
+		public final CaveType type;
 		public final double min, max;
 
-		public DepthRange(A inst, double min, double max)
+		public CaveRange(CaveType inst, double min, double max)
 		{
-			this.inst = inst;
+			this.type = inst;
 			this.min = Math.min(min, max);
 			this.max = Math.max(min, max);
 		}
@@ -31,42 +39,20 @@ public class CaveRangeConfig implements IFeatureConfig
 		{
 			return this.min <= depth && depth < this.max;
 		}
-
-		@Override
-		public <B> B serialize(DynamicOps<B> ops)
-		{
-			return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(
-				ops.createString("inst"), this.inst.serialize(ops),
-				ops.createString("min"), ops.createDouble(this.min),
-				ops.createString("max"), ops.createDouble(this.max)))).getValue();
-		}
 	}
 
-	public final List<DepthRange<CaveType>> caveRanges;
+	public final List<CaveRange> caveRanges;
 
-	public CaveRangeConfig(List<DepthRange<CaveType>> caveRanges)
+	public CaveRangeConfig(List<CaveRange> caveRanges)
 	{
 		this.caveRanges = caveRanges;
 	}
 
 	public CaveType getCaveTypeAt(double depth)
 	{
-		for(DepthRange<CaveType> caveDepth : this.caveRanges)
+		for(CaveRange caveDepth : this.caveRanges)
 			if(caveDepth.contains(depth))
-				return caveDepth.inst;
-		return null;
-	}
-
-	@Override
-	public <T> Dynamic<T> serialize(DynamicOps<T> ops)
-	{
-		return new Dynamic<>(ops, ops.createMap(ImmutableMap.of(
-			ops.createString("caveRanges"), ops.createList(this.caveRanges.stream().map(depthRange -> depthRange.serialize(ops))))));
-	}
-
-	public static <T> CaveRangeConfig deserialize(Dynamic<T> dyn)
-	{
-		dyn.get("caveRanges").asList(dyn1 -> new DepthRange(SubWildFeatures.CAVE_TYPES.get(new ResourceLocation(dyn1.get("name").asString(SubWildFeatures.BASIC_CAVE.name.toString()))), dyn1.get("min").asDouble(0d), dyn1.get("max").asDouble(1d)));
+				return caveDepth.type;
 		return null;
 	}
 
@@ -77,11 +63,11 @@ public class CaveRangeConfig implements IFeatureConfig
 
 	public static class Builder
 	{
-		public final List<DepthRange<CaveType>> caveRanges = Lists.newArrayList();
+		public final List<CaveRange> caveRanges = Lists.newArrayList();
 
 		public Builder addCaveType(CaveType type, double min, double max)
 		{
-			this.caveRanges.add(new DepthRange(type, min, max));
+			this.caveRanges.add(new CaveRange(type, min, max));
 			return this;
 		}
 

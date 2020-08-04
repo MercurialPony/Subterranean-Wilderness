@@ -1,0 +1,9 @@
+{
+	"variants":
+	{
+		"":
+		{
+			"model": "subwild:block/basalt_diamond_ore"
+		}
+	}
+}

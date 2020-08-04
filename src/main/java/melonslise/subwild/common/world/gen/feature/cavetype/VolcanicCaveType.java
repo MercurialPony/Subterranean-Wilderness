@@ -7,7 +7,7 @@ import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 
 public class VolcanicCaveType extends BasicCaveType
 {
@@ -15,21 +15,23 @@ public class VolcanicCaveType extends BasicCaveType
 	{
 		super(domain, path);
 		this.ceilCh = 7f;
-		this.defSlab = SubWildBlocks.BLACKSTONE_SLAB;
-		this.defStairs = SubWildBlocks.BLACKSTONE_STAIRS;
+		this.defSlab = Blocks.BLACKSTONE_SLAB;
+		this.defStairs = Blocks.BLACKSTONE_STAIRS;
 		this.defSpel = SubWildBlocks.BLACKSTONE_SPELEOTHEM;
 	}
 
 	@Override
-	public void genFloor(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-			else if(d < 0.3d)
-				this.replaceBlock(world, pos, SubWildBlocks.BLACKSTONE.getDefaultState());
+			else if(d < 0d)
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+			else if(d < 0.6d)
+				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}
@@ -37,15 +39,17 @@ public class VolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-			else if(d < 0.3d)
-				this.replaceBlock(world, pos, SubWildBlocks.BLACKSTONE.getDefaultState());
+			else if(d < 0d)
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+			else if(d < 0.6d)
+				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
 			if(d < -0.7d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			if(rand.nextFloat() < 0.2f)
@@ -55,15 +59,17 @@ public class VolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-			else if(d < 0.3d)
-				this.replaceBlock(world, pos, SubWildBlocks.BLACKSTONE.getDefaultState());
+			else if(d < 0d)
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+			else if(d < 0.6d)
+				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}

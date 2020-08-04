@@ -1,10 +1,6 @@
 {
 	"itemGroup.subwild": "Subterranean Wilderness",
 
-	"block.subwild.blackstone": "Blackstone",
-	"block.subwild.blackstone_stairs": "Blackstone Stairs",
-	"block.subwild.blackstone_slab": "Blackstone Slab",
-
 	"block.subwild.dirt_stairs": "Dirt Stairs",
 	"block.subwild.dirt_slab": "Dirt Slab",
 
@@ -36,6 +32,7 @@
 	"block.subwild.red_sandstone_speleothem": "Red Sandstone Speleothem",
 	"block.subwild.obsidian_speleothem": "Obsidian Speleothem",
 	"block.subwild.blackstone_speleothem": "Blackstone Speleothem",
+	"block.subwild.basalt_speleothem": "Basalt Speleothem",
 
 	"block.subwild.frozen_stone_speleothem": "Frozen Stone Speleothem",
 	"block.subwild.frozen_granite_speleothem": "Frozen Granite Speleothem",
@@ -45,6 +42,7 @@
 	"block.subwild.frozen_red_sandstone_speleothem": "Frozen Red Sandstone Speleothem",
 	"block.subwild.frozen_obsidian_speleothem": "Frozen Obsidian Speleothem",
 	"block.subwild.frozen_blackstone_speleothem": "Frozen Blackstone Speleothem",
+	"block.subwild.frozen_basalt_speleothem": "Frozen Basalt Speleothem",
 
 	"block.subwild.icicle": "Icicle",
 
@@ -58,6 +56,7 @@
 	"block.subwild.molten_smooth_red_sandstone": "Molten Smooth Red Sandstone",
 	"block.subwild.molten_obsidian": "Molten Obsidian",
 	"block.subwild.molten_blackstone": "Molten Blackstone",
+	"block.subwild.molten_basalt": "Molten Basalt",
 
 	"block.subwild.mossy_dirt": "Mossy Dirt",
 	"block.subwild.mossy_sand": "Mossy Sand",
@@ -73,6 +72,7 @@
 	"block.subwild.mossy_smooth_red_sandstone": "Mossy Smooth Red Sandstone",
 	"block.subwild.mossy_obsidian": "Mossy Obsidian",
 	"block.subwild.mossy_blackstone": "Mossy Blackstone",
+	"block.subwild.mossy_basalt": "Mossy Basalt",
 
 	"block.subwild.wet_stone": "Wet Stone",
 	"block.subwild.wet_granite": "Wet Granite",
@@ -89,6 +89,8 @@
 	"block.subwild.hot_smooth_sandstone": "Hot Smooth Sandstone",
 	"block.subwild.hot_red_sandstone": "Hot Red Sandstone",
 	"block.subwild.hot_smooth_red_sandstone": "Hot Smooth Red Sandstone",
+	"block.subwild.hot_blackstone": "Hot Blackstone",
+	"block.subwild.hot_basalt": "Hot Basalt",
 
 	"block.subwild.sandstone_coal_ore": "Sandstone Coal Ore",
 	"block.subwild.sandstone_iron_ore": "Sandstone Iron Ore",
@@ -192,5 +194,13 @@
 	"block.subwild.blackstone_lapis_ore": "Blackstone Lapis Ore",
 	"block.subwild.blackstone_redstone_ore": "Blackstone Redstone Ore",
 	"block.subwild.blackstone_diamond_ore": "Blackstone Diamond Ore",
-	"block.subwild.blackstone_emerald_ore": "Blackstone Emerald Ore"
+	"block.subwild.blackstone_emerald_ore": "Blackstone Emerald Ore",
+
+	"block.subwild.basalt_coal_ore": "Basalt Coal Ore",
+	"block.subwild.basalt_iron_ore": "Basalt Iron Ore",
+	"block.subwild.basalt_gold_ore": "Basalt Gold Ore",
+	"block.subwild.basalt_lapis_ore": "Basalt Lapis Ore",
+	"block.subwild.basalt_redstone_ore": "Basalt Redstone Ore",
+	"block.subwild.basalt_diamond_ore": "Basalt Diamond Ore",
+	"block.subwild.basalt_emerald_ore": "Basalt Emerald Ore"
 }

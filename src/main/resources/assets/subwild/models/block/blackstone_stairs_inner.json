@@ -1,9 +1,0 @@
-{
-	"parent": "minecraft:block/inner_stairs",
-	"textures":
-	{
-		"bottom": "subwild:block/blackstone_top",
-		"top": "subwild:block/blackstone_top",
-		"side": "subwild:block/blackstone"
-	}
-}

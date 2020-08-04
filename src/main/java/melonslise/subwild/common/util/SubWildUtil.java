@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.state.IProperty;
+import net.minecraft.state.Property;
 
 public final class SubWildUtil
 {
@@ -46,7 +46,7 @@ public final class SubWildUtil
 
 	public static BlockState copyStateProps(BlockState from, BlockState to)
 	{
-		for(IProperty prop : from.getProperties())
+		for(Property prop : from.func_235904_r_()) // getProperties
 			to = to.with(prop, from.get(prop));
 		return to;
 	}

@@ -33,7 +33,7 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock
 	// TODO
 	public EncasedSpeleothemBlock(Properties properties, Block encased)
 	{
-		super(properties.tickRandomly());
+		super(properties.tickRandomly().setPropagatesDownwards((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
 		this.encased = encased;
 	}
 
@@ -80,16 +80,10 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock
 		return false;
 	}
 
-	@Override
-	public boolean canEntitySpawn(BlockState state, IBlockReader world, BlockPos pos, EntityType<?> type)
-	{
-		return type == EntityType.POLAR_BEAR;
-	}
-
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return !this.isSolid(state) && adjState.getBlock() == this ? true : super.isSideInvisible(state, adjState, side);
+		return !state.isSolid() && adjState.getBlock() == this ? true : super.isSideInvisible(state, adjState, side);
 	}
 }

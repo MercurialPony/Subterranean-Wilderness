@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures":
+	{
+		"end": "subwild:block/basalt_emerald_ore_top",
+		"side": "subwild:block/basalt_emerald_ore_side"
+	}
+}

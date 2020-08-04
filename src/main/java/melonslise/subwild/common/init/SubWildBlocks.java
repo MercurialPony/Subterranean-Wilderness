@@ -46,17 +46,11 @@ public final class SubWildBlocks
 
 	// FIXME Speleothem pushreaction
 	public static final Block
-	// TODO HARVEST LEVEL
-	// TODO FIX ORES TOOL
-		BLACKSTONE = add("blackstone", new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(1.5f, 6f).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_STAIRS = add("blackstone_stairs", new StairsBlock(() -> BLACKSTONE.getDefaultState(), Block.Properties.from(BLACKSTONE))),
-		BLACKSTONE_SLAB = add("blackstone_slab", new SlabBlock(Block.Properties.from(BLACKSTONE))),
-
 		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(() -> Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.DIRT))),
 		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.from(Blocks.DIRT))),
 
-		SHORT_FOXFIRE = add("short_foxfire", new FoxfireBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0f).lightValue(4).sound(SoundType.NETHER_WART))),
-		LONG_FOXFIRE = add("long_foxfire", new FoxfireBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0f).lightValue(4).sound(SoundType.NETHER_WART))),
+		SHORT_FOXFIRE = add("short_foxfire", new FoxfireBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0f).sound(SoundType.NETHER_WART))),
+		LONG_FOXFIRE = add("long_foxfire", new FoxfireBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0f).sound(SoundType.NETHER_WART))),
 
 		LIGHT_BROWN_ROOTS = add("light_brown_roots", new RootsBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.1f).sound(SoundType.NETHER_WART))),
 		BROWN_ROOTS = add("brown_roots", new RootsBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.1f).sound(SoundType.NETHER_WART))),
@@ -65,14 +59,14 @@ public final class SubWildBlocks
 		DARK_BROWN_ROOTS = add("dark_brown_roots", new RootsBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.1f).sound(SoundType.NETHER_WART))),
 		ORANGE_ROOTS = add("orange_roots", new RootsBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.1f).sound(SoundType.NETHER_WART))),
 
-		DIRT_PATCH = add("dirt_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.DIRT).hardnessAndResistance(0.1f).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL))),
-		MOSSY_DIRT_PATCH = add("mossy_dirt_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.FOLIAGE).hardnessAndResistance(0.1f).sound(SoundType.WET_GRASS).harvestTool(ToolType.SHOVEL))),
-		PODZOL_PATCH = add("podzol_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.OBSIDIAN).hardnessAndResistance(0.1f).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL))),
-		GRAVEL_PATCH = add("gravel_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.STONE).hardnessAndResistance(0.15f).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL))),
-		SAND_PATCH = add("sand_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.SAND).hardnessAndResistance(0.1f).sound(SoundType.SAND).harvestTool(ToolType.SHOVEL))),
-		RED_SAND_PATCH = add("red_sand_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.ADOBE).hardnessAndResistance(0.1f).sound(SoundType.SAND).harvestTool(ToolType.SHOVEL))),
-		SNOW_PATCH = add("snow_patch", new PatchBlock(Block.Properties.create(Material.SNOW).tickRandomly().hardnessAndResistance(0.1f).sound(SoundType.SNOW).harvestTool(ToolType.SHOVEL))),
-		ICE_PATCH = add("ice_patch", new MeltingPatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.ICE).slipperiness(0.98f).hardnessAndResistance(0.1f).notSolid().sound(SoundType.GLASS).harvestTool(ToolType.PICKAXE))),
+		DIRT_PATCH = add("dirt_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.DIRT).hardnessAndResistance(0.1f).sound(SoundType.GROUND).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		MOSSY_DIRT_PATCH = add("mossy_dirt_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.FOLIAGE).hardnessAndResistance(0.1f).sound(SoundType.WET_GRASS).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		PODZOL_PATCH = add("podzol_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.OBSIDIAN).hardnessAndResistance(0.1f).sound(SoundType.GROUND).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		GRAVEL_PATCH = add("gravel_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.STONE).hardnessAndResistance(0.15f).sound(SoundType.GROUND).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		SAND_PATCH = add("sand_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.SAND).hardnessAndResistance(0.1f).sound(SoundType.SAND).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		RED_SAND_PATCH = add("red_sand_patch", new PatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.ADOBE).hardnessAndResistance(0.1f).sound(SoundType.SAND).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		SNOW_PATCH = add("snow_patch", new PatchBlock(Block.Properties.create(Material.SNOW).tickRandomly().hardnessAndResistance(0.1f).sound(SoundType.SNOW).setRequiresTool().harvestTool(ToolType.SHOVEL))),
+		ICE_PATCH = add("ice_patch", new MeltingPatchBlock(Block.Properties.create(Material.SNOW, MaterialColor.ICE).slipperiness(0.98f).hardnessAndResistance(0.1f).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestTool(ToolType.PICKAXE))),
 		WATER_PUDDLE = add("water_puddle", new PuddleBlock(Block.Properties.create(Material.SNOW, MaterialColor.WATER).doesNotBlockMovement().hardnessAndResistance(0f).noDrops().sound(SubWildSoundTypes.WATER))),
 
 		STONE_SPELEOTHEM = add("stone_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.STONE))),
@@ -82,7 +76,8 @@ public final class SubWildBlocks
 		SANDSTONE_SPELEOTHEM = add("sandstone_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.SANDSTONE))),
 		RED_SANDSTONE_SPELEOTHEM = add("red_sandstone_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.RED_SANDSTONE))),
 		OBSIDIAN_SPELEOTHEM = add("obsidian_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.OBSIDIAN))),
-		BLACKSTONE_SPELEOTHEM = add("blackstone_speleothem", new SpeleothemBlock(Block.Properties.from(BLACKSTONE))),
+		BLACKSTONE_SPELEOTHEM = add("blackstone_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.BLACKSTONE))),
+		BASALT_SPELEOTHEM = add("basalt_speleothem", new SpeleothemBlock(Block.Properties.from(Blocks.BASALT))),
 
 		FROZEN_STONE_SPELEOTHEM = add("frozen_stone_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.STONE).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), STONE_SPELEOTHEM)),
 		FROZEN_GRANITE_SPELEOTHEM = add("frozen_granite_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.DIRT).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), GRANITE_SPELEOTHEM)),
@@ -92,19 +87,21 @@ public final class SubWildBlocks
 		FROZEN_RED_SANDSTONE_SPELEOTHEM = add("frozen_red_sandstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.ADOBE).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), RED_SANDSTONE_SPELEOTHEM)),
 		FROZEN_OBSIDIAN_SPELEOTHEM = add("frozen_obsidian_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.BLACK).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), OBSIDIAN_SPELEOTHEM)),
 		FROZEN_BLACKSTONE_SPELEOTHEM = add("frozen_blackstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.BLACK).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), BLACKSTONE_SPELEOTHEM)),
+		FROZEN_BASALT_SPELEOTHEM = add("frozen_basalt_speleothem", new EncasedSpeleothemBlock(Block.Properties.create(Material.ICE, MaterialColor.BLACK).slipperiness(0.98f).hardnessAndResistance(0.5f).sound(SoundType.GLASS).notSolid().harvestTool(ToolType.PICKAXE), BASALT_SPELEOTHEM)),
 
 		ICICLE = add("icicle", new IcicleBlock(Block.Properties.from(Blocks.ICE))),
 
-		MOLTEN_STONE = add("molten_stone", new MoltenBlock(Block.Properties.from(Blocks.STONE).lightValue(5))),
-		MOLTEN_GRANITE = add("molten_granite", new MoltenBlock(Block.Properties.from(Blocks.GRANITE).lightValue(5))),
-		MOLTEN_DIORITE = add("molten_diorite", new MoltenBlock(Block.Properties.from(Blocks.DIORITE).lightValue(5))),
-		MOLTEN_ANDESITE = add("molten_andesite", new MoltenBlock(Block.Properties.from(Blocks.ANDESITE).lightValue(5))),
-		MOLTEN_SANDSTONE = add("molten_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SANDSTONE).lightValue(5))),
-		MOLTEN_SMOOTH_SANDSTONE = add("molten_smooth_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SMOOTH_SANDSTONE).lightValue(5))),
-		MOLTEN_RED_SANDSTONE = add("molten_red_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SANDSTONE).lightValue(5))),
-		MOLTEN_SMOOTH_RED_SANDSTONE = add("molten_smooth_red_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SMOOTH_RED_SANDSTONE).lightValue(5))),
-		MOLTEN_OBSIDIAN = add("molten_obsidian", new MoltenBlock(Block.Properties.from(Blocks.OBSIDIAN).lightValue(5))),
-		MOLTEN_BLACKSTONE = add("molten_blackstone", new MoltenBlock(Block.Properties.from(BLACKSTONE).lightValue(5))),
+		MOLTEN_STONE = add("molten_stone", new MoltenBlock(Block.Properties.from(Blocks.STONE).setLightLevel(state -> 5))),
+		MOLTEN_GRANITE = add("molten_granite", new MoltenBlock(Block.Properties.from(Blocks.GRANITE).setLightLevel(state -> 5))),
+		MOLTEN_DIORITE = add("molten_diorite", new MoltenBlock(Block.Properties.from(Blocks.DIORITE).setLightLevel(state -> 5))),
+		MOLTEN_ANDESITE = add("molten_andesite", new MoltenBlock(Block.Properties.from(Blocks.ANDESITE).setLightLevel(state -> 5))),
+		MOLTEN_SANDSTONE = add("molten_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SANDSTONE).setLightLevel(state -> 5))),
+		MOLTEN_SMOOTH_SANDSTONE = add("molten_smooth_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SMOOTH_SANDSTONE).setLightLevel(state -> 5))),
+		MOLTEN_RED_SANDSTONE = add("molten_red_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SANDSTONE).setLightLevel(state -> 5))),
+		MOLTEN_SMOOTH_RED_SANDSTONE = add("molten_smooth_red_sandstone", new MoltenBlock(Block.Properties.from(Blocks.SMOOTH_RED_SANDSTONE).setLightLevel(state -> 5))),
+		MOLTEN_OBSIDIAN = add("molten_obsidian", new MoltenBlock(Block.Properties.from(Blocks.OBSIDIAN).setLightLevel(state -> 5))),
+		MOLTEN_BLACKSTONE = add("molten_blackstone", new MoltenBlock(Block.Properties.from(Blocks.BLACKSTONE).setLightLevel(state -> 5))),
+		MOLTEN_BASALT = add("molten_basalt", new MoltenBlock(Block.Properties.from(Blocks.BASALT).setLightLevel(state -> 5))),
 
 		// TODO add to mossy tag?
 		MOSSY_DIRT = add("mossy_dirt", new Block(Block.Properties.from(Blocks.DIRT))),
@@ -120,8 +117,10 @@ public final class SubWildBlocks
 		MOSSY_RED_SANDSTONE = add("mossy_red_sandstone", new Block(Block.Properties.from(Blocks.RED_SANDSTONE))),
 		MOSSY_SMOOTH_RED_SANDSTONE = add("mossy_smooth_red_sandstone", new Block(Block.Properties.from(Blocks.SMOOTH_RED_SANDSTONE))),
 		MOSSY_OBSIDIAN = add("mossy_obsidian", new Block(Block.Properties.from(Blocks.OBSIDIAN))),
-		MOSSY_BLACKSTONE = add("mossy_blackstone", new Block(Block.Properties.from(BLACKSTONE))),
+		MOSSY_BLACKSTONE = add("mossy_blackstone", new Block(Block.Properties.from(Blocks.BLACKSTONE))),
+		MOSSY_BASALT = add("mossy_basalt", new Block(Block.Properties.from(Blocks.BASALT))),
 
+		// FIXME add the rest of the variants?
 		WET_STONE = add("wet_stone", new DrippingBlock(Block.Properties.from(Blocks.STONE), ParticleTypes.DRIPPING_WATER)),
 		WET_GRANITE = add("wet_granite", new DrippingBlock(Block.Properties.from(Blocks.GRANITE), ParticleTypes.DRIPPING_WATER)),
 		WET_DIORITE = add("wet_diorite", new DrippingBlock(Block.Properties.from(Blocks.DIORITE), ParticleTypes.DRIPPING_WATER)),
@@ -137,6 +136,8 @@ public final class SubWildBlocks
 		HOT_RED_SANDSTONE = add("hot_red_sandstone", new DrippingBlock(Block.Properties.from(Blocks.RED_SANDSTONE), ParticleTypes.DRIPPING_LAVA)),
 		HOT_SMOOTH_RED_SANDSTONE = add("hot_smooth_red_sandstone", new DrippingBlock(Block.Properties.from(Blocks.SMOOTH_RED_SANDSTONE), ParticleTypes.DRIPPING_LAVA)),
 		HOT_OBSIDIAN = add("hot_obsidian", new DrippingBlock(Block.Properties.from(Blocks.OBSIDIAN), ParticleTypes.DRIPPING_LAVA)),
+		HOT_BLACKSTONE = add("hot_blackstone", new DrippingBlock(Block.Properties.from(Blocks.BLACKSTONE), ParticleTypes.DRIPPING_LAVA)),
+		HOT_BASALT = add("hot_basalt", new DrippingBlock(Block.Properties.from(Blocks.BASALT), ParticleTypes.DRIPPING_LAVA)),
 
 		SANDSTONE_COAL_ORE = add("sandstone_coal_ore", new XpBlock(Block.Properties.from(Blocks.SANDSTONE).hardnessAndResistance(1.6f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
 		SANDSTONE_IRON_ORE = add("sandstone_iron_ore", new OreBlock(Block.Properties.from(Blocks.SANDSTONE).hardnessAndResistance(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
@@ -226,21 +227,29 @@ public final class SubWildBlocks
 		RED_TERRACOTTA_DIAMOND_ORE = add("red_terracotta_diamond_ore", new XpBlock(Block.Properties.from(Blocks.RED_TERRACOTTA).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
 		RED_TERRACOTTA_EMERALD_ORE = add("red_terracotta_emerald_ore", new XpBlock(Block.Properties.from(Blocks.RED_TERRACOTTA).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
 
-		ICE_COAL_ORE = add("ice_coal_ore", new XpBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		ICE_IRON_ORE = add("ice_iron_ore", new EncasedOreBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ICE_GOLD_ORE = add("ice_gold_ore", new EncasedOreBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ICE_LAPIS_ORE = add("ice_lapis_ore", new XpBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		ICE_REDSTONE_ORE = add("ice_redstone_ore", new XpBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(2).harvestTool(ToolType.PICKAXE), 1, 6)),
-		ICE_DIAMOND_ORE = add("ice_diamond_ore", new XpBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		ICE_EMERALD_ORE = add("ice_emerald_ore", new XpBlock(Block.Properties.create(SubWildMaterials.ICE_ORE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		ICE_COAL_ORE = add("ice_coal_ore", new XpBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
+		ICE_IRON_ORE = add("ice_iron_ore", new EncasedOreBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		ICE_GOLD_ORE = add("ice_gold_ore", new EncasedOreBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		ICE_LAPIS_ORE = add("ice_lapis_ore", new XpBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
+		ICE_REDSTONE_ORE = add("ice_redstone_ore", new XpBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(2).harvestTool(ToolType.PICKAXE), 1, 6)),
+		ICE_DIAMOND_ORE = add("ice_diamond_ore", new XpBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		ICE_EMERALD_ORE = add("ice_emerald_ore", new XpBlock(Block.Properties.create(Material.ICE).hardnessAndResistance(1f).slipperiness(0.98F).notSolid().sound(SoundType.GLASS).setRequiresTool().harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
 
-		BLACKSTONE_COAL_ORE = add("blackstone_coal_ore", new XpBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		BLACKSTONE_IRON_ORE = add("blackstone_iron_ore", new OreBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_GOLD_ORE = add("blackstone_gold_ore", new OreBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_LAPIS_ORE = add("blackstone_lapis_ore", new XpBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		BLACKSTONE_REDSTONE_ORE = add("blackstone_redstone_ore", new RedstoneOreBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_DIAMOND_ORE = add("blackstone_diamond_ore", new XpBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		BLACKSTONE_EMERALD_ORE = add("blackstone_emerald_ore", new XpBlock(Block.Properties.from(BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7));
+		BLACKSTONE_COAL_ORE = add("blackstone_coal_ore", new XpBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
+		BLACKSTONE_IRON_ORE = add("blackstone_iron_ore", new OreBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		BLACKSTONE_GOLD_ORE = add("blackstone_gold_ore", new OreBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		BLACKSTONE_LAPIS_ORE = add("blackstone_lapis_ore", new XpBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
+		BLACKSTONE_REDSTONE_ORE = add("blackstone_redstone_ore", new RedstoneOreBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
+		BLACKSTONE_DIAMOND_ORE = add("blackstone_diamond_ore", new XpBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		BLACKSTONE_EMERALD_ORE = add("blackstone_emerald_ore", new XpBlock(Block.Properties.from(Blocks.BLACKSTONE).hardnessAndResistance(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+
+		BASALT_COAL_ORE = add("basalt_coal_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
+		BASALT_IRON_ORE = add("basalt_iron_ore", new OreBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		BASALT_GOLD_ORE = add("basalt_gold_ore", new OreBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
+		BASALT_LAPIS_ORE = add("basalt_lapis_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
+		BASALT_REDSTONE_ORE = add("basalt_redstone_ore", new RedstoneOreBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
+		BASALT_DIAMOND_ORE = add("basalt_diamond_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		BASALT_EMERALD_ORE = add("basalt_emerald_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7));
 
 	public static void register(RegistryEvent.Register<Block> event)
 	{

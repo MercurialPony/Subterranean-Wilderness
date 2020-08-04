@@ -10,7 +10,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Plane;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 
 public class IcyRockyCaveType extends BasicCaveType
 {
@@ -22,7 +22,7 @@ public class IcyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -46,7 +46,7 @@ public class IcyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -64,7 +64,7 @@ public class IcyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -88,7 +88,7 @@ public class IcyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -112,10 +112,10 @@ public class IcyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(IWorld world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
+	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genFill(IWorld world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{

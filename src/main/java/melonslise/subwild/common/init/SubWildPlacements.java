@@ -16,7 +16,7 @@ public final class SubWildPlacements
 	public static final List<Placement> PLACEMENTS = new ArrayList<>(1);
 
 	public static final Placement
-		CAVE = add("cave", new PlacementAtCave(NoPlacementConfig::deserialize));
+		CAVE = add("cave", new PlacementAtCave(NoPlacementConfig.field_236555_a_));
 
 	public static void register(RegistryEvent.Register<Placement<?>> event)
 	{

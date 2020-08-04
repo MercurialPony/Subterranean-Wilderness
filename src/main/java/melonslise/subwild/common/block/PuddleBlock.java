@@ -16,7 +16,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class PuddleBlock extends Block
 {
-
 	public PuddleBlock(Properties properties)
 	{
 		super(properties);
@@ -57,6 +56,6 @@ public class PuddleBlock extends Block
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return !this.isSolid(state) && adjState.getBlock() == this ? true : super.isSideInvisible(state, adjState, side);
+		return !state.isSolid() && adjState.getBlock() == this ? true : super.isSideInvisible(state, adjState, side);
 	}
 }

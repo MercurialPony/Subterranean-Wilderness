@@ -2,7 +2,7 @@
 	"parent": "subwild:block/base/encased_medium_stalagmite",
 	"textures":
 	{
-		"base": "subwild:block/blackstone",
+		"base": "block/blackstone",
 		"case": "block/ice"
 	}
 }

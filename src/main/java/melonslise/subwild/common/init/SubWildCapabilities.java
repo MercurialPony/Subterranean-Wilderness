@@ -4,6 +4,7 @@ import melonslise.subwild.common.capability.CapabilityProvider;
 import melonslise.subwild.common.capability.EmptyCapabilityStorage;
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.capability.OpenSimplex2FNoise;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
@@ -24,6 +25,7 @@ public final class SubWildCapabilities
 
 	public static void attachToWorld(AttachCapabilitiesEvent<World> event)
 	{
-		event.addCapability(OpenSimplex2FNoise.ID, new CapabilityProvider(NOISE_CAPABILITY, new OpenSimplex2FNoise(event.getObject())));
+		if(event.getObject() instanceof ISeedReader)
+			event.addCapability(OpenSimplex2FNoise.ID, new CapabilityProvider(NOISE_CAPABILITY, new OpenSimplex2FNoise((ISeedReader) event.getObject())));
 	}
 }

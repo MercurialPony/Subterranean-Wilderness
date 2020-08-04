@@ -72,7 +72,7 @@ public final class SubWildFeatures
 	public static final List<Feature> FEATURES = new ArrayList<>(1);
 
 	public static final Feature
-		CAVE_DECO = add("cave", new CaveDecoFeature(CaveRangeConfig::deserialize));
+		CAVE_DECO = add("cave", new CaveDecoFeature(CaveRangeConfig.CODEC));
 
 	public static void register(RegistryEvent.Register<Feature<?>> event)
 	{

@@ -47,7 +47,7 @@ public class FoxfireBlock extends Block implements IPlantable
 
 	public FoxfireBlock(Properties properties)
 	{
-		super(properties.tickRandomly());
+		super(properties.tickRandomly().setLightLevel(state -> state.get(SubWildProperties.GLOWING) ? 4 : 0));
 		this.setDefaultState(this.stateContainer.getBaseState().with(SubWildProperties.GLOWING, false).with(BlockStateProperties.FACING, Direction.NORTH));
 	}
 
@@ -79,12 +79,6 @@ public class FoxfireBlock extends Block implements IPlantable
 		}
 	}
 
-	@Override
-	public int getLightValue(BlockState state)
-	{
-		return state.get(SubWildProperties.GLOWING) ? super.getLightValue(state) : 0;
-	}
-
 	/*
 	 *	Block#randomTick receives random ticks. By default also calls Block#tick
 	 *	Block#tick receives scheduled ticks
@@ -110,6 +104,8 @@ public class FoxfireBlock extends Block implements IPlantable
 						if(world.isAirBlock(pos1.offset(side)))
 							orients.add(Pair.of(pos1.offset(side), side));
 			}
+			if(orients.size() <= 0)
+				return;
 			Pair<BlockPos, Direction> orient = orients.get(rand.nextInt(orients.size()));
 			world.setBlockState(orient.getLeft(), SubWildTags.FOXFIRE.getRandomElement(rand).getDefaultState().with(BlockStateProperties.FACING, orient.getRight()), 2);
 		}
@@ -158,13 +154,13 @@ public class FoxfireBlock extends Block implements IPlantable
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
-		return type == PathType.AIR && !this.blocksMovement ? true : super.allowsMovement(state, world, pos, type);
+		return type == PathType.AIR && !this.canCollide ? true : super.allowsMovement(state, world, pos, type);
 	}
 
 	@Override
 	public PlantType getPlantType(IBlockReader world, BlockPos pos)
 	{
-		return PlantType.Cave;
+		return PlantType.CAVE;
 	}
 
 	@Override

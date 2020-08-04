@@ -2,9 +2,9 @@
 	"parent": "subwild:block/base/cube_bottom_top_overlay_all",
 	"textures":
 	{
-		"bottom": "subwild:block/blackstone_top",
-		"top": "subwild:block/blackstone_top",
-		"side": "subwild:block/blackstone",
+		"bottom": "block/blackstone_top",
+		"top": "block/blackstone_top",
+		"side": "block/blackstone",
 		"mask": "subwild:block/lava_overlay",
 		"particle": "#side"
 	}

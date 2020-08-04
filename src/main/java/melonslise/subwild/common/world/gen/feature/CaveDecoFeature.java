@@ -1,30 +1,30 @@
 package melonslise.subwild.common.world.gen.feature;
 
 import java.util.Random;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.init.SubWildCapabilities;
 import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 
 public class CaveDecoFeature extends Feature<CaveRangeConfig>
 {
-	public CaveDecoFeature(Function<Dynamic<?>, ? extends CaveRangeConfig> factory)
+	public CaveDecoFeature(Codec<CaveRangeConfig> codec)
 	{
-		super(factory);
+		super(codec);
 	}
 
 	@Override
-	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> gen, Random rand, BlockPos pos, CaveRangeConfig profile)
+	public boolean func_230362_a_(ISeedReader world, StructureManager strcMgr, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig profile)
 	{
 		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
 		if(noise == null)

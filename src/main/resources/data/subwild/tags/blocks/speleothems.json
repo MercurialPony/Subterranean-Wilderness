@@ -10,6 +10,7 @@
 		"subwild:red_sandstone_speleothem",
 		"subwild:obsidian_speleothem",
 		"subwild:blackstone_speleothem",
+		"subwild:basalt_speleothem",
 
 		"subwild:frozen_stone_speleothem",
 		"subwild:frozen_granite_speleothem",
@@ -19,6 +20,7 @@
 		"subwild:frozen_red_sandstone_speleothem",
 		"subwild:frozen_obsidian_speleothem",
 		"subwild:frozen_blackstone_speleothem",
+		"subwild:frozen_basalt_speleothem",
 
 		"subwild:icicle"
 	]

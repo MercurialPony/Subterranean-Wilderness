@@ -65,6 +65,7 @@ public final class SubWildClientModEvents
 		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_OBSIDIAN, RenderType.getCutout());
 		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BLACKSTONE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BASALT, RenderType.getCutout());
 
 		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_COAL_ORE, RenderType.getTranslucent());
 		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_IRON_ORE, RenderType.getTranslucent());
@@ -87,6 +88,7 @@ public final class SubWildClientModEvents
 		addFullOverride(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
 		addFullOverride(SubWildBlocks.MOLTEN_OBSIDIAN, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
 		addFullOverride(SubWildBlocks.MOLTEN_BLACKSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_BASALT, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
 	}
 
 	@SubscribeEvent

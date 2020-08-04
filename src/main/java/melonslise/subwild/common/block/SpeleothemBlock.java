@@ -88,17 +88,6 @@ public class SpeleothemBlock extends FallingBlock
 	}
 
 	@Override
-	public void updateNeighbors(BlockState state, IWorld world, BlockPos pos, int flags)
-	{
-		super.updateNeighbors(state, world, pos, flags);
-		if(!this.isValidPosition(state, world, pos))
-			return;
-		for(Direction dir : Direction.Plane.VERTICAL.facingValues)
-			state = state.with(SubWildProperties.FACING_LOOKUP.get(dir), this.canConnect(world, pos, state, pos.offset(dir), world.getBlockState(pos.offset(dir))));
-		world.setBlockState(pos, state, 3);
-	}
-
-	@Override
 	public BlockState updatePostPlacement(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
 	{
 		if(side.getAxis().isVertical() && this.canConnect(world, pos, state, adjPos, adjState))
@@ -116,15 +105,15 @@ public class SpeleothemBlock extends FallingBlock
 		BlockState state = this.getDefaultState();
 		Direction face = ctx.getFace();
 		if(face.getAxis().isVertical())
-			return state.with(SubWildProperties.VERTICAL_FACING, face);
-		else
-			for(Direction dir : Direction.Plane.VERTICAL.facingValues)
-			{
-				state = state.with(SubWildProperties.VERTICAL_FACING, dir);
-				BlockPos supPos = pos.offset(dir.getOpposite());
-				if(this.canSupport(world, pos, state, supPos, world.getBlockState(supPos)))
-					return state;
-			}
+			state = state.with(SubWildProperties.VERTICAL_FACING, face);
+		for(Direction dir : Direction.Plane.VERTICAL.facingValues)
+		{
+			BlockPos adjPos = pos.offset(dir);
+			BlockState adjState = world.getBlockState(adjPos);
+			state = state.with(SubWildProperties.FACING_LOOKUP.get(dir), this.canConnect(world, pos, state, adjPos, adjState));
+			if(this.canSupport(world, pos, state, adjPos, adjState))
+				state = state.with(SubWildProperties.VERTICAL_FACING, dir.getOpposite());
+		}
 		return state;
 	}
 
@@ -157,7 +146,7 @@ public class SpeleothemBlock extends FallingBlock
 	}
 
 	@Override
-	public void onBroken(World world, BlockPos pos)
+	public void onBroken(World world, BlockPos pos, FallingBlockEntity entity)
 	{
 		world.playEvent(2001, pos, Block.getStateId(this.getDefaultState()));
 	}
