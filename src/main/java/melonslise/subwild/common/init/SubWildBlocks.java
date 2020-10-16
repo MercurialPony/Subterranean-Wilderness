@@ -1,8 +1,5 @@
 package melonslise.subwild.common.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import melonslise.subwild.SubWild;
 import melonslise.subwild.common.block.DrippingBlock;
 import melonslise.subwild.common.block.EncasedOreBlock;
@@ -31,7 +28,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /*
  * 	Block#blocksMovement enables collision, while Material#blocksMovement is for certain logic
@@ -42,10 +42,10 @@ public final class SubWildBlocks
 {
 	private SubWildBlocks() {}
 
-	public static final List<Block> BLOCKS = new ArrayList<Block>(142);
+	public static DeferredRegister BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SubWild.ID);
 
 	// FIXME Speleothem pushreaction
-	public static final Block
+	public static final RegistryObject<Block>
 		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(() -> Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.DIRT))),
 		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.from(Blocks.DIRT))),
 
@@ -251,16 +251,14 @@ public final class SubWildBlocks
 		BASALT_DIAMOND_ORE = add("basalt_diamond_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
 		BASALT_EMERALD_ORE = add("basalt_emerald_ore", new XpBlock(Block.Properties.from(Blocks.BASALT).hardnessAndResistance(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7));
 
-	public static void register(RegistryEvent.Register<Block> event)
+	public static void register()
 	{
-		for(Block block : BLOCKS)
-			event.getRegistry().register(block);
+		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	public static Block add(String name, Block block)
+	public static RegistryObject<Block> add(String name, Block block)
 	{
-		BLOCKS.add(block.setRegistryName(SubWild.ID, name));
-		SubWildItems.add(new BlockItem(block, new Item.Properties().group(SubWildItems.TAB)));
-		return block;
+		SubWildItems.add(name, new BlockItem(block, new Item.Properties().group(SubWildItems.TAB)));
+		return BLOCKS.register(name, () -> block);
 	}
 }

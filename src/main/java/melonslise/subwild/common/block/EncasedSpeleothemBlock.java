@@ -1,6 +1,7 @@
 package melonslise.subwild.common.block;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
@@ -28,12 +29,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EncasedSpeleothemBlock extends SpeleothemBlock
 {
-	public final Block encased;
+	public final Supplier<Block> encased;
 
 	// TODO
-	public EncasedSpeleothemBlock(Properties properties, Block encased)
+	public EncasedSpeleothemBlock(Properties properties, Supplier<Block> encased)
 	{
-		super(properties.tickRandomly().setPropagatesDownwards((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
+		super(properties.tickRandomly().setAllowsSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
 		this.encased = encased;
 	}
 
@@ -71,7 +72,7 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock
 	{
 		super.harvestBlock(world, player, pos, state, te, stack);
 		if(!EnchantmentHelper.getEnchantments(stack).containsKey(Enchantments.SILK_TOUCH))
-			world.setBlockState(pos, SubWildUtil.copyStateProps(state, this.encased.getDefaultState()));
+			world.setBlockState(pos, SubWildUtil.copyStateProps(state, this.encased.get().getDefaultState()));
 	}
 
 	@Override

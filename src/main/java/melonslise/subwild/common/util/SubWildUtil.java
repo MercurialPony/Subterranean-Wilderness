@@ -46,7 +46,7 @@ public final class SubWildUtil
 
 	public static BlockState copyStateProps(BlockState from, BlockState to)
 	{
-		for(Property prop : from.func_235904_r_()) // getProperties
+		for(Property prop : from.getProperties()) // getProperties
 			to = to.with(prop, from.get(prop));
 		return to;
 	}

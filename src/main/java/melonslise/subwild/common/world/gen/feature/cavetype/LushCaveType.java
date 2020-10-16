@@ -34,7 +34,7 @@ public class LushCaveType extends BasicCaveType
 		if(pass == 0)
 		{
 			double d = this.getNoise(noise, pos, 0.125d);
-			if(-0.4d < d && d < 0.6d)
+			if(-0.2d < d && d < 0.4d)
 				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
 			if(this.getNoise(noise, pos, 0.25d) < 0.2d)
 				this.modifyBlock(world, pos, SubWildLookups.MOSSY);
@@ -49,9 +49,9 @@ public class LushCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
-				this.genLayer(world, pos, SubWildBlocks.MOSSY_DIRT_PATCH.getDefaultState(), d, -1d, -0.4d, 3);
+				this.genLayer(world, pos, SubWildBlocks.MOSSY_DIRT_PATCH.get().getDefaultState(), d, -1d, -0.4d, 3);
 			else if(d > 0.1d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			if(this.getNoise(noise, pos, 0.125d) > 0d)
 				this.genBlock(world, pos, PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) PLANTS.length)].getDefaultState());
 			if(rand.nextInt(10) == 0)
@@ -75,7 +75,7 @@ public class LushCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			if(this.getNoise(noise, pos, 0.125d) < 0.1d)
+			if(this.getNoise(noise, pos, 0.125d) < -0.4d)
 				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
 			if(this.getNoise(noise, pos, 0.25d) < 0.1d)
 				this.modifyBlock(world, pos, SubWildLookups.MOSSY);
@@ -99,7 +99,7 @@ public class LushCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			if(this.getNoise(noise, pos, 0.125d) < -0.1d)
+			if(this.getNoise(noise, pos, 0.125d) < -0.4d)
 				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
 			if(this.getNoise(noise, pos, 0.25d) < 0.1d)
 				this.modifyBlock(world, pos, SubWildLookups.MOSSY);

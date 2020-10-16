@@ -2,6 +2,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -25,15 +26,15 @@ import net.minecraftforge.common.Tags;
 
 public class BasicCaveType extends CaveType
 {
-	public static final Block[] FOXFIRE = new Block[] { SubWildBlocks.SHORT_FOXFIRE, SubWildBlocks.LONG_FOXFIRE };
+	public static final Supplier<Block>[] FOXFIRE = new Supplier[] { SubWildBlocks.SHORT_FOXFIRE, SubWildBlocks.LONG_FOXFIRE };
 
 	//  TODO Getters vs fields?
 	public ImmutableSet<Direction> dirs = ImmutableSet.of(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.UP, Direction.DOWN);
 	public float floorCh = 2f, ceilCh = 3f;
-	public Block
+	public Supplier<Block>
 		defSpel = SubWildBlocks.STONE_SPELEOTHEM,
-		defStairs = Blocks.STONE_STAIRS,
-		defSlab = Blocks.STONE_SLAB;
+		defStairs = () -> Blocks.STONE_STAIRS,
+		defSlab = () -> Blocks.STONE_SLAB;
 
 	public BasicCaveType(ResourceLocation name)
 	{
@@ -57,10 +58,10 @@ public class BasicCaveType extends CaveType
 			if(support.getMaterial() == Material.WOOD)
 			{
 				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
-					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].getDefaultState().with(BlockStateProperties.FACING, Direction.UP).with(SubWildProperties.GLOWING, true));
+					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, Direction.UP).with(SubWildProperties.GLOWING, true));
 			}
 			else if(depth > 0d && !support.isIn(Tags.Blocks.DIRT) && this.getSpelChance(depth, this.floorCh, rand))
-				this.genRandSpel(world, pos, SubWildLookups.SPELEOS.getOrDefault(support.getBlock(), this.defSpel).getDefaultState().with(SubWildProperties.VERTICAL_FACING, Direction.UP), depth, rand);
+				this.genRandSpel(world, pos, SubWildLookups.SPELEOS.getOrDefault(support.getBlock(), this.defSpel.get()).getDefaultState().with(SubWildProperties.VERTICAL_FACING, Direction.UP), depth, rand);
 		}
 	}
 
@@ -76,12 +77,12 @@ public class BasicCaveType extends CaveType
 			if(support.getMaterial() == Material.WOOD)
 			{
 				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
-					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].getDefaultState().with(BlockStateProperties.FACING, Direction.DOWN).with(SubWildProperties.GLOWING, true));
+					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, Direction.DOWN).with(SubWildProperties.GLOWING, true));
 			}
 			else if(!support.isIn(Tags.Blocks.DIRT))
 			{
 				if(depth > 0d && this.getSpelChance(depth, this.ceilCh, rand))
-					this.genRandSpel(world, pos, SubWildLookups.SPELEOS.getOrDefault(support.getBlock(), this.defSpel).getDefaultState().with(SubWildProperties.VERTICAL_FACING, Direction.DOWN), depth, rand);
+					this.genRandSpel(world, pos, SubWildLookups.SPELEOS.getOrDefault(support.getBlock(), this.defSpel.get()).getDefaultState().with(SubWildProperties.VERTICAL_FACING, Direction.DOWN), depth, rand);
 			}
 			else if(this.getNoise(noise, pos, 0.125d) > 0.4d)
 				this.genRoots(world, noise, pos);
@@ -99,7 +100,7 @@ public class BasicCaveType extends CaveType
 			if(world.getBlockState(pos.offset(wallDir)).getMaterial() == Material.WOOD)
 			{
 				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
-					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].getDefaultState().with(BlockStateProperties.FACING, wallDir.getOpposite()).with(SubWildProperties.GLOWING, true));
+					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, wallDir.getOpposite()).with(SubWildProperties.GLOWING, true));
 			}
 			else
 				this.genSlope(world, pos, wallDir, rand);
@@ -168,8 +169,8 @@ public class BasicCaveType extends CaveType
 		if(rand.nextInt(10) >= chance)
 			return;
 		if(rand.nextInt(5) <= 2)
-			this.genBlock(world, pos, SubWildLookups.STAIRS.getOrDefault(wall, this.defStairs).getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir).with(BlockStateProperties.HALF, isDown ? Half.BOTTOM : Half.TOP));
+			this.genBlock(world, pos, SubWildLookups.STAIRS.getOrDefault(wall, this.defStairs.get()).getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir).with(BlockStateProperties.HALF, isDown ? Half.BOTTOM : Half.TOP));
 		else
-			this.genBlock(world, pos, SubWildLookups.SLABS.getOrDefault(wall, this.defSlab).getDefaultState().with(BlockStateProperties.SLAB_TYPE, isDown ? SlabType.BOTTOM : SlabType.TOP));
+			this.genBlock(world, pos, SubWildLookups.SLABS.getOrDefault(wall, this.defSlab.get()).getDefaultState().with(BlockStateProperties.SLAB_TYPE, isDown ? SlabType.BOTTOM : SlabType.TOP));
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -35,7 +36,7 @@ public abstract class CaveType
 
 	public final ResourceLocation name;
 
-	public static final Block[] ROOTS = new Block[] { SubWildBlocks.LIGHT_BROWN_ROOTS, SubWildBlocks.BROWN_ROOTS, SubWildBlocks.WHITE_ROOTS, SubWildBlocks.LIGHT_ORANGE_ROOTS, SubWildBlocks.ORANGE_ROOTS, SubWildBlocks.DARK_BROWN_ROOTS };
+	public static final Supplier<Block>[] ROOTS = new Supplier[] { SubWildBlocks.LIGHT_BROWN_ROOTS, SubWildBlocks.BROWN_ROOTS, SubWildBlocks.WHITE_ROOTS, SubWildBlocks.LIGHT_ORANGE_ROOTS, SubWildBlocks.ORANGE_ROOTS, SubWildBlocks.DARK_BROWN_ROOTS };
 
 	public CaveType(ResourceLocation name)
 	{
@@ -118,7 +119,7 @@ public abstract class CaveType
 
 	public void genRoots(ISeedReader world, INoise noise, BlockPos pos)
 	{
-		this.genBlock(world, pos, ROOTS[(int) (this.getClampedNoise(noise, pos, 0.0625d) * (double) ROOTS.length)].getDefaultState());
+		this.genBlock(world, pos, ROOTS[(int) (this.getClampedNoise(noise, pos, 0.0625d) * (double) ROOTS.length)].get().getDefaultState());
 	}
 
 	public void genVines(ISeedReader world, BlockPos pos, Direction mainDir, int len)

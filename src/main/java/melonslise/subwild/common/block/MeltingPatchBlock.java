@@ -20,21 +20,21 @@ public class MeltingPatchBlock extends PatchBlock
 {
 	public MeltingPatchBlock(Properties properties)
 	{
-		super(properties.setPropagatesDownwards((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
+		super(properties.setAllowsSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
 	}
 
 	@Override
 	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
 		super.harvestBlock(world, player, pos, state, te, stack);
-		if (world.func_230315_m_().func_236040_e_()) // getDimensionType(?).doesWaterVaporize
+		if (world.getDimensionType().isUltrawarm())
 		{
 			world.removeBlock(pos, false);
 			return;
 		}
 		Material material = world.getBlockState(pos.down()).getMaterial();
 		if (material.blocksMovement() || material.isLiquid())
-			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
+			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 	}
 
 	public boolean isHot(World world, BlockPos pos, BlockState state)
@@ -51,12 +51,12 @@ public class MeltingPatchBlock extends PatchBlock
 
 	public void melt(World world, BlockPos pos, BlockState state)
 	{
-		if(world.func_230315_m_().func_236040_e_()) // getDimensionType(?).doesWaterVaporize
+		if (world.getDimensionType().isUltrawarm())
 			world.removeBlock(pos, false);
 		else
 		{
-			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
-			world.neighborChanged(pos, SubWildBlocks.WATER_PUDDLE, pos);
+			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+			world.neighborChanged(pos, SubWildBlocks.WATER_PUDDLE.get(), pos);
 		}
 	}
 }

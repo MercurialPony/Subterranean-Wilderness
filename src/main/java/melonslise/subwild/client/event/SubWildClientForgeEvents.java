@@ -1,6 +1,8 @@
 package melonslise.subwild.client.event;
 
+import java.util.List;
 import java.util.ListIterator;
+import java.util.function.Supplier;
 
 import melonslise.subwild.SubWild;
 import melonslise.subwild.common.init.SubWildFeatures;
@@ -28,16 +30,22 @@ public final class SubWildClientForgeEvents
 		Minecraft mc = Minecraft.getInstance();
 		if(!mc.gameSettings.showDebugInfo || mc.isReducedDebug())
 			return;
-		BlockPos pos = mc.player.func_233580_cy_(); // getPosition
+		BlockPos pos = mc.player.getPosition();
 		CaveType cave = null;
-		for(ConfiguredFeature cf : mc.world.getBiome(pos).getFeatures(GenerationStage.Decoration.UNDERGROUND_DECORATION))
-			if(cf.config instanceof DecoratedFeatureConfig)
+		List<List<Supplier<ConfiguredFeature<?, ?>>>> stageToFeature = mc.world.getBiome(pos).getGenerationSettings().getFeatures();
+		int stage = GenerationStage.Decoration.UNDERGROUND_DECORATION.ordinal();
+		if(stageToFeature.size() >= stage)
+			for(Supplier<ConfiguredFeature<?, ?>> supp : stageToFeature.get(stage))
 			{
-				ConfiguredFeature cf1 = ((DecoratedFeatureConfig) cf.config).feature;
-				if(cf1.feature == SubWildFeatures.CAVE_DECO)
+				ConfiguredFeature cf = supp.get();
+				if(cf.config instanceof DecoratedFeatureConfig)
 				{
-					cave = ((CaveRangeConfig) cf1.config).getCaveTypeAt(CaveDecoFeature.depthAt(mc.world, pos));
-					break;
+					ConfiguredFeature cf1 = ((DecoratedFeatureConfig) cf.config).feature.get();
+					if(cf1.feature == SubWildFeatures.CAVE_DECO.get())
+					{
+						cave = ((CaveRangeConfig) cf1.config).getCaveTypeAt(CaveDecoFeature.depthAt(mc.world, pos));
+						break;
+					}
 				}
 			}
 		ListIterator<String> it = event.getLeft().listIterator();

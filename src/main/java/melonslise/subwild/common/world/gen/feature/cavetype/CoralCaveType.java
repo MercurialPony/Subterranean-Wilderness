@@ -23,8 +23,8 @@ public class CoralCaveType extends BasicCaveType
 	public CoralCaveType(String domain, String path)
 	{
 		super(domain, path);
-		this.defStairs = Blocks.PRISMARINE_STAIRS;
-		this.defSlab = Blocks.PRISMARINE_SLAB;
+		this.defStairs = () -> Blocks.PRISMARINE_STAIRS;
+		this.defSlab = () -> Blocks.PRISMARINE_SLAB;
 	}
 
 	@Override

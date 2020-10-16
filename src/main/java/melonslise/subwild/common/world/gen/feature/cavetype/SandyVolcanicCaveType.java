@@ -49,7 +49,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(d > 0.4d)
-				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).getDefaultState(), d, 0.4d, 1d, 5);
+				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, 0.4d, 1d, 5);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}

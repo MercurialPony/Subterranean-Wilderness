@@ -41,9 +41,9 @@ public class PodzolCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.0625d);
 			if(d > 0d)
-				this.genLayer(world, pos, SubWildBlocks.PODZOL_PATCH.getDefaultState(), d, 0.2d, 1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.PODZOL_PATCH.get().getDefaultState(), d, 0.2d, 1d, 5);
 			else if(d > -0.3d)
-				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.getDefaultState(), d, -0.1d, 0.2d, 5);
+				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.get().getDefaultState(), d, -0.1d, 0.2d, 5);
 			if(this.getNoise(noise, pos, 0.1d) > 0.5d)
 				this.genBlock(world, pos, LushCaveType.PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) LushCaveType.PLANTS.length)].getDefaultState());
 			if(rand.nextInt(34) == 0)

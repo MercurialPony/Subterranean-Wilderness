@@ -39,68 +39,68 @@ public final class SubWildClientModEvents
 	@SubscribeEvent
 	public static void onSetup(FMLClientSetupEvent event)
 	{
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.SHORT_FOXFIRE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.LONG_FOXFIRE, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.SHORT_FOXFIRE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.LONG_FOXFIRE.get(), RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_PATCH, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.WATER_PUDDLE, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_PATCH.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.WATER_PUDDLE.get(), RenderType.getTranslucent());
 
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_STONE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_GRANITE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_DIORITE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_ANDESITE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_SANDSTONE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_RED_SANDSTONE_SPELEOTHEM, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_OBSIDIAN_SPELEOTHEM, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_STONE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_GRANITE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_DIORITE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_ANDESITE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_SANDSTONE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_RED_SANDSTONE_SPELEOTHEM.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.FROZEN_OBSIDIAN_SPELEOTHEM.get(), RenderType.getTranslucent());
 
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICICLE, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICICLE.get(), RenderType.getTranslucent());
 
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_STONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_GRANITE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_DIORITE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_ANDESITE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SANDSTONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SMOOTH_SANDSTONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_RED_SANDSTONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_OBSIDIAN, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BLACKSTONE, RenderType.getCutout());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BASALT, RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_STONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_GRANITE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_DIORITE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_ANDESITE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SANDSTONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SMOOTH_SANDSTONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_RED_SANDSTONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_OBSIDIAN.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BLACKSTONE.get(), RenderType.getCutout());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.MOLTEN_BASALT.get(), RenderType.getCutout());
 
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_COAL_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_IRON_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_GOLD_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_LAPIS_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_REDSTONE_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_DIAMOND_ORE, RenderType.getTranslucent());
-		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_EMERALD_ORE, RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_COAL_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_IRON_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_GOLD_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_LAPIS_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_REDSTONE_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_DIAMOND_ORE.get(), RenderType.getTranslucent());
+		RenderTypeLookup.setRenderLayer(SubWildBlocks.ICE_EMERALD_ORE.get(), RenderType.getTranslucent());
 
-		addBlockOverride(SubWildBlocks.SHORT_FOXFIRE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("glowing")));
-		addBlockOverride(SubWildBlocks.LONG_FOXFIRE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("glowing")));
+		addBlockOverride(SubWildBlocks.SHORT_FOXFIRE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("glowing")));
+		addBlockOverride(SubWildBlocks.LONG_FOXFIRE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("glowing")));
 
-		addFullOverride(SubWildBlocks.MOLTEN_STONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_GRANITE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_DIORITE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_ANDESITE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_SANDSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_SMOOTH_SANDSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_RED_SANDSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_OBSIDIAN, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_BLACKSTONE, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
-		addFullOverride(SubWildBlocks.MOLTEN_BASALT, model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_STONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_GRANITE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_DIORITE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_ANDESITE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_SANDSTONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_SMOOTH_SANDSTONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_RED_SANDSTONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_SMOOTH_RED_SANDSTONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_OBSIDIAN.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_BLACKSTONE.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
+		addFullOverride(SubWildBlocks.MOLTEN_BASALT.get(), model -> new BrightnessBakedModel(model, tex -> tex.getPath().contains("lava")));
 	}
 
 	@SubscribeEvent
 	public static void registerBlockColors(ColorHandlerEvent.Block event)
 	{
-		event.getBlockColors().register((state, world, pos, layer) -> BiomeColors.getWaterColor(world, pos), SubWildBlocks.WATER_PUDDLE);
+		event.getBlockColors().register((state, world, pos, layer) -> BiomeColors.getWaterColor(world, pos), SubWildBlocks.WATER_PUDDLE.get());
 	}
 
 	@SubscribeEvent
 	public static void registerItemColors(ColorHandlerEvent.Item event)
 	{
-		event.getItemColors().register((stack, layer) -> Fluids.WATER.getAttributes().getColor(), SubWildBlocks.WATER_PUDDLE);
+		event.getItemColors().register((stack, layer) -> Fluids.WATER.getAttributes().getColor(), SubWildBlocks.WATER_PUDDLE.get());
 	}
 
 	@SubscribeEvent

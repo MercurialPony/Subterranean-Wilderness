@@ -93,7 +93,7 @@ public class SpeleothemBlock extends FallingBlock
 		if(side.getAxis().isVertical() && this.canConnect(world, pos, state, adjPos, adjState))
 			state = state.with(SubWildProperties.FACING_LOOKUP.get(side), true);
 		if(!this.isValidPosition(state, world, pos))
-			this.startFalling(world.getWorld(), pos, state);
+			this.startFalling((World) world, pos, state);
 		return state;
 	}
 
@@ -106,7 +106,7 @@ public class SpeleothemBlock extends FallingBlock
 		Direction face = ctx.getFace();
 		if(face.getAxis().isVertical())
 			state = state.with(SubWildProperties.VERTICAL_FACING, face);
-		for(Direction dir : Direction.Plane.VERTICAL.facingValues)
+		for(Direction dir : Direction.Plane.VERTICAL)
 		{
 			BlockPos adjPos = pos.offset(dir);
 			BlockState adjState = world.getBlockState(adjPos);

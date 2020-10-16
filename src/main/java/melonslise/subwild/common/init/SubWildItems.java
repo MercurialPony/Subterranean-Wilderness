@@ -1,22 +1,21 @@
 package melonslise.subwild.common.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import melonslise.subwild.SubWild;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildItems
 {
 	private SubWildItems( ) {}
 
-	public static final List<Item> ITEMS = new ArrayList<>(142);
+	public static DeferredRegister ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SubWild.ID);
 
 	public static final ItemGroup TAB = new ItemGroup(SubWild.ID)
 	{
@@ -24,25 +23,17 @@ public final class SubWildItems
 		@Override
 		public ItemStack createIcon()
 		{
-			return new ItemStack(SubWildBlocks.LONG_FOXFIRE);
+			return new ItemStack(SubWildBlocks.LONG_FOXFIRE.get());
 		}
 	};
 
-	public static void register(RegistryEvent.Register<Item> event)
+	public static void register()
 	{
-		for(Item item : ITEMS)
-			event.getRegistry().register(item);
+		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	public static Item add(String name, Item item)
+	public static RegistryObject<Item> add(String name, Item item)
 	{
-		ITEMS.add(item.setRegistryName(SubWild.ID, name));
-		return item;
-	}
-
-	public static Item add(BlockItem item)
-	{
-		ITEMS.add(item.setRegistryName(item.getBlock().getRegistryName()));
-		return item;
+		return ITEMS.register(name, () -> item);
 	}
 }

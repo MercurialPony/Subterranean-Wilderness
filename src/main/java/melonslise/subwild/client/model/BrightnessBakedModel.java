@@ -35,7 +35,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 		{
 			if(quad.getVertexData()[6] == 0x00F00F0)
 				break;
-			if(this.filter.test(quad.func_187508_a().getName())) // getSprite
+			if(this.filter.test(quad.getSprite().getName()))
 				transformQuad(quad);
 		}
 		return quads;

@@ -15,8 +15,8 @@ public class VolcanicCaveType extends BasicCaveType
 	{
 		super(domain, path);
 		this.ceilCh = 7f;
-		this.defSlab = Blocks.BLACKSTONE_SLAB;
-		this.defStairs = Blocks.BLACKSTONE_STAIRS;
+		this.defSlab = () -> Blocks.BLACKSTONE_SLAB;
+		this.defStairs = () -> Blocks.BLACKSTONE_STAIRS;
 		this.defSpel = SubWildBlocks.BLACKSTONE_SPELEOTHEM;
 	}
 

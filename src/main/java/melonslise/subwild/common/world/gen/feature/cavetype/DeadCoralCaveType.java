@@ -22,8 +22,8 @@ public class DeadCoralCaveType extends BasicCaveType
 	public DeadCoralCaveType(String domain, String path)
 	{
 		super(domain, path);
-		this.defStairs = Blocks.PRISMARINE_STAIRS;
-		this.defSlab = Blocks.PRISMARINE_SLAB;
+		this.defStairs = () -> Blocks.PRISMARINE_STAIRS;
+		this.defSlab = () -> Blocks.PRISMARINE_SLAB;
 		this.ceilCh = 4f;
 	}
 
@@ -47,7 +47,7 @@ public class DeadCoralCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			if(this.getNoise(noise, pos, 0.125d) < 0.4d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			if(this.getNoise(noise, pos, 0.15d) > 0.6d)
 				this.genBlock(world, pos, DEAD_CORAL[rand.nextInt(DEAD_CORAL.length)].getDefaultState().with(BlockStateProperties.WATERLOGGED, false)); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_CORAL.length)
 		}

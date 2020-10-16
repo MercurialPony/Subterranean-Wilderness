@@ -19,7 +19,7 @@ public class MoltenBlock extends Block
 {
 	public MoltenBlock(Properties properties)
 	{
-		super(properties.setPropagatesDownwards((state, world, pos, type) -> type.isImmuneToFire()));
+		super(properties.setAllowsSpawn((state, world, pos, type) -> type.isImmuneToFire()));
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class MoltenBlock extends Block
 	{
 		if(rand.nextInt(10) != 0)
 			return;
-		for(Direction dir : Direction.Plane.VERTICAL.facingValues)
+		for(Direction dir : Direction.Plane.VERTICAL)
 		{
 			BlockPos adjPos = pos.offset(dir);
 			BlockState adjState = world.getBlockState(adjPos);

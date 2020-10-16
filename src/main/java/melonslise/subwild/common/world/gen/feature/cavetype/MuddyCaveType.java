@@ -38,9 +38,9 @@ public class MuddyCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < 0d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else
-				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.getDefaultState(), d, 0.3d, 1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.get().getDefaultState(), d, 0.3d, 1d, 5);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}

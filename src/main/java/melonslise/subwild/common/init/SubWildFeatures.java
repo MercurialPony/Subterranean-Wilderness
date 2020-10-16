@@ -1,13 +1,10 @@
 package melonslise.subwild.common.init;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.google.common.collect.Maps;
 
 import melonslise.subwild.SubWild;
-import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.world.gen.feature.CaveDecoFeature;
 import melonslise.subwild.common.world.gen.feature.CaveRangeConfig;
 import melonslise.subwild.common.world.gen.feature.cavetype.BasicCaveType;
@@ -30,14 +27,13 @@ import melonslise.subwild.common.world.gen.feature.cavetype.SandyRockyCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.SandyVolcanicCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.VolcanicCaveType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.placement.CaveEdgeConfig;
-import net.minecraft.world.gen.placement.ConfiguredPlacement;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildFeatures
@@ -69,76 +65,69 @@ public final class SubWildFeatures
 		SANDY_RED_VOLCANIC_CAVE = new SandyVolcanicCaveType(SubWild.ID, "sandy_red_volcanic", true),
 		CORAL_CAVE = new CoralCaveType(SubWild.ID, "coral");
 
-	public static final List<Feature> FEATURES = new ArrayList<>(1);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, SubWild.ID);
 
-	public static final Feature
+	public static final RegistryObject<Feature<CaveRangeConfig>>
 		CAVE_DECO = add("cave", new CaveDecoFeature(CaveRangeConfig.CODEC));
 
-	public static void register(RegistryEvent.Register<Feature<?>> event)
+	public static void register()
 	{
-		for(Feature<?> feature : FEATURES)
-			event.getRegistry().register(feature);
+		FEATURES.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	public static void addFeatures()
+	public static void addFeatures(BiomeLoadingEvent event)
 	{
-		GenerationStage.Decoration dec = GenerationStage.Decoration.UNDERGROUND_DECORATION;
-		ConfiguredPlacement liq = Placement.CARVING_MASK.configure(new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 2f));
-		ConfiguredPlacement air = !SubWildConfig.EXPENSIVE_SCAN.get() ? Placement.CARVING_MASK.configure(new CaveEdgeConfig(GenerationStage.Carving.AIR, 2f)) : SubWildPlacements.CAVE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG);
-		for(Biome biome : ForgeRegistries.BIOMES.getValues())
+		GenerationStage.Decoration stage = GenerationStage.Decoration.UNDERGROUND_DECORATION;
+		switch (event.getCategory())
 		{
-			switch(biome.getCategory())
-			{
-			case BEACH:
-			case OCEAN:
-			case RIVER:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(DEAD_CORAL_CAVE, 0d, 0.8d).addCaveType(VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(CORAL_CAVE, 0d, 1d).build()).withPlacement(liq));
-				break;
-			case TAIGA:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(PODZOL_CAVE, 0d, 0.4d).addCaveType(MUDDY_CAVE, 0.4d, 0.8d).addCaveType(LUSH_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case EXTREME_HILLS:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(ROCKY_CAVE, 0d, 0.4d).addCaveType(ICY_ROCKY_CAVE, 0.4d, 0.8d).addCaveType(ROCKY_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case JUNGLE:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(LUSH_CAVE, 0d, 0.8d).addCaveType(LUSH_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case MESA:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(MESA_CAVE, 0d, 0.8d).addCaveType(SANDY_RED_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case PLAINS:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(MUDDY_CAVE, 0d, 0.8d).addCaveType(VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case SAVANNA:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(SANDY_ROCKY_CAVE, 0d, 0.8d).addCaveType(SANDY_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case ICY:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(ICY_CAVE, 0d, 0.8d).addCaveType(ICY_ROCKY_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case FOREST:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(MOSSY_ROCKY_CAVE, 0d, 0.8d).addCaveType(LUSH_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case DESERT:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(SANDY_CAVE, 0d, 0.8d).addCaveType(SANDY_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case SWAMP:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(MOSSY_CAVE, 0d, 0.8d).addCaveType(LUSH_VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			case MUSHROOM:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(FUNGAL_CAVE, 0d, 1d).build()).withPlacement(air));
-				break;
-			default:
-				biome.addFeature(dec, CAVE_DECO.withConfiguration(CaveRangeConfig.builder().addCaveType(ROCKY_CAVE, 0d, 0.8d).addCaveType(VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(air));
-				break;
-			}
+		case BEACH:
+		case OCEAN:
+		case RIVER:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_AIR_CAVE_DECO);
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_LIQUID_CAVE_DECO);
+			break;
+		case TAIGA:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_TAIGA_CAVE_DECO);
+			break;
+		case EXTREME_HILLS:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_EXTREME_HILLS_CAVE_DECO);
+			break;
+		case JUNGLE:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_JUNGLE_CAVE_DECO);
+			break;
+		case MESA:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MESA_CAVE_DECO);
+			break;
+		case PLAINS:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_PLAINS_CAVE_DECO);
+			break;
+		case SAVANNA:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SAVANNA_CAVE_DECO);
+			break;
+		case ICY:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ICY_CAVE_DECO);
+			break;
+		case FOREST:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_FOREST_CAVE_DECO);
+			break;
+		case DESERT:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_DESERT_CAVE_DECO);
+			break;
+		case SWAMP:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SWAMP_CAVE_DECO);
+			break;
+		case MUSHROOM:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MUSHROOM_CAVE_DECO);
+			break;
+		default:
+			event.getGeneration().withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ROCKY_CAVE_DECO);
+			break;
 		}
 	}
 
-	public static Feature add(String name, Feature feature)
+	public static <T extends IFeatureConfig> RegistryObject<Feature<T>> add(String name, Feature<T> feature)
 	{
-		FEATURES.add((Feature) feature.setRegistryName(SubWild.ID, name));
-		return feature;
+		return FEATURES.register(name, () -> feature);
 	}
 
 	public static CaveType addCaveType(CaveType type)

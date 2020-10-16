@@ -14,7 +14,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.StructureManager;
 
 public class CaveDecoFeature extends Feature<CaveRangeConfig>
 {
@@ -24,7 +23,7 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 	}
 
 	@Override
-	public boolean func_230362_a_(ISeedReader world, StructureManager strcMgr, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig profile)
+	public boolean func_241855_a(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
 	{
 		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
 		if(noise == null)
@@ -32,7 +31,7 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 		float depth = depthAt(world, pos);
 		if(depth < 0f)
 			return false;
-		CaveType type = profile.getCaveTypeAt(depth);
+		CaveType type = cfg.getCaveTypeAt(depth);
 		if(type == null)
 			return false;
 		BlockPos.Mutable adjPos = new BlockPos.Mutable();

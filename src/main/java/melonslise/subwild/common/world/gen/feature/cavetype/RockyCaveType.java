@@ -43,7 +43,7 @@ public class RockyCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(-0.4 < d && d < 0.1d)
-				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.getDefaultState(), d, -0.4d, 0.1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.4d, 0.1d, 5);
 			if(rand.nextInt(14) == 0)
 				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.facingValues[rand.nextInt(Plane.HORIZONTAL.facingValues.length)]));
 		}

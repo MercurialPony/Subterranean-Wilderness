@@ -43,9 +43,9 @@ public class IcyCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.1d)
-				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.getDefaultState(), d, -0.1d, 1d, 7);
+				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().getDefaultState(), d, -0.1d, 1d, 7);
 			else if(d > -0.7d)
-				this.genLayer(world, pos, SubWildBlocks.ICE_PATCH.getDefaultState(), d, -0.7d, -0.1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.ICE_PATCH.get().getDefaultState(), d, -0.7d, -0.1d, 5);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}

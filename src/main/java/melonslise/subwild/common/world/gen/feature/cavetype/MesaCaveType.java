@@ -18,8 +18,8 @@ public class MesaCaveType extends BasicCaveType
 		super(domain, path);
 		this.floorCh = 0f;
 		this.defSpel = SubWildBlocks.RED_SANDSTONE_SPELEOTHEM;
-		this.defStairs = Blocks.RED_SANDSTONE_STAIRS;
-		this.defSlab = Blocks.RED_SANDSTONE_SLAB;
+		this.defStairs = () -> Blocks.RED_SANDSTONE_STAIRS;
+		this.defSlab = () -> Blocks.RED_SANDSTONE_SLAB;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MesaCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.5d && d < 0.5d)
-				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.getDefaultState(), d, -0.5d, 0.5d, 5);
+				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().getDefaultState(), d, -0.5d, 0.5d, 5);
 			else if(rand.nextInt(34) == 0)
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
 		}

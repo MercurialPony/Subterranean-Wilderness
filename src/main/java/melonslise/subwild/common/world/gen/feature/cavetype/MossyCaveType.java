@@ -35,7 +35,7 @@ public class MossyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			if(this.getNoise(noise, pos, 0.125d) < 0d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else if(rand.nextInt(36) == 0)
 				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);
 		}

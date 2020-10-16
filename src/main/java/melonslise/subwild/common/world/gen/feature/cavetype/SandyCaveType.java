@@ -16,8 +16,8 @@ public class SandyCaveType extends BasicCaveType
 	{
 		super(domain, path);
 		this.defSpel = red ? SubWildBlocks.RED_SANDSTONE_SPELEOTHEM : SubWildBlocks.SANDSTONE_SPELEOTHEM;
-		this.defStairs = red ? Blocks.RED_SANDSTONE_STAIRS : Blocks.SANDSTONE_STAIRS;
-		this.defSlab = red ? Blocks.RED_SANDSTONE_SLAB : Blocks.SANDSTONE_SLAB;
+		this.defStairs = red ? () -> Blocks.RED_SANDSTONE_STAIRS : () -> Blocks.SANDSTONE_STAIRS;
+		this.defSlab = red ? () -> Blocks.RED_SANDSTONE_SLAB : () -> Blocks.SANDSTONE_SLAB;
 		this.red = red;
 	}
 
@@ -44,7 +44,7 @@ public class SandyCaveType extends BasicCaveType
 		{
 			double d = this.getNoise(noise, pos, 0.1d);
 			if(-0.5d < d && d < 0.5d)
-				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).getDefaultState(), d, -0.5d, 0.5d, 7);
+				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, -0.5d, 0.5d, 7);
 			if(rand.nextInt(26) == 0)
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
 		}

@@ -27,7 +27,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 
 minecraft
 {
-	mappings channel: 'snapshot', version: '20200707-1.16.1'
+	mappings channel: 'snapshot', version: '20200916-1.16.2'
     
 	accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -39,7 +39,7 @@ minecraft
 
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-			property 'forge.logging.console.level', 'debug'
+			property 'forge.logging.console.level', 'info'
 
 			mods
 			{
@@ -56,7 +56,7 @@ minecraft
 
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-			property 'forge.logging.console.level', 'debug'
+			property 'forge.logging.console.level', 'info'
 
 			mods
 			{
@@ -75,7 +75,7 @@ minecraft
 
 			property 'forge.logging.console.level', 'debug'
 
-			args '--mod', 'subwild', '--all', '--output', file('src/generated/resources/')
+			args '--mod', 'subwild', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
 			mods
 			{
@@ -88,26 +88,25 @@ minecraft
 	}
 }
 
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
 dependencies
 {
-	minecraft 'net.minecraftforge:forge:1.16.1-32.0.98'
+    minecraft 'net.minecraftforge:forge:1.16.3-34.1.19'
 }
 
 jar
 {
 	manifest
 	{
-		attributes
-		(
-			[
-				"Specification-Title": archivesBaseName,
-				"Specification-Vendor": "melonslise",
-				"Specification-Version": version,
-				"Implementation-Title": archivesBaseName,
-				"Implementation-Version": version,
-				"Implementation-Vendor" :"melonslise",
-				"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-			]
-		)
+		attributes([
+			"Specification-Title": archivesBaseName,
+			"Specification-Vendor": "melonslise",
+			"Specification-Version": version, // We are version 1 of ourselves
+			"Implementation-Title": archivesBaseName,
+			"Implementation-Version": version,
+			"Implementation-Vendor" :"melonslise",
+			"Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+		])
 	}
 }
