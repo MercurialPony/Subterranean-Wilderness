@@ -84,9 +84,9 @@ public class FoxfireBlock extends Block implements IPlantable
 	 *	Block#tick receives scheduled ticks
 	 */
 	@Override
-	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand)
+	public void tick(final BlockState state, final ServerWorld world, final BlockPos pos, final Random rand)
 	{
-		boolean glowing = state.get(SubWildProperties.GLOWING);
+		final boolean glowing = state.get(SubWildProperties.GLOWING);
 		if(world.getLightSubtracted(pos, 0) < GLOWING_THRESHOLD != glowing)
 			world.setBlockState(pos, state.with(SubWildProperties.GLOWING, !glowing));
 		if(rand.nextInt(250) == 0)
@@ -106,7 +106,7 @@ public class FoxfireBlock extends Block implements IPlantable
 			}
 			if(orients.size() <= 0)
 				return;
-			Pair<BlockPos, Direction> orient = orients.get(rand.nextInt(orients.size()));
+			final Pair<BlockPos, Direction> orient = orients.get(rand.nextInt(orients.size()));
 			world.setBlockState(orient.getLeft(), SubWildTags.FOXFIRE.getRandomElement(rand).getDefaultState().with(BlockStateProperties.FACING, orient.getRight()), 2);
 		}
 	}

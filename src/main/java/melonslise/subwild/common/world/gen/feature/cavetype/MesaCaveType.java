@@ -13,7 +13,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
 public class MesaCaveType extends BasicCaveType
 {
-	public MesaCaveType(String domain, String path)
+	public MesaCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.floorCh = 0f;
@@ -23,11 +23,11 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.2d)
 				this.replaceBlock(world, pos, Blocks.RED_SAND.getDefaultState());
 			else
@@ -37,11 +37,11 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.5d && d < 0.5d)
 				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().getDefaultState(), d, -0.5d, 0.5d, 5);
 			else if(rand.nextInt(34) == 0)
@@ -51,7 +51,7 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -61,7 +61,7 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -71,11 +71,11 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, float depth, int pass, final Random rand) {}
 
-	public void genTerracotta(ISeedReader world, BlockPos pos)
+	public void genTerracotta(final ISeedReader world, final BlockPos pos)
 	{
-		BadlandsSurfaceBuilder builder = (BadlandsSurfaceBuilder) SurfaceBuilder.BADLANDS;
+		final BadlandsSurfaceBuilder builder = (BadlandsSurfaceBuilder) SurfaceBuilder.BADLANDS;
 		builder.setSeed(world.getSeed());
 		this.replaceBlock(world, pos, builder.func_215431_a(pos.getX(), pos.getY(), pos.getZ()));
 	}

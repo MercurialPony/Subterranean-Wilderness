@@ -16,18 +16,18 @@ public class RockyCaveType extends BasicCaveType
 {
 	public static final Block[] STONE = new Block[] { Blocks.GRANITE, Blocks.ANDESITE, Blocks.STONE, Blocks.COBBLESTONE, Blocks.DIORITE };
 
-	public RockyCaveType(String domain, String path)
+	public RockyCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.ceilCh = 6f;
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.3d)
@@ -37,11 +37,11 @@ public class RockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(-0.4 < d && d < 0.1d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.4d, 0.1d, 5);
 			if(rand.nextInt(14) == 0)
@@ -51,11 +51,11 @@ public class RockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.3d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.2d)
@@ -65,11 +65,11 @@ public class RockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < 0.1d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.4d)

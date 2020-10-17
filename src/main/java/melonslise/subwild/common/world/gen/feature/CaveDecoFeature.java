@@ -23,15 +23,15 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 	}
 
 	@Override
-	public boolean func_241855_a(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
+	public boolean func_241855_a(final ISeedReader world, final ChunkGenerator gen, final Random rand, final BlockPos pos, final CaveRangeConfig cfg)
 	{
-		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
+		final INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
 		if(noise == null)
 			return false;
-		float depth = depthAt(world, pos);
+		final float depth = depthAt(world, pos);
 		if(depth < 0f)
 			return false;
-		CaveType type = cfg.getCaveTypeAt(depth);
+		final CaveType type = cfg.getCaveTypeAt(depth);
 		if(type == null)
 			return false;
 		BlockPos.Mutable adjPos = new BlockPos.Mutable();
@@ -73,7 +73,7 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 		return false;
 	}
 
-	public static float depthAt(IWorld world, BlockPos pos)
+	public static float depthAt(final IWorld world, final BlockPos pos)
 	{
 		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ());
 	}

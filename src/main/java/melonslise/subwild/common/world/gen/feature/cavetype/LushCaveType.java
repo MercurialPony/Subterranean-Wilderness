@@ -21,7 +21,7 @@ public class LushCaveType extends BasicCaveType
 		PLANTS = new Block[] { Blocks.FERN, Blocks.GRASS }, // Blocks.LARGE_FERN, Blocks.TALL_GRASS
 		MUSHROOMS = new Block[] { Blocks.RED_MUSHROOM, Blocks.BROWN_MUSHROOM };
 
-	public LushCaveType(String domain, String path)
+	public LushCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.floorCh = 5f;
@@ -29,11 +29,11 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.2d < d && d < 0.4d)
 				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
 			if(this.getNoise(noise, pos, 0.25d) < 0.2d)
@@ -43,11 +43,11 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
 				this.genLayer(world, pos, SubWildBlocks.MOSSY_DIRT_PATCH.get().getDefaultState(), d, -1d, -0.4d, 3);
 			else if(d > 0.1d)
@@ -60,10 +60,10 @@ public class LushCaveType extends BasicCaveType
 				world.setBlockState(pos, MUSHROOMS[rand.nextInt(MUSHROOMS.length)].getDefaultState(), 2);
 			if(this.getNoise(noise, pos, 0.1d) > -0.2d)
 				this.genBlock(world, pos, LEAVES[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) LEAVES.length)].getDefaultState().with(BlockStateProperties.PERSISTENT, true));
-			BlockPos up = pos.up();
+			final BlockPos up = pos.up();
 			if(this.getNoise(noise, up, 0.1d) > 0.4d && world.getBlockState(up).isAir())
 				this.genBlock(world, up, LEAVES[(int) (this.getClampedNoise(noise, up, 0.015625d) * (double) LEAVES.length)].getDefaultState().with(BlockStateProperties.PERSISTENT, true));
-			BlockPos upup = up.up();
+			final BlockPos upup = up.up();
 			if(this.getNoise(noise, up, 0.1d) > 0.7d && world.getBlockState(upup).isAir())
 				this.genBlock(world, upup, LEAVES[(int) (this.getClampedNoise(noise, upup, 0.015625d) * (double) LEAVES.length)].getDefaultState().with(BlockStateProperties.PERSISTENT, true));
 		}
@@ -71,7 +71,7 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -84,7 +84,7 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -95,7 +95,7 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -108,7 +108,7 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -126,7 +126,7 @@ public class LushCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFill(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{

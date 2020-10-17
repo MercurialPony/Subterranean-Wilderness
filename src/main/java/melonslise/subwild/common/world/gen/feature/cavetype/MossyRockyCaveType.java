@@ -15,17 +15,17 @@ import net.minecraft.world.ISeedReader;
 
 public class MossyRockyCaveType extends BasicCaveType
 {
-	public MossyRockyCaveType(String domain, String path)
+	public MossyRockyCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)
@@ -37,7 +37,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -45,7 +45,7 @@ public class MossyRockyCaveType extends BasicCaveType
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else if(rand.nextInt(36) == 0)
 				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(-0.1d < d && d < 0.4d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.1d, 0.4d, 5);
 			if(rand.nextInt(14) == 0)
@@ -55,11 +55,11 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)
@@ -73,7 +73,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -84,11 +84,11 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)
@@ -100,7 +100,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -114,7 +114,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFill(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{

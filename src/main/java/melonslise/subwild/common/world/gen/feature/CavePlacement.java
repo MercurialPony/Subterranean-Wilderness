@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import com.mojang.serialization.Codec;
 
+import io.netty.util.concurrent.CompleteFuture;
 import melonslise.subwild.common.config.SubWildConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -22,17 +23,17 @@ import net.minecraft.world.gen.placement.Placement;
 
 public class CavePlacement extends Placement<NoPlacementConfig>
 {
-	public CavePlacement(Codec<NoPlacementConfig> codec)
+	public CavePlacement(final Codec<NoPlacementConfig> codec)
 	{
 		super(codec);
 	}
 
 	@Override
-	public Stream<BlockPos> func_241857_a(WorldDecoratingHelper helper, Random rand, NoPlacementConfig cfg, BlockPos pos)
+	public Stream<BlockPos> func_241857_a(final WorldDecoratingHelper helper, final Random rand, final NoPlacementConfig cfg, final BlockPos pos)
 	{
 		Set<BlockPos> set = new HashSet<>(1024);
-		IChunk chunk =helper.field_242889_a.getChunk(pos);
-		ChunkPos chPos = chunk.getPos();
+		final IChunk chunk =helper.field_242889_a.getChunk(pos);
+		final ChunkPos chPos = chunk.getPos();
 		if(SubWildConfig.EXPENSIVE_SCAN.get())
 		{
 			BlockPos.Mutable mut = new BlockPos.Mutable();
@@ -42,7 +43,7 @@ public class CavePlacement extends Placement<NoPlacementConfig>
 						if(chunk.getBlockState(mut.setPos(x, y, z)).getBlock() == Blocks.CAVE_AIR)
 							set.add(mut.add(chPos.getXStart(), 0, chPos.getZStart()).toImmutable());
 		}
-		BitSet bits = ((ChunkPrimer) chunk).getOrAddCarvingMask(GenerationStage.Carving.AIR);
+		final BitSet bits = ((ChunkPrimer) chunk).getOrAddCarvingMask(GenerationStage.Carving.AIR);
 			for(int a = 0; a < bits.length(); ++a)
 				if(bits.get(a))
 					set.add(new BlockPos(chPos.getXStart() + (a & 15), a >> 8, chPos.getZStart() + (a >> 4 & 15)));

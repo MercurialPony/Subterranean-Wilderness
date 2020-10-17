@@ -10,7 +10,7 @@ import net.minecraft.world.ISeedReader;
 
 public class MuddyCaveType extends BasicCaveType
 {
-	public MuddyCaveType(String domain, String path)
+	public MuddyCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.defSlab = SubWildBlocks.DIRT_SLAB;
@@ -18,11 +18,11 @@ public class MuddyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.4d)
 				this.replaceBlock(world, pos, Blocks.FARMLAND.getDefaultState());
 			else if(d > -0.2d)
@@ -32,11 +32,11 @@ public class MuddyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < 0d)
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else
@@ -46,7 +46,7 @@ public class MuddyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -57,7 +57,7 @@ public class MuddyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{

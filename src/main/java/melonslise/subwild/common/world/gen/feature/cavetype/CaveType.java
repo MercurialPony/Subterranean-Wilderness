@@ -38,46 +38,47 @@ public abstract class CaveType
 
 	public static final Supplier<Block>[] ROOTS = new Supplier[] { SubWildBlocks.LIGHT_BROWN_ROOTS, SubWildBlocks.BROWN_ROOTS, SubWildBlocks.WHITE_ROOTS, SubWildBlocks.LIGHT_ORANGE_ROOTS, SubWildBlocks.ORANGE_ROOTS, SubWildBlocks.DARK_BROWN_ROOTS };
 
-	public CaveType(ResourceLocation name)
+	public CaveType(final ResourceLocation name)
 	{
 		this.name = name;
 	}
 
-	public CaveType(String domain, String path)
+	public CaveType(final String domain, final String path)
 	{
 		this(new ResourceLocation(domain, path));
 	}
 
-	public abstract void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genCeilExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand);
+	public abstract void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand);
 
-	public abstract void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand);
+	public abstract void genFill(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand);
 
-	public abstract boolean canGenSide(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass, Direction dir);
+	public abstract boolean canGenSide(final ISeedReader world, final BlockPos pos, final BlockState state, final float depth, final int pass, final Direction dir);
 
-	public abstract boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir);
+	public abstract boolean canGenExtra(final ISeedReader world, final BlockPos pos, final BlockState state, final BlockPos sidePos, final BlockState sideState, final float depth, final int pass, final Direction dir);
 
-	public abstract boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass);
+	public abstract boolean canGenFill(final ISeedReader world, final BlockPos pos, final BlockState state, final float depth, final int pass);
 
-	public abstract Set<Direction> getGenOrder(int pass);
+	public abstract Set<Direction> getGenOrder(final int pass);
 
 	public abstract int getPasses();
 
-	public boolean isNatural(ISeedReader world, BlockPos pos, BlockState state)
+	public boolean isNatural(final ISeedReader world, final BlockPos pos, final BlockState state)
 	{
-		return state.isIn(Tags.Blocks.STONE) || state.getBlock() == Blocks.BLACKSTONE || state.getBlock() == Blocks.MAGMA_BLOCK || state.isIn(Tags.Blocks.COBBLESTONE) || state.isIn(BlockTags.CORAL_BLOCKS) || state.getBlock() == Blocks.SNOW_BLOCK || state.getBlock() == Blocks.PRISMARINE || state.isIn(BlockTags.ICE) || state.isIn(Tags.Blocks.SANDSTONE) || state.isIn(SubWildTags.TERRACOTTA) || state.isIn(Tags.Blocks.SAND) || state.isIn(Tags.Blocks.GRAVEL) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.OBSIDIAN);
+		final Block block = state.getBlock();
+		return state.isIn(Tags.Blocks.STONE) || block == Blocks.BLACKSTONE || block == Blocks.MAGMA_BLOCK || state.isIn(Tags.Blocks.COBBLESTONE) || state.isIn(BlockTags.CORAL_BLOCKS) || block == Blocks.SNOW_BLOCK || block == Blocks.PRISMARINE || state.isIn(BlockTags.ICE) || state.isIn(Tags.Blocks.SANDSTONE) || state.isIn(SubWildTags.TERRACOTTA) || state.isIn(Tags.Blocks.SAND) || state.isIn(Tags.Blocks.GRAVEL) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.OBSIDIAN);
 	}
 
-	public boolean genBlock(ISeedReader world, BlockPos pos, BlockState state)
+	public boolean genBlock(final ISeedReader world, final BlockPos pos, final BlockState state)
 	{
 		if(!state.isValidPosition(world, pos))
 			return false;
@@ -85,9 +86,9 @@ public abstract class CaveType
 		return true;
 	}
 
-	public boolean replaceBlock(ISeedReader world, BlockPos pos, BlockState state)
+	public boolean replaceBlock(final ISeedReader world, BlockPos pos, final BlockState state)
 	{
-		Block block = world.getBlockState(pos).getBlock();
+		final Block block = world.getBlockState(pos).getBlock();
 		if(!block.isIn(Tags.Blocks.ORES))
 			return this.genBlock(world, pos, state);
 		else
@@ -97,32 +98,32 @@ public abstract class CaveType
 				.orElse(false);
 	}
 
-	public boolean modifyBlock(ISeedReader world, BlockPos pos, Map<Block, Block> lookup)
+	public boolean modifyBlock(final ISeedReader world, final BlockPos pos, final Map<Block, Block> lookup)
 	{
-		Block block = world.getBlockState(pos).getBlock();
-		Block newBlock = lookup.get(block);
+		final Block block = world.getBlockState(pos).getBlock();
+		final Block newBlock = lookup.get(block);
 		if(newBlock == null)
 			return false;
 		return this.replaceBlock(world, pos, newBlock.getDefaultState());
 	}
 
-	public boolean genLayer(ISeedReader world, BlockPos pos, BlockState state, double noise, double min, double max, int maxHgt)
+	public boolean genLayer(final ISeedReader world, final BlockPos pos, final BlockState state, final double noise, final double min, final double max, final int maxHgt)
 	{
 		if(noise < min || noise > max)
 			return false;
 		// Normalize our noise to range (0, 1)
-		double nrm = (noise - min) / (max - min);
+		final double nrm = (noise - min) / (max - min);
 		// Use linear formula 1 - 2abs(x - 0.5) where x is normalized to 0-1
 		this.genBlock(world, pos, state.with(BlockStateProperties.LAYERS_1_8, (int) ((1d - 2d * Math.abs(nrm - 0.5d)) * (double) maxHgt) + 1));
 		return true;
 	}
 
-	public void genRoots(ISeedReader world, INoise noise, BlockPos pos)
+	public void genRoots(final ISeedReader world, final INoise noise, final BlockPos pos)
 	{
 		this.genBlock(world, pos, ROOTS[(int) (this.getClampedNoise(noise, pos, 0.0625d) * (double) ROOTS.length)].get().getDefaultState());
 	}
 
-	public void genVines(ISeedReader world, BlockPos pos, Direction mainDir, int len)
+	public void genVines(final ISeedReader world, final BlockPos pos, final Direction mainDir, final int len)
 	{
 		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < len; ++a)
@@ -139,7 +140,7 @@ public abstract class CaveType
 		}
 	}
 
-	public void genKelp(ISeedReader world, BlockPos pos, int len)
+	public void genKelp(final ISeedReader world, final BlockPos pos, final int len)
 	{
 		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < len; ++a)
@@ -151,13 +152,13 @@ public abstract class CaveType
 		}
 	}
 
-	public void genSpel(ISeedReader world, BlockPos pos, BlockState state, int size)
+	public void genSpel(final ISeedReader world, final BlockPos pos, final BlockState state, final int size)
 	{
-		Direction dir = state.get(SubWildProperties.VERTICAL_FACING);
+		final Direction dir = state.get(SubWildProperties.VERTICAL_FACING);
 		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < size; ++a)
 		{
-			BlockState nextState = world.getBlockState(next.move(dir));
+			final BlockState nextState = world.getBlockState(next.move(dir));
 			BlockState newState = state;
 			if(nextState.isAir())
 				newState = newState.with(SubWildProperties.FACING_LOOKUP.get(dir), a != size - 1);
@@ -172,7 +173,7 @@ public abstract class CaveType
 		}
 	}
 
-	public void genBigBrownShroom(ISeedReader world, BlockPos pos, int len)
+	public void genBigBrownShroom(final ISeedReader world, final BlockPos pos, int len)
 	{
 		if(len < 1)
 			len = 1;
@@ -199,7 +200,7 @@ public abstract class CaveType
 			this.genBlock(world, next, Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState());
 	}
 
-	public void genBigRedShroom(ISeedReader world, BlockPos pos, int len)
+	public void genBigRedShroom(final ISeedReader world, final BlockPos pos, int len)
 	{
 		if(len < 1)
 			len = 1;
@@ -225,12 +226,12 @@ public abstract class CaveType
 	/**
 	 * Generally frequency means 1 / (number of blocks per feature). So for example a frequency of 1/8 or 0.125 means we are likely to get a feature every 8 tiles.
 	 */
-	public double getNoise(INoise noise, BlockPos pos, double frequency)
+	public double getNoise(final INoise noise, final BlockPos pos, final double frequency)
 	{
 		return noise.sample((double) pos.getX() * frequency, (double) pos.getY() * frequency, (double) pos.getZ() * frequency);
 	}
 
-	public double getClampedNoise(INoise noise, BlockPos pos, double frequency)
+	public double getClampedNoise(final INoise noise, final BlockPos pos, final double frequency)
 	{
 		return this.getNoise(noise, pos, frequency) / 2d + 0.5d;
 	}

@@ -1,0 +1,31 @@
+Video settings used:
+- Render distance: 24 chunks
+- Render quality: Fast
+- Clouds: Off
+- FPS cap: Unlimited
+- VSync: Off
+- Entity distance: 50%
+- Entity shadows: Off
+- Smooth lighting: Off
+
+World settings used:
+- Seed: subwild-test
+- Game mode: Creative
+- Difficulty: Peaceful
+
+Mod settings used:
+- All default unless otherwise specified
+
+Testing methodology (same in all tests):
+- Sprint flying in a straight line at y:100, same direction. Stop once reach Z:8000
+- JProfiler set to "Full sampling" mode
+- Commands used on world join to setup tests:
+  - /gamemode spectator
+  - /tp @a 74.5 128 144.5
+- World is deleted after each run to ensure that chunks are always regenerated
+
+Before:
+before.jps
+
+After:
+after.jps

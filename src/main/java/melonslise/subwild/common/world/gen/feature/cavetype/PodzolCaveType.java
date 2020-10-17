@@ -19,11 +19,11 @@ public class PodzolCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.7d)
 				this.replaceBlock(world, pos, Blocks.FARMLAND.getDefaultState());
 			else if(d > 0.4d)
@@ -35,11 +35,11 @@ public class PodzolCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d > 0d)
 				this.genLayer(world, pos, SubWildBlocks.PODZOL_PATCH.get().getDefaultState(), d, 0.2d, 1d, 5);
 			else if(d > -0.3d)
@@ -53,21 +53,20 @@ public class PodzolCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			if(this.getNoise(noise, pos, 0.1d) < -0.2d)
-				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).getDefaultState());
-			if(this.getNoise(noise, pos, 0.125d) < -0.2d)
-				this.modifyBlock(world, pos, SubWildLookups.MOSSY);
-		}
+		genCeilOrWall(world, noise, pos, pass, rand);
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
+		genCeilOrWall(world, noise, pos, pass, rand);
+		super.genWall(world, noise, pos, depth, pass, rand);
+	}
+
+	private void genCeilOrWall(final ISeedReader world, final INoise noise, final BlockPos pos, final int pass, final Random rand) {
 		if(pass == 0)
 		{
 			if(this.getNoise(noise, pos, 0.1d) < -0.2d)
@@ -75,6 +74,5 @@ public class PodzolCaveType extends BasicCaveType
 			if(this.getNoise(noise, pos, 0.125d) < -0.2d)
 				this.modifyBlock(world, pos, SubWildLookups.MOSSY);
 		}
-		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 }

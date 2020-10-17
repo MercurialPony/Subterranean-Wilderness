@@ -19,7 +19,7 @@ public class DeadCoralCaveType extends BasicCaveType
 		DEAD_CORAL = new Block[] { Blocks.DEAD_BRAIN_CORAL, Blocks.DEAD_BRAIN_CORAL_FAN, Blocks.DEAD_BUBBLE_CORAL, Blocks.DEAD_BUBBLE_CORAL_FAN, Blocks.DEAD_FIRE_CORAL, Blocks.DEAD_FIRE_CORAL_FAN, Blocks.DEAD_HORN_CORAL, Blocks.DEAD_HORN_CORAL_FAN, Blocks.DEAD_TUBE_CORAL, Blocks.DEAD_TUBE_CORAL_FAN },
 		DEAD_WALL_CORAL = new Block[] { Blocks.DEAD_BRAIN_CORAL_WALL_FAN, Blocks.DEAD_BUBBLE_CORAL_WALL_FAN, Blocks.DEAD_FIRE_CORAL_WALL_FAN, Blocks.DEAD_HORN_CORAL_WALL_FAN, Blocks.DEAD_TUBE_CORAL_WALL_FAN };
 
-	public DeadCoralCaveType(String domain, String path)
+	public DeadCoralCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.defStairs = () -> Blocks.PRISMARINE_STAIRS;
@@ -28,11 +28,11 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.6d)
@@ -42,7 +42,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -55,7 +55,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
@@ -63,7 +63,7 @@ public class DeadCoralCaveType extends BasicCaveType
 				this.modifyBlock(world, pos, SubWildLookups.WET);
 			else
 			{
-				double d = this.getNoise(noise, pos, 0.125d);
+				final double d = this.getNoise(noise, pos, 0.125d);
 				if(d < -0.4d)
 					this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 				else if(d > 0.2d)
@@ -74,11 +74,11 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.4d)
@@ -88,7 +88,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{

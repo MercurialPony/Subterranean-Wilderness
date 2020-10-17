@@ -36,25 +36,25 @@ public class BasicCaveType extends CaveType
 		defStairs = () -> Blocks.STONE_STAIRS,
 		defSlab = () -> Blocks.STONE_SLAB;
 
-	public BasicCaveType(ResourceLocation name)
+	public BasicCaveType(final ResourceLocation name)
 	{
 		super(name);
 	}
 
-	public BasicCaveType(String domain, String path)
+	public BasicCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand) {}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			BlockState support = world.getBlockState(pos.down());
+			final BlockState support = world.getBlockState(pos.down());
 			if(support.getMaterial() == Material.WOOD)
 			{
 				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
@@ -66,14 +66,14 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand) {}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			BlockState support = world.getBlockState(pos.up());
+			final BlockState support = world.getBlockState(pos.up());
 			if(support.getMaterial() == Material.WOOD)
 			{
 				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
@@ -90,10 +90,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand) {}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -108,28 +108,28 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFill(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand) {}
 
 	@Override
-	public boolean canGenSide(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass, Direction dir)
+	public boolean canGenSide(final ISeedReader world, final BlockPos pos, final BlockState state, final float depth, final int pass, final Direction dir)
 	{
 		return pass == 0 && (state.isIn(Tags.Blocks.STONE) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL)) || state.isIn(Tags.Blocks.ORES);
 	}
 
 	@Override
-	public boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
+	public boolean canGenExtra(final ISeedReader world, final BlockPos pos, final BlockState state, final BlockPos sidePos, final BlockState sideState, final float depth, final int pass, final Direction dir)
 	{
 		return pass == 1 && state.isAir() && (sideState.isIn(Tags.Blocks.ORES) || sideState.getMaterial() == Material.WOOD || this.isNatural(world, sidePos, sideState));
 	}
 
 	@Override
-	public boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass)
+	public boolean canGenFill(final ISeedReader world, final BlockPos pos, final BlockState state, final float depth, final int pass)
 	{
 		return pass == 1 && state.isAir();
 	}
 
 	@Override
-	public Set<Direction> getGenOrder(int pass)
+	public Set<Direction> getGenOrder(final int pass)
 	{
 		return this.dirs;
 	}
@@ -140,22 +140,22 @@ public class BasicCaveType extends CaveType
 		return 2;
 	}
 
-	public boolean getSpelChance(float depth, float baseCh, Random rand)
+	public boolean getSpelChance(final float depth, final float baseCh, final Random rand)
 	{
 		return (float) rand.nextInt(100) < baseCh + depth * 3f;
 	}
 
-	public void genRandSpel(ISeedReader world, BlockPos pos, BlockState state, float depth, Random rand)
+	public void genRandSpel(final ISeedReader world, final BlockPos pos, final BlockState state, final float depth, final Random rand)
 	{
 		this.genSpel(world, pos, state, 1 + rand.nextInt(2) + rand.nextInt((int) (depth * 10f) + 1));
 	}
 
-	public void genSlope(ISeedReader world, BlockPos pos, Direction wallDir, Random rand)
+	public void genSlope(final ISeedReader world, final BlockPos pos, final Direction wallDir, final Random rand)
 	{
 		BlockPos.Mutable mutPos = new BlockPos.Mutable().setPos(pos);
-		Block wall = world.getBlockState(mutPos.setPos(pos).move(wallDir)).getBlock();
-		boolean isDown = this.isNatural(world, mutPos.setPos(pos).move(0, -1, 0), world.getBlockState(mutPos));
-		boolean isUp = this.isNatural(world, mutPos.setPos(pos).move(0, 1, 0), world.getBlockState(mutPos));
+		final Block wall = world.getBlockState(mutPos.setPos(pos).move(wallDir)).getBlock();
+		final boolean isDown = this.isNatural(world, mutPos.setPos(pos).move(0, -1, 0), world.getBlockState(mutPos));
+		final boolean isUp = this.isNatural(world, mutPos.setPos(pos).move(0, 1, 0), world.getBlockState(mutPos));
 		if(!isDown && !isUp)
 			return;
 		mutPos.setPos(pos);

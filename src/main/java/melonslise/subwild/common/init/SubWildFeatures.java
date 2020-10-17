@@ -130,7 +130,7 @@ public final class SubWildFeatures
 		return FEATURES.register(name, () -> feature);
 	}
 
-	public static CaveType addCaveType(CaveType type)
+	public static CaveType addCaveType(final CaveType type)
 	{
 		CAVE_TYPES.put(type.name, type);
 		return type;

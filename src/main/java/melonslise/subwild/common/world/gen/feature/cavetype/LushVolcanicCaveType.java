@@ -12,7 +12,7 @@ import net.minecraft.world.ISeedReader;
 
 public class LushVolcanicCaveType extends BasicCaveType
 {
-	public LushVolcanicCaveType(String domain, String path)
+	public LushVolcanicCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.floorCh = 5f;
@@ -20,11 +20,11 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.55d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.2d)
@@ -38,7 +38,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -55,11 +55,11 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			else if (d > 0.2d)
@@ -69,7 +69,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(final ISeedReader world, final INoise noise, final BlockPos pos, float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
@@ -80,11 +80,11 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.5d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			else if (d > 0.4d)
@@ -94,7 +94,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{

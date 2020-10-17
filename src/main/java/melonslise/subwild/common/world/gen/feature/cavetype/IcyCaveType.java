@@ -11,7 +11,7 @@ import net.minecraft.world.ISeedReader;
 
 public class IcyCaveType extends BasicCaveType
 {
-	public IcyCaveType(String domain, String path)
+	public IcyCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.defSpel = SubWildBlocks.FROZEN_STONE_SPELEOTHEM;
@@ -19,29 +19,18 @@ public class IcyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			double d = this.getNoise(noise, pos, 0.125d);
-			if(d > 0.8d)
-				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
-			else if(d > 0.6d)
-				this.replaceBlock(world, pos, Blocks.PACKED_ICE.getDefaultState());
-			else if(d > 0d)
-				this.replaceBlock(world, pos, Blocks.ICE.getDefaultState());
-			else
-				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
-		}
+		genFloorCeilOrWall(world, noise, pos, pass);
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.1d)
 				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().getDefaultState(), d, -0.1d, 1d, 7);
 			else if(d > -0.7d)
@@ -51,29 +40,23 @@ public class IcyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			double d = this.getNoise(noise, pos, 0.125d);
-			if(d > 0.8d)
-				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
-			else if(d > 0.6d)
-				this.replaceBlock(world, pos, Blocks.PACKED_ICE.getDefaultState());
-			else if(d > 0d)
-				this.replaceBlock(world, pos, Blocks.ICE.getDefaultState());
-			else
-				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
-		}
+		genFloorCeilOrWall(world, noise, pos, pass);
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
+		genFloorCeilOrWall(world, noise, pos, pass);
+		super.genWall(world, noise, pos, depth, pass, rand);
+	}
+
+	private void genFloorCeilOrWall(final ISeedReader world, final INoise noise, final BlockPos pos, final int pass) {
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.8d)
 				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
 			else if(d > 0.6d)
@@ -83,18 +66,17 @@ public class IcyCaveType extends BasicCaveType
 			else
 				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
 		}
-		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand) {}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFill(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			BlockPos down = pos.down();
+			final BlockPos down = pos.down();
 			if(world.getBlockState(down).getBlock() == Blocks.WATER)
 				this.genBlock(world, down, Blocks.ICE.getDefaultState());
 		}

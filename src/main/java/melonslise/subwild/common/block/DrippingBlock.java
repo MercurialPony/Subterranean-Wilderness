@@ -27,8 +27,8 @@ public class DrippingBlock extends Block
 	{
 		if(rand.nextInt(10) != 1)
 			return;
-		BlockPos down = pos.down();
-		BlockState downState = world.getBlockState(down);
+		final BlockPos down = pos.down();
+		final BlockState downState = world.getBlockState(down);
 		if(!downState.isSolid() || !downState.isSolidSide(world, down, Direction.UP))
 			world.addParticle(this.particle, (double) pos.getX() + rand.nextDouble(), (double) pos.getY() - 0.1d, (double) pos.getZ() + rand.nextDouble(), 0d, 0d, 0d);
 	}

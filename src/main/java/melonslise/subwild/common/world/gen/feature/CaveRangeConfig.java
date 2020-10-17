@@ -28,14 +28,14 @@ public class CaveRangeConfig implements IFeatureConfig
 		public final CaveType type;
 		public final double min, max;
 
-		public CaveRange(CaveType inst, double min, double max)
+		public CaveRange(final CaveType inst, final double min, final double max)
 		{
 			this.type = inst;
 			this.min = Math.min(min, max);
 			this.max = Math.max(min, max);
 		}
 
-		public boolean contains(double depth)
+		public boolean contains(final double depth)
 		{
 			return this.min <= depth && depth < this.max;
 		}
@@ -43,14 +43,14 @@ public class CaveRangeConfig implements IFeatureConfig
 
 	public final List<CaveRange> caveRanges;
 
-	public CaveRangeConfig(List<CaveRange> caveRanges)
+	public CaveRangeConfig(final List<CaveRange> caveRanges)
 	{
 		this.caveRanges = caveRanges;
 	}
 
-	public CaveType getCaveTypeAt(double depth)
+	public CaveType getCaveTypeAt(final double depth)
 	{
-		for(CaveRange caveDepth : this.caveRanges)
+		for(final CaveRange caveDepth : this.caveRanges)
 			if(caveDepth.contains(depth))
 				return caveDepth.type;
 		return null;
@@ -65,7 +65,7 @@ public class CaveRangeConfig implements IFeatureConfig
 	{
 		public final List<CaveRange> caveRanges = Lists.newArrayList();
 
-		public Builder addCaveType(CaveType type, double min, double max)
+		public Builder addCaveType(final CaveType type, final double min, final double max)
 		{
 			this.caveRanges.add(new CaveRange(type, min, max));
 			return this;

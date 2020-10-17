@@ -12,18 +12,18 @@ import net.minecraft.world.ISeedReader;
 
 public class FungalCaveType extends BasicCaveType
 {
-	public FungalCaveType(String domain, String path)
+	public FungalCaveType(final String domain, final String path)
 	{
 		super(domain, path);
 		this.dirs = ImmutableSet.of(Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.UP);
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > -0.5d)
 				this.replaceBlock(world, pos, Blocks.MYCELIUM.getDefaultState());
 			else if( d > 0.8d)
@@ -35,7 +35,7 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1 && rand.nextInt(34) == 0)
 		{
@@ -60,29 +60,23 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			double d = this.getNoise(noise, pos, 0.125d);
-			if(d > 0d)
-				this.replaceBlock(world, pos, Blocks.TERRACOTTA.getDefaultState());
-			else if(d > -0.5d)
-				this.replaceBlock(world, pos, Blocks.LIGHT_GRAY_TERRACOTTA.getDefaultState());
-			else if(d > -0.8d)
-				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
-			else
-				this.replaceBlock(world, pos, Blocks.COARSE_DIRT.getDefaultState());
-		}
+		genCeilOrWall(world, noise, pos, pass);
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
+		genCeilOrWall(world, noise, pos, pass);
+		super.genWall(world, noise, pos, depth, pass, rand);
+	}
+
+	private void genCeilOrWall(final ISeedReader world, final INoise noise, final BlockPos pos, final int pass) {
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0d)
 				this.replaceBlock(world, pos, Blocks.TERRACOTTA.getDefaultState());
 			else if(d > -0.5d)
@@ -92,11 +86,10 @@ public class FungalCaveType extends BasicCaveType
 			else
 				this.replaceBlock(world, pos, Blocks.COARSE_DIRT.getDefaultState());
 		}
-		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final Direction wallDir, final float depth, final int pass, final Random rand)
 	{
 		/*
 		if(rand.nextInt(14) == 0 && !world.getBlockState(pos.up()).isAir() || !world.getBlockState(pos.down()).isAir())

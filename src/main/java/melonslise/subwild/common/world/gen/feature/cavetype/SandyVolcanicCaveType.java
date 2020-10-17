@@ -13,7 +13,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 {
 	public final boolean red;
 
-	public SandyVolcanicCaveType(String domain, String path, boolean red)
+	public SandyVolcanicCaveType(final String domain, final String path, boolean red)
 	{
 		super(domain, path);
 		this.red = red;
@@ -21,33 +21,18 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			double d = this.getNoise(noise, pos, 0.0625d);
-			if(d < -0.85d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-			else if(d < -0.1d)
-				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
-			else if(d < 0.4d)
-				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
-			else if(d < 0.7d)
-				this.replaceBlock(world, pos, (this.red ? Blocks.SMOOTH_RED_SANDSTONE : Blocks.SMOOTH_SANDSTONE).getDefaultState());
-			else
-				this.replaceBlock(world, pos, (this.red ? Blocks.RED_SANDSTONE : Blocks.SANDSTONE).getDefaultState());
-			if(rand.nextFloat() < 0.2f)
-				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
-		}
+		genWallOrFloor(world, noise, pos, pass, rand);
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > 0.4d)
 				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, 0.4d, 1d, 5);
 		}
@@ -55,11 +40,11 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.1d)
@@ -79,11 +64,16 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
+		genWallOrFloor(world, noise, pos, pass, rand);
+		super.genWall(world, noise, pos, depth, pass, rand);
+	}
+
+	private void genWallOrFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final int pass, final Random rand) {
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.1d)
@@ -97,6 +87,5 @@ public class SandyVolcanicCaveType extends BasicCaveType
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}
-		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 }

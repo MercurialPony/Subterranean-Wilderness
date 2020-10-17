@@ -21,29 +21,18 @@ public class VolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
-		if(pass == 0)
-		{
-			double d = this.getNoise(noise, pos, 0.0625d);
-			if(d < -0.85d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
-			else if(d < 0d)
-				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
-			else if(d < 0.6d)
-				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
-			if(rand.nextFloat() < 0.2f)
-				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
-		}
+		genWallOrFloor(world, noise, pos, pass, rand);
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < 0d)
@@ -59,11 +48,16 @@ public class VolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(final ISeedReader world, final INoise noise, final BlockPos pos, final float depth, final int pass, final Random rand)
 	{
+		genWallOrFloor(world, noise, pos, pass, rand);
+		super.genWall(world, noise, pos, depth, pass, rand);
+	}
+
+	private void genWallOrFloor(final ISeedReader world, final INoise noise, final BlockPos pos, final int pass, final Random rand) {
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < 0d)
@@ -73,6 +67,5 @@ public class VolcanicCaveType extends BasicCaveType
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}
-		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 }
