@@ -7,7 +7,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.state.Property;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 
 public final class SubWildUtil
 {
@@ -43,6 +48,12 @@ public final class SubWildUtil
 		}
 	}
 	*/
+
+	public static BlockState waterlog(BlockState state, IWorldReader world, BlockPos pos)
+	{
+		FluidState fluidState = world.getFluidState(pos);
+		return state.with(BlockStateProperties.WATERLOGGED, fluidState.isTagged(FluidTags.WATER) && fluidState.getLevel() == 8);
+	}
 
 	public static BlockState copyStateProps(BlockState from, BlockState to)
 	{

@@ -9,9 +9,11 @@ import java.util.stream.Stream;
 import com.mojang.serialization.Codec;
 
 import melonslise.subwild.common.config.SubWildConfig;
+import melonslise.subwild.common.init.SubWildCapabilities;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.GenerationStage;
@@ -28,8 +30,11 @@ public class CavePlacement extends Placement<NoPlacementConfig>
 	}
 
 	@Override
-	public Stream<BlockPos> func_241857_a(WorldDecoratingHelper helper, Random rand, NoPlacementConfig cfg, BlockPos pos)
+	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig cfg, BlockPos pos)
 	{
+		World world = helper.field_242889_a.getWorld();
+		if(!SubWildConfig.isAllowed(world) || !world.getCapability(SubWildCapabilities.NOISE_CAPABILITY).isPresent())
+			return Stream.empty();
 		Set<BlockPos> set = new HashSet<>(1024);
 		IChunk chunk =helper.field_242889_a.getChunk(pos);
 		ChunkPos chPos = chunk.getPos();
@@ -38,7 +43,7 @@ public class CavePlacement extends Placement<NoPlacementConfig>
 			BlockPos.Mutable mut = new BlockPos.Mutable();
 			for(int x = 0; x < 16; ++x)
 				for(int z = 0; z < 16; ++z)
-					for(int y = 0, yMax = chunk.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, x, z); y < yMax; ++y)
+					for(int y = 0, yMax = chunk.getTopBlockY(Heightmap.Type.OCEAN_FLOOR, x, z); y < yMax; ++y)
 						if(chunk.getBlockState(mut.setPos(x, y, z)).getBlock() == Blocks.CAVE_AIR)
 							set.add(mut.add(chPos.getXStart(), 0, chPos.getZStart()).toImmutable());
 		}

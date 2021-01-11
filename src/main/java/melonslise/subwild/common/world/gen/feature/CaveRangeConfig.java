@@ -65,7 +65,7 @@ public class CaveRangeConfig implements IFeatureConfig
 	{
 		public final List<CaveRange> caveRanges = Lists.newArrayList();
 
-		public Builder addCaveType(CaveType type, double min, double max)
+		public Builder add(CaveType type, double min, double max)
 		{
 			this.caveRanges.add(new CaveRange(type, min, max));
 			return this;

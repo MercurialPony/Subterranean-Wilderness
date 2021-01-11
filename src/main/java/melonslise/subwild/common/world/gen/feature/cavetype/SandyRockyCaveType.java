@@ -52,7 +52,7 @@ public class SandyRockyCaveType extends BasicCaveType
 			if(rand.nextInt(42) == 0)
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
 			else if(rand.nextInt(14) == 0)
-				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.facingValues[rand.nextInt(Plane.HORIZONTAL.facingValues.length)]));
+				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.random(rand)));
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}

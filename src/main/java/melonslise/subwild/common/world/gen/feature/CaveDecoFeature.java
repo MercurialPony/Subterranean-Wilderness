@@ -22,18 +22,18 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 		super(codec);
 	}
 
+	public static boolean yungHack = false;
+
 	@Override
-	public boolean func_241855_a(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
+	public boolean generate(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
 	{
-		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
-		if(noise == null)
-			return false;
 		float depth = depthAt(world, pos);
 		if(depth < 0f)
 			return false;
 		CaveType type = cfg.getCaveTypeAt(depth);
 		if(type == null)
 			return false;
+		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
 		BlockPos.Mutable adjPos = new BlockPos.Mutable();
 		for(int pass = 0; pass < type.getPasses(); ++pass)
 		{
@@ -63,6 +63,17 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 						type.genFloorExtra(world, noise, pos, depth, pass, rand);
 						break;
 					default:
+						if(yungHack) // can be shortened to 1 if but this is more readable
+						{
+							if(dir == Direction.EAST && adjPos.getX() % 16 == 0)
+								break;
+							if(dir == Direction.SOUTH && adjPos.getZ() % 16 == 0)
+								break;
+							if(dir == Direction.WEST && (adjPos.getX() + 1) % 16 == 0)
+								break;
+							if(dir == Direction.NORTH && (adjPos.getZ() + 1) % 16 == 0)
+								break;
+						}
 						type.genWallExtra(world, noise, pos, dir, depth, pass, rand);
 						break;
 					}

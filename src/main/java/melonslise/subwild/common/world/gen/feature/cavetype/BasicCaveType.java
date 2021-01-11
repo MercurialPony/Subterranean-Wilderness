@@ -11,6 +11,7 @@ import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import melonslise.subwild.common.init.SubWildProperties;
+import melonslise.subwild.common.util.SubWildUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -169,8 +170,8 @@ public class BasicCaveType extends CaveType
 		if(rand.nextInt(10) >= chance)
 			return;
 		if(rand.nextInt(5) <= 2)
-			this.genBlock(world, pos, SubWildLookups.STAIRS.getOrDefault(wall, this.defStairs.get()).getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir).with(BlockStateProperties.HALF, isDown ? Half.BOTTOM : Half.TOP));
+			this.genBlock(world, pos, SubWildUtil.waterlog(SubWildLookups.STAIRS.getOrDefault(wall, this.defStairs.get()).getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir).with(BlockStateProperties.HALF, isDown ? Half.BOTTOM : Half.TOP), world, pos));
 		else
-			this.genBlock(world, pos, SubWildLookups.SLABS.getOrDefault(wall, this.defSlab.get()).getDefaultState().with(BlockStateProperties.SLAB_TYPE, isDown ? SlabType.BOTTOM : SlabType.TOP));
+			this.genBlock(world, pos, SubWildUtil.waterlog(SubWildLookups.SLABS.getOrDefault(wall, this.defSlab.get()).getDefaultState().with(BlockStateProperties.SLAB_TYPE, isDown ? SlabType.BOTTOM : SlabType.TOP), world, pos));
 	}
 }

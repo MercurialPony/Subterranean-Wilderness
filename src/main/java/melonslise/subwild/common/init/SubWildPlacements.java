@@ -2,6 +2,7 @@ package melonslise.subwild.common.init;
 
 import melonslise.subwild.SubWild;
 import melonslise.subwild.common.world.gen.feature.CavePlacement;
+import melonslise.subwild.common.world.gen.feature.LiquidCavePlacement;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
@@ -12,12 +13,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildPlacements
 {
-	private SubWildPlacements() {}
-
 	public static final DeferredRegister<Placement<?>> PLACEMENTS = DeferredRegister.create(ForgeRegistries.DECORATORS, SubWild.ID);
 
 	public static final RegistryObject<Placement<NoPlacementConfig>>
-		CAVE = add("cave", new CavePlacement(NoPlacementConfig.field_236555_a_));
+		CAVE = add("cave", new CavePlacement(NoPlacementConfig.CODEC)),
+		LIQUID_CAVE = add("liquid_cave", new LiquidCavePlacement(NoPlacementConfig.CODEC));
+
+	private SubWildPlacements() {}
 
 	public static void register()
 	{
