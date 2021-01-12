@@ -50,6 +50,17 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 						type.genFloor(world, noise, adjPos, depth, pass, rand);
 						break;
 					default:
+						if(yungHack) // can be shortened to 1 if but this is more readable
+						{
+							if(dir == Direction.EAST && adjPos.getX() % 16 == 0)
+								break;
+							if(dir == Direction.SOUTH && adjPos.getZ() % 16 == 0)
+								break;
+							if(dir == Direction.WEST && (adjPos.getX() + 1) % 16 == 0)
+								break;
+							if(dir == Direction.NORTH && (adjPos.getZ() + 1) % 16 == 0)
+								break;
+						}
 						type.genWall(world, noise, adjPos, depth, pass, rand);
 						break;
 					}
@@ -86,6 +97,6 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 
 	public static float depthAt(IWorld world, BlockPos pos)
 	{
-		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.getX(), pos.getZ());
+		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Type.OCEAN_FLOOR, pos.getX(), pos.getZ());
 	}
 }

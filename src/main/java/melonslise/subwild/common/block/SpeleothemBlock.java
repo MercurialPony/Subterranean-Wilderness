@@ -4,10 +4,14 @@ import java.util.Random;
 
 import melonslise.subwild.common.init.SubWildProperties;
 import melonslise.subwild.common.init.SubWildTags;
+import melonslise.subwild.common.util.SubWildUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -24,7 +28,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SpeleothemBlock extends FallingBlock
+public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 {
 	public static final VoxelShape
 		SMALL_STALAGMITE_SHAPE = Block.makeCuboidShape(7d, 0d, 7d, 9d, 6d, 9d),
@@ -38,13 +42,13 @@ public class SpeleothemBlock extends FallingBlock
 	public SpeleothemBlock(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(BlockStateProperties.UP, false).with(BlockStateProperties.DOWN, false).with(SubWildProperties.VERTICAL_FACING, Direction.UP));
+		this.setDefaultState(this.stateContainer.getBaseState().with(BlockStateProperties.UP, false).with(BlockStateProperties.DOWN, false).with(SubWildProperties.VERTICAL_FACING, Direction.UP).with(BlockStateProperties.WATERLOGGED, false));
 	}
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
 	{
-		builder.add(BlockStateProperties.UP).add(BlockStateProperties.DOWN).add(SubWildProperties.VERTICAL_FACING);
+		builder.add(BlockStateProperties.UP).add(BlockStateProperties.DOWN).add(SubWildProperties.VERTICAL_FACING).add(BlockStateProperties.WATERLOGGED);
 	}
 
 	@Override
@@ -114,7 +118,7 @@ public class SpeleothemBlock extends FallingBlock
 			if(this.canSupport(world, pos, state, adjPos, adjState))
 				state = state.with(SubWildProperties.VERTICAL_FACING, dir.getOpposite());
 		}
-		return state;
+		return SubWildUtil.waterlog(state, world, pos);
 	}
 
 	@Override
@@ -154,4 +158,10 @@ public class SpeleothemBlock extends FallingBlock
 	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {}
+
+	@Override
+	public FluidState getFluidState(BlockState state)
+	{
+		return state.get(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+	}
 }

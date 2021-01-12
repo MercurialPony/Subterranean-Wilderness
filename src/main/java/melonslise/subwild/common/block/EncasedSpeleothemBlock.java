@@ -12,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -19,6 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
@@ -27,7 +29,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class EncasedSpeleothemBlock extends SpeleothemBlock
+public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITranslucent
 {
 	public final Supplier<Block> encased;
 
@@ -42,6 +44,12 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
 	{
 		return VoxelShapes.fullCube();
+	}
+
+	@Override
+	public boolean shouldDisplayFluidOverlay(BlockState state, IBlockDisplayReader world, BlockPos pos, FluidState fluidState)
+	{
+		return true;
 	}
 
 	@Override
@@ -85,6 +93,12 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return !state.isSolid() && adjState.getBlock() == this ? true : super.isSideInvisible(state, adjState, side);
+		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) ? true : super.isSideInvisible(state, adjState, side);
+	}
+
+	@Override
+	public boolean isIce(BlockState state)
+	{
+		return !state.isSolid();
 	}
 }
