@@ -73,12 +73,10 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 			return COLUMN_SHAPE;
 	}
 
-	// TODO Different damage depending on size
 	@Override
 	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand)
 	{
-		if(!this.isValidPosition(state, world, pos))
-			this.startFalling(world, pos, state);
+		this.tryToFall(world, pos, state);
 	}
 
 	public boolean canConnect(IWorldReader world, BlockPos pos, BlockState state, BlockPos toPos, BlockState toState)
@@ -96,8 +94,7 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 	{
 		if(side.getAxis().isVertical() && this.canConnect(world, pos, state, adjPos, adjState))
 			state = state.with(SubWildProperties.FACING_LOOKUP.get(side), true);
-		if(!this.isValidPosition(state, world, pos))
-			this.startFalling((World) world, pos, state);
+		world.getPendingBlockTicks().scheduleTick(pos, this, 1);
 		return state;
 	}
 
@@ -128,9 +125,9 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 		return this.canSupport(world, pos, state, supPos, world.getBlockState(supPos));
 	}
 
-	public void startFalling(World world, BlockPos pos, BlockState state)
+	public void tryToFall(World world, BlockPos pos, BlockState state)
 	{
-		if(!this.falling())
+		if(!this.falling() || this.isValidPosition(state, world, pos))
 			return;
 		FallingBlockEntity falling = new FallingBlockEntity(world, (double) pos.getX() + 0.5d, (double) pos.getY(), (double) pos.getZ() + 0.5d, world.getBlockState(pos));
 		falling.dontSetBlock = true;

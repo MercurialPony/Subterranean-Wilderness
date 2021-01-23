@@ -25,7 +25,7 @@ public class IcicleBlock extends SpeleothemBlock
 
 	public void melt(World world, BlockPos pos, BlockState state)
 	{
-		this.startFalling(world, pos, state);
+		this.tryToFall(world, pos, state);
 	}
 
 	@Override
