@@ -44,9 +44,10 @@ public class BrightnessBakedModel extends BakedModelWrapper
 	public static void transformQuad(BakedQuad quad)
 	{
 		int[] vertexData = quad.getVertexData();
+		int step = vertexData.length / 4;
 		vertexData[6] = 0x00F000F0;
-		vertexData[6 + 8] = 0x00F000F0;
-		vertexData[6 + 8 + 8] = 0x00F000F0;
-		vertexData[6 + 8 + 8 + 8] = 0x00F000F0;
+		vertexData[6 + step] = 0x00F000F0;
+		vertexData[6 + 2 * step] = 0x00F000F0;
+		vertexData[6 + 3 * step] = 0x00F000F0;
 	}
 }
