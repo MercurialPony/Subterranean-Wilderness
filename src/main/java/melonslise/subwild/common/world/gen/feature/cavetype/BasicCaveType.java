@@ -169,7 +169,7 @@ public class BasicCaveType extends CaveType
 			chance = SubWildConfig.SLOPE_THRESHOLD_CHANCE.get();
 		if(rand.nextInt(10) >= chance)
 			return;
-		if(rand.nextInt(5) <= 2)
+		if(SubWildConfig.GENERATE_STAIRS.get() && rand.nextInt(5) <= 2)
 			this.genBlock(world, pos, SubWildUtil.waterlog(SubWildLookups.STAIRS.getOrDefault(wall, this.defStairs.get()).getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir).with(BlockStateProperties.HALF, isDown ? Half.BOTTOM : Half.TOP), world, pos));
 		else
 			this.genBlock(world, pos, SubWildUtil.waterlog(SubWildLookups.SLABS.getOrDefault(wall, this.defSlab.get()).getDefaultState().with(BlockStateProperties.SLAB_TYPE, isDown ? SlabType.BOTTOM : SlabType.TOP), world, pos));

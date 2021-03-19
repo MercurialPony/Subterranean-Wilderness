@@ -36,7 +36,7 @@ public class CavePlacement extends Placement<NoPlacementConfig>
 		if(!SubWildConfig.isAllowed(world) || !world.getCapability(SubWildCapabilities.NOISE_CAPABILITY).isPresent())
 			return Stream.empty();
 		Set<BlockPos> set = new HashSet<>(1024);
-		IChunk chunk =helper.field_242889_a.getChunk(pos);
+		IChunk chunk = helper.field_242889_a.getChunk(pos);
 		ChunkPos chPos = chunk.getPos();
 		if(SubWildConfig.EXPENSIVE_SCAN.get())
 		{
