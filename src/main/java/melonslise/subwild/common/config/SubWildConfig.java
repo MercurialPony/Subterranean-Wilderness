@@ -11,7 +11,7 @@ public class SubWildConfig
 {
 	public static final ForgeConfigSpec SPEC;
 
-	public static final ForgeConfigSpec.BooleanValue EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS;
+	public static final ForgeConfigSpec.BooleanValue EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS, GENERATE_PATCHES;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
 
@@ -28,11 +28,13 @@ public class SubWildConfig
 		GENERATE_VINES = cfg.comment("Enable to generate vines in fungal, lush and mossy cave biomes").define("Generate Vines", true);
 		GENERATE_PUDDLES = cfg.comment("Enable to generate puddles in lush, mossy muddy, dead coral cave biomes").define("Generate Puddles", true);
 		GENERATE_STAIRS = cfg.comment("Enable to generate stairs in cave biomes. Slope Generation Chance must also be above 0 for stairs to generate.").define("Generate Stairs", true);
+		GENERATE_SLABS = cfg.comment("Enable to generate slabs in cave biomes. Slope Generation Chance must also be above 0 for slabs to generate.").define("Generate Slabs", true);
+		GENERATE_PATCHES = cfg.comment("Enable to generate patches (varying heights of slabs and snow) in cave biomes.").define("Generate Patches", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");
-		SLOPE_CHANCE = cfg.comment("The chance of a slab, stair or other type of slope generating normally in caves. Higher numbers increase the amount of slabs/stairs/slopes. Zero should stop generating them entirely.").defineInRange("Slope Generation Chance", 6, 0, 8);
-		SLOPE_THRESHOLD_CHANCE = cfg.comment("The chance of a slab, stair or other type of slope generating when within the Slope Threshold. Should be lower than the Slope Generation Chance.").defineInRange("Slope Threshold Generation Chance", 2, 0, 7);
+		SLOPE_CHANCE = cfg.comment("The chance of a slab or stairs generating normally in caves. Higher numbers increase the amount of slabs/stairs/slopes. Zero should stop generating them entirely.").defineInRange("Slope Generation Chance", 6, 0, 8);
+		SLOPE_THRESHOLD_CHANCE = cfg.comment("The chance of a slab or stairs generating when within the Slope Threshold. Should be lower than the Slope Generation Chance.").defineInRange("Slope Threshold Generation Chance", 2, 0, 7);
 		cfg.pop();
 
 		SPEC = cfg.build();

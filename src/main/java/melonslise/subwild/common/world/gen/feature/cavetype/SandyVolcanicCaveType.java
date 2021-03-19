@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Blocks;
@@ -45,7 +46,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	@Override
 	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
-		if(pass == 1)
+		if(pass == 1 && SubWildConfig.GENERATE_PATCHES.get())
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > 0.4d)

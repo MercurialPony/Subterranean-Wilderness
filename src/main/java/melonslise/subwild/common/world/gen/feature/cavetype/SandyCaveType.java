@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -43,7 +44,7 @@ public class SandyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
-			if(-0.5d < d && d < 0.5d)
+			if(SubWildConfig.GENERATE_PATCHES.get() && -0.5d < d && d < 0.5d)
 				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, -0.5d, 0.5d, 7);
 			if(rand.nextInt(26) == 0)
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());

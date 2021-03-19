@@ -52,11 +52,11 @@ public class IcyRockyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
-			if(d > 0.1d)
+			if(SubWildConfig.GENERATE_PATCHES.get() && d > 0.1d)
 				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().getDefaultState(), d, 0.1d, 1d, 7);
-			else if(d > -0.4d)
+			else if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.4d)
 				this.genLayer(world, pos, SubWildBlocks.ICE_PATCH.get().getDefaultState(), d, -0.4d, 1d, 5);
-			else if(d > -0.8d)
+			else if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.8d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.8d, -0.4d, 4);
 			else if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextInt(4) == 0)
 				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.random(rand)));
