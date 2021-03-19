@@ -148,7 +148,8 @@ public class BasicCaveType extends CaveType
 
 	public void genRandSpel(ISeedReader world, BlockPos pos, BlockState state, float depth, Random rand)
 	{
-		this.genSpel(world, pos, state, 1 + rand.nextInt(2) + rand.nextInt((int) (depth * 10f) + 1));
+		if (SubWildConfig.GENERATE_SPELEOTHEMS.get())
+			this.genSpel(world, pos, state, 1 + rand.nextInt(2) + rand.nextInt((int) (depth * 10f) + 1));
 	}
 
 	public void genSlope(ISeedReader world, BlockPos pos, Direction wallDir, Random rand)

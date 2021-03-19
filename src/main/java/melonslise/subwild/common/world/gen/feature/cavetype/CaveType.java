@@ -157,6 +157,9 @@ public abstract class CaveType
 
 	public void genSpel(ISeedReader world, BlockPos pos, BlockState state, int size)
 	{
+		if (!SubWildConfig.GENERATE_SPELEOTHEMS.get())
+			return;
+
 		Direction dir = state.get(SubWildProperties.VERTICAL_FACING);
 		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < size; ++a)
