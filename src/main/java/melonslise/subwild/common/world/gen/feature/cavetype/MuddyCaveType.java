@@ -22,7 +22,7 @@ public class MuddyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.4d)
 				this.replaceBlock(world, pos, Blocks.FARMLAND.getDefaultState());
 			else if(d > -0.2d)
@@ -36,7 +36,7 @@ public class MuddyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < 0d)
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else

@@ -25,7 +25,7 @@ public class VolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < 0d)
@@ -43,7 +43,7 @@ public class VolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < 0d)
@@ -63,7 +63,7 @@ public class VolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < 0d)

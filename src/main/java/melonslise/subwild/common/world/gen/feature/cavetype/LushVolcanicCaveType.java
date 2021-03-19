@@ -24,7 +24,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.55d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.2d)
@@ -59,7 +59,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			else if (d > 0.2d)
@@ -84,7 +84,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.5d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			else if (d > 0.4d)

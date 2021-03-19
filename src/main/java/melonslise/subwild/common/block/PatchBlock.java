@@ -82,7 +82,7 @@ public class PatchBlock extends Block
 	{
 		BlockState state = ctx.getWorld().getBlockState(ctx.getPos());
 		if (state.getBlock() == this)
-			return state.with(BlockStateProperties.LAYERS_1_8, Integer.valueOf(Math.min(8, state.get(BlockStateProperties.LAYERS_1_8) + 1)));
+			return state.with(BlockStateProperties.LAYERS_1_8, Math.min(8, state.get(BlockStateProperties.LAYERS_1_8) + 1));
 		return super.getStateForPlacement(ctx);
 	}
 
@@ -119,6 +119,6 @@ public class PatchBlock extends Block
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return !state.isSolid() && adjState.getBlock() == this && state.get(BlockStateProperties.LAYERS_1_8) <= adjState.get(BlockStateProperties.LAYERS_1_8) ? true : super.isSideInvisible(state, adjState, side);
+		return !state.isSolid() && adjState.getBlock() == this && state.get(BlockStateProperties.LAYERS_1_8) <= adjState.get(BlockStateProperties.LAYERS_1_8) || super.isSideInvisible(state, adjState, side);
 	}
 }

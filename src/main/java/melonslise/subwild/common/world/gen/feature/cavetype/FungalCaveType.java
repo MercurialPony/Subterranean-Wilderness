@@ -23,7 +23,7 @@ public class FungalCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > -0.5d)
 				this.replaceBlock(world, pos, Blocks.MYCELIUM.getDefaultState());
 			else if( d > 0.8d)
@@ -64,7 +64,7 @@ public class FungalCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0d)
 				this.replaceBlock(world, pos, Blocks.TERRACOTTA.getDefaultState());
 			else if(d > -0.5d)
@@ -82,7 +82,7 @@ public class FungalCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0d)
 				this.replaceBlock(world, pos, Blocks.TERRACOTTA.getDefaultState());
 			else if(d > -0.5d)

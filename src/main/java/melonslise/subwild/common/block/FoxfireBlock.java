@@ -154,7 +154,7 @@ public class FoxfireBlock extends Block implements IPlantable
 	@Override
 	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
-		return type == PathType.AIR && !this.canCollide ? true : super.allowsMovement(state, world, pos, type);
+		return type == PathType.AIR && !this.canCollide || super.allowsMovement(state, world, pos, type);
 	}
 
 	@Override

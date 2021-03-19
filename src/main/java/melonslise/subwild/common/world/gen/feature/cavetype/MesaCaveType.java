@@ -27,7 +27,7 @@ public class MesaCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.2d)
 				this.replaceBlock(world, pos, Blocks.RED_SAND.getDefaultState());
 			else
@@ -41,7 +41,7 @@ public class MesaCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.5d && d < 0.5d)
 				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().getDefaultState(), d, -0.5d, 0.5d, 5);
 			else if(rand.nextInt(34) == 0)

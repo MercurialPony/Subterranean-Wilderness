@@ -33,7 +33,7 @@ public final class SubWildClientForgeEvents
 		BlockPos pos = mc.player.getPosition();
 		CaveType cave = null;
 		List<List<Supplier<ConfiguredFeature<?, ?>>>> stageToFeature = mc.world.getBiome(pos).getGenerationSettings().getFeatures();
-		int stage = GenerationStage.Decoration.UNDERGROUND_DECORATION.ordinal();
+		final int stage = GenerationStage.Decoration.UNDERGROUND_DECORATION.ordinal();
 		if(stageToFeature.size() >= stage)
 			for(Supplier<ConfiguredFeature<?, ?>> supp : stageToFeature.get(stage))
 			{

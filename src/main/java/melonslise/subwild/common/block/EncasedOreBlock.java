@@ -26,6 +26,6 @@ public class EncasedOreBlock extends OreBlock implements ITranslucent
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return ITranslucent.isAdjacentIce(adjState) ? true : super.isSideInvisible(state, adjState, side);
+		return ITranslucent.isAdjacentIce(adjState) || super.isSideInvisible(state, adjState, side);
 	}
 }

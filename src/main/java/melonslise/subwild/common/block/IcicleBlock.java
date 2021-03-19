@@ -43,9 +43,9 @@ public class IcicleBlock extends SpeleothemBlock
 			return;
 		state.getShape(world, pos).forEachBox((minX, minY, minZ, maxX, maxY, maxZ) ->
 		{
-			double x = minX + rand.nextDouble() * (maxX - minX);
-			double y = minY + rand.nextDouble() * (maxY - minY);
-			double z = minZ + rand.nextDouble() * (maxZ - minZ);
+			final double x = minX + rand.nextDouble() * (maxX - minX);
+			final double y = minY + rand.nextDouble() * (maxY - minY);
+			final double z = minZ + rand.nextDouble() * (maxZ - minZ);
 			world.addParticle(ParticleTypes.DRIPPING_WATER, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 0d, 0d, 0d);
 		});
 	}

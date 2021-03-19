@@ -34,7 +34,7 @@ public class LushCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.2d < d && d < 0.4d)
 				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
 			if(this.getNoise(noise, pos, 0.25d) < 0.2d)
@@ -48,7 +48,7 @@ public class LushCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
 				this.genLayer(world, pos, SubWildBlocks.MOSSY_DIRT_PATCH.get().getDefaultState(), d, -1d, -0.4d, 3);
 			else if(d > 0.1d)

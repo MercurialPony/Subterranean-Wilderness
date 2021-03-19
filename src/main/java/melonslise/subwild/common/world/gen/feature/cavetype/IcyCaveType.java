@@ -23,7 +23,7 @@ public class IcyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.8d)
 				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
 			else if(d > 0.6d)
@@ -41,7 +41,7 @@ public class IcyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > -0.1d)
 				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().getDefaultState(), d, -0.1d, 1d, 7);
 			else if(d > -0.7d)
@@ -55,7 +55,7 @@ public class IcyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.8d)
 				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
 			else if(d > 0.6d)
@@ -73,7 +73,7 @@ public class IcyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.8d)
 				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
 			else if(d > 0.6d)

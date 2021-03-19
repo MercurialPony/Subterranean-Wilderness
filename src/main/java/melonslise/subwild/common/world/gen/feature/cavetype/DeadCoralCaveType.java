@@ -32,7 +32,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.6d)
@@ -63,7 +63,7 @@ public class DeadCoralCaveType extends BasicCaveType
 				this.modifyBlock(world, pos, SubWildLookups.WET);
 			else
 			{
-				double d = this.getNoise(noise, pos, 0.125d);
+				final double d = this.getNoise(noise, pos, 0.125d);
 				if(d < -0.4d)
 					this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 				else if(d > 0.2d)
@@ -78,7 +78,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.4d)

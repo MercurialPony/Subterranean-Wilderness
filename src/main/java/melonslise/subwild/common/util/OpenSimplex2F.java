@@ -5,7 +5,7 @@ public class OpenSimplex2F
 	private static final int PSIZE = 2048;
 	private static final int PMASK = 2047;
 
-	private short[] perm;
+	private final short[] perm;
 	private Grad2[] permGrad2;
 	private Grad3[] permGrad3;
 

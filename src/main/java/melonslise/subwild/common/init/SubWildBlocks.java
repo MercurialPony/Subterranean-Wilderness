@@ -46,7 +46,7 @@ public final class SubWildBlocks
 
 	// FIXME Speleothem pushreaction
 	public static final RegistryObject<Block>
-		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(() -> Blocks.DIRT.getDefaultState(), Block.Properties.from(Blocks.DIRT))),
+		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(Blocks.DIRT::getDefaultState, Block.Properties.from(Blocks.DIRT))),
 		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.from(Blocks.DIRT))),
 
 		SHORT_FOXFIRE = add("short_foxfire", new FoxfireBlock(Block.Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0f).sound(SoundType.NETHER_WART))),

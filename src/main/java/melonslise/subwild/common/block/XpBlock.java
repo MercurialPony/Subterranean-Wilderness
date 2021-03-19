@@ -38,7 +38,7 @@ public class XpBlock extends OreBlock implements ITranslucent
 	@Override
 	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
 	{
-		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) ? true : super.isSideInvisible(state, adjState, side);
+		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) || super.isSideInvisible(state, adjState, side);
 	}
 
 	@Override

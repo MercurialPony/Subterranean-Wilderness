@@ -54,9 +54,9 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
 	{
-		boolean up = state.get(BlockStateProperties.UP);
-		boolean down = state.get(BlockStateProperties.DOWN);
-		boolean stalagmite = state.get(SubWildProperties.VERTICAL_FACING) == Direction.UP;
+		final boolean up = state.get(BlockStateProperties.UP);
+		final boolean down = state.get(BlockStateProperties.DOWN);
+		final boolean stalagmite = state.get(SubWildProperties.VERTICAL_FACING) == Direction.UP;
 		if(!up && down && stalagmite)
 			return SMALL_STALAGMITE_SHAPE;
 		else if(up && !down && !stalagmite)

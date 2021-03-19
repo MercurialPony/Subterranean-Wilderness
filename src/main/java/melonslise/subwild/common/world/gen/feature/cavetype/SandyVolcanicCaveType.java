@@ -25,7 +25,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.1d)
@@ -47,7 +47,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d > 0.4d)
 				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, 0.4d, 1d, 5);
 		}
@@ -59,7 +59,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.1d)
@@ -83,7 +83,7 @@ public class SandyVolcanicCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
 				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
 			else if(d < -0.1d)

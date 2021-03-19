@@ -26,7 +26,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)
@@ -60,7 +60,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)
@@ -89,7 +89,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(-0.4d < d && d < 0.7d)
 				this.replaceBlock(world, pos, RockyCaveType.STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) RockyCaveType.STONE.length)].getDefaultState());
 			else if(d < -0.4d)

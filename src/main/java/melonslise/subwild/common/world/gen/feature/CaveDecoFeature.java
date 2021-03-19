@@ -27,7 +27,7 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 	@Override
 	public boolean generate(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
 	{
-		float depth = depthAt(world, pos);
+		final float depth = depthAt(world, pos);
 		if(depth < 0f)
 			return false;
 		CaveType type = cfg.getCaveTypeAt(depth);

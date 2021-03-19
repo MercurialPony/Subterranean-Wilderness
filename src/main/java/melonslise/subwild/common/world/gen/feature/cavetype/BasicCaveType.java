@@ -155,8 +155,8 @@ public class BasicCaveType extends CaveType
 	{
 		BlockPos.Mutable mutPos = new BlockPos.Mutable().setPos(pos);
 		Block wall = world.getBlockState(mutPos.setPos(pos).move(wallDir)).getBlock();
-		boolean isDown = this.isNatural(world, mutPos.setPos(pos).move(0, -1, 0), world.getBlockState(mutPos));
-		boolean isUp = this.isNatural(world, mutPos.setPos(pos).move(0, 1, 0), world.getBlockState(mutPos));
+		final boolean isDown = this.isNatural(world, mutPos.setPos(pos).move(0, -1, 0), world.getBlockState(mutPos));
+		final boolean isUp = this.isNatural(world, mutPos.setPos(pos).move(0, 1, 0), world.getBlockState(mutPos));
 		if(!isDown && !isUp)
 			return;
 		mutPos.setPos(pos);

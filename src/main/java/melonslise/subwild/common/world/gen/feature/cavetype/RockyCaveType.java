@@ -28,7 +28,7 @@ public class RockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.3d)
@@ -42,7 +42,7 @@ public class RockyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.1d);
+			final double d = this.getNoise(noise, pos, 0.1d);
 			if(-0.4 < d && d < 0.1d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.4d, 0.1d, 5);
 			if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextInt(14) == 0)
@@ -56,7 +56,7 @@ public class RockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.3d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.2d)
@@ -70,7 +70,7 @@ public class RockyCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < 0.1d)
 				this.replaceBlock(world, pos, STONE[(int) (this.getClampedNoise(noise, pos, 0.1d) * (double) STONE.length)].getDefaultState());
 			else if(d < 0.4d)

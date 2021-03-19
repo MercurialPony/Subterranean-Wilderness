@@ -23,7 +23,7 @@ public class PodzolCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.7d)
 				this.replaceBlock(world, pos, Blocks.FARMLAND.getDefaultState());
 			else if(d > 0.4d)
@@ -39,7 +39,7 @@ public class PodzolCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.0625d);
+			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d > 0d)
 				this.genLayer(world, pos, SubWildBlocks.PODZOL_PATCH.get().getDefaultState(), d, 0.2d, 1d, 5);
 			else if(d > -0.3d)

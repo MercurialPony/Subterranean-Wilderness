@@ -31,6 +31,6 @@ public class LiquidCavePlacement extends Placement<NoPlacementConfig>
 			return Stream.empty();
 		ChunkPos chunkpos = new ChunkPos(pos);
 		BitSet bitset = helper.func_242892_a(chunkpos, GenerationStage.Carving.LIQUID);
-		return IntStream.range(0, bitset.length()).filter((index) -> bitset.get(index)).mapToObj((bit) -> new BlockPos(chunkpos.getXStart() + (bit & 15), bit >> 8, chunkpos.getZStart() + (bit >> 4 & 15)));
+		return IntStream.range(0, bitset.length()).filter(bitset::get).mapToObj((bit) -> new BlockPos(chunkpos.getXStart() + (bit & 15), bit >> 8, chunkpos.getZStart() + (bit >> 4 & 15)));
 	}
 }

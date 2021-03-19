@@ -25,7 +25,7 @@ public class SubWildConfig
 
 		cfg.push("Features");
 		GENERATE_BUTTONS = cfg.comment("Whether or not we should generate stone buttons in rocky cave biomes").define("Generate Buttons", true);
-		GENERATE_VINES = cfg.comment("Whether or not we should generate vines in cave biomes").define("Generate Vines", true);
+		GENERATE_VINES = cfg.comment("Whether or not we should generate vines in fungal, lush and mossy cave biomes").define("Generate Vines", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");

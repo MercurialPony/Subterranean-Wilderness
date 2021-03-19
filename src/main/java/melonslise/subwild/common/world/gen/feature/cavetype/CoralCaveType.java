@@ -32,7 +32,7 @@ public class CoralCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < 0.2d)
 				this.replaceBlock(world, pos, CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.5d)
@@ -48,7 +48,7 @@ public class CoralCaveType extends BasicCaveType
 		{
 			if(this.getNoise(noise, pos, 0.15d) > 0.1d || rand.nextInt(14) == 0)
 				this.genBlock(world, pos, CORAL[rand.nextInt(CORAL.length)].getDefaultState());
-			double d = this.getNoise(noise, pos, 0.12d);
+			final double d = this.getNoise(noise, pos, 0.12d);
 			if(d > 0.5d || rand.nextInt(18) == 0)
 				this.genKelp(world, pos, 1 + rand.nextInt(10));
 			else if(d > -0.2d || rand.nextInt(12) == 0)
@@ -69,7 +69,7 @@ public class CoralCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
 				this.replaceBlock(world, pos, CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.3d)
@@ -86,7 +86,7 @@ public class CoralCaveType extends BasicCaveType
 	{
 		if(pass == 0)
 		{
-			double d = this.getNoise(noise, pos, 0.125d);
+			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < 0.2d)
 				this.replaceBlock(world, pos, CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) CORAL_BLOCKS.length)].getDefaultState());
 			else if(d > 0.4d)
