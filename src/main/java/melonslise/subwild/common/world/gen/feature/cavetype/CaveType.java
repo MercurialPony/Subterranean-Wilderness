@@ -10,6 +10,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildFeatures;
 import melonslise.subwild.common.init.SubWildLookups;
@@ -124,6 +125,9 @@ public abstract class CaveType
 
 	public void genVines(ISeedReader world, BlockPos pos, Direction mainDir, int len)
 	{
+		if (!SubWildConfig.GENERATE_VINES.get())
+			return;
+
 		BlockPos.Mutable next = new BlockPos.Mutable().setPos(pos);
 		for(int a = 0; a < len; ++a)
 		{

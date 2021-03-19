@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Block;

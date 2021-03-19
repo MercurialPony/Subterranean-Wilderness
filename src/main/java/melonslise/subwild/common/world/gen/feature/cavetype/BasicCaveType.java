@@ -164,9 +164,9 @@ public class BasicCaveType extends CaveType
 		Direction oppDir = wallDir.getOpposite();
 		while(air < 16 && !world.getBlockState(mutPos.move(oppDir)).isSolidSide(world, mutPos, wallDir))
 			++air;
-		int chance = 6;
+		int chance = SubWildConfig.SLOPE_CHANCE.get();
 		if(air <= SubWildConfig.SLOPE_THRESHOLD.get())
-			chance = 2;
+			chance = SubWildConfig.SLOPE_THRESHOLD_CHANCE.get();
 		if(rand.nextInt(10) >= chance)
 			return;
 		if(rand.nextInt(5) <= 2)
