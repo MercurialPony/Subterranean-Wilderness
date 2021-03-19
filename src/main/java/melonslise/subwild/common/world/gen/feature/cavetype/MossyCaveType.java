@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Blocks;
@@ -34,7 +35,7 @@ public class MossyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(this.getNoise(noise, pos, 0.125d) < 0d)
+			if(SubWildConfig.GENERATE_PUDDLES.get() && this.getNoise(noise, pos, 0.125d) < 0d)
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else if(rand.nextInt(36) == 0)
 				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);

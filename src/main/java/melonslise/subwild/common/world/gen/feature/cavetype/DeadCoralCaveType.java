@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(this.getNoise(noise, pos, 0.125d) < 0.4d)
+			if(SubWildConfig.GENERATE_PUDDLES.get() && this.getNoise(noise, pos, 0.125d) < 0.4d)
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			if(this.getNoise(noise, pos, 0.15d) > 0.6d)
 				this.genBlock(world, pos, DEAD_CORAL[rand.nextInt(DEAD_CORAL.length)].getDefaultState().with(BlockStateProperties.WATERLOGGED, false)); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_CORAL.length)

@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +38,7 @@ public class MuddyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			final double d = this.getNoise(noise, pos, 0.0625d);
-			if(d < 0d)
+			if(d < 0d && SubWildConfig.GENERATE_PUDDLES.get())
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			else
 				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.get().getDefaultState(), d, 0.3d, 1d, 5);

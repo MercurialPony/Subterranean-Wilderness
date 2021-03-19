@@ -11,7 +11,7 @@ public class SubWildConfig
 {
 	public static final ForgeConfigSpec SPEC;
 
-	public static final ForgeConfigSpec.BooleanValue EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES;
+	public static final ForgeConfigSpec.BooleanValue EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
 
@@ -24,8 +24,9 @@ public class SubWildConfig
 		DIMENSION_WHITELIST = cfg.comment("The dimensions in which cave biomes will generate in").defineList("Dimension Whitelist", Lists.newArrayList("minecraft:overworld"), e -> e instanceof String);
 
 		cfg.push("Features");
-		GENERATE_BUTTONS = cfg.comment("Whether or not we should generate stone buttons in rocky cave biomes").define("Generate Buttons", true);
-		GENERATE_VINES = cfg.comment("Whether or not we should generate vines in fungal, lush and mossy cave biomes").define("Generate Vines", true);
+		GENERATE_BUTTONS = cfg.comment("Enable to generate stone buttons in rocky cave biomes").define("Generate Buttons", true);
+		GENERATE_VINES = cfg.comment("Enable to generate vines in fungal, lush and mossy cave biomes").define("Generate Vines", true);
+		GENERATE_PUDDLES = cfg.comment("Enable to generate puddles in lush, mossy muddy, dead coral cave biomes").define("Generate Puddles", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");

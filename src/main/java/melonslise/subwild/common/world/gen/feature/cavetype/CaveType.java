@@ -112,7 +112,7 @@ public abstract class CaveType
 		if(noise < min || noise > max)
 			return false;
 		// Normalize our noise to range (0, 1)
-		double nrm = (noise - min) / (max - min);
+		final double nrm = (noise - min) / (max - min);
 		// Use linear formula 1 - 2abs(x - 0.5) where x is normalized to 0-1
 		this.genBlock(world, pos, state.with(BlockStateProperties.LAYERS_1_8, (int) ((1d - 2d * Math.abs(nrm - 0.5d)) * (double) maxHgt) + 1));
 		return true;

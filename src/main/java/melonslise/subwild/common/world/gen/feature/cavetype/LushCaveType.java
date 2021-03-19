@@ -51,7 +51,7 @@ public class LushCaveType extends BasicCaveType
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(d < -0.4d)
 				this.genLayer(world, pos, SubWildBlocks.MOSSY_DIRT_PATCH.get().getDefaultState(), d, -1d, -0.4d, 3);
-			else if(d > 0.1d)
+			else if(d > 0.1d && SubWildConfig.GENERATE_PUDDLES.get())
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			if(this.getNoise(noise, pos, 0.125d) > 0d)
 				this.genBlock(world, pos, PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) PLANTS.length)].getDefaultState());
