@@ -58,7 +58,7 @@ public class BasicCaveType extends CaveType
 			BlockState support = world.getBlockState(pos.down());
 			if(support.getMaterial() == Material.WOOD)
 			{
-				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
+				if(SubWildConfig.GENERATE_FOXFIRES.get() && this.getNoise(noise, pos, 0.1d) > 0.6d)
 					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, Direction.UP).with(SubWildProperties.GLOWING, true));
 			}
 			else if(depth > 0d && !support.isIn(Tags.Blocks.DIRT) && this.getSpelChance(depth, this.floorCh, rand))
@@ -77,7 +77,7 @@ public class BasicCaveType extends CaveType
 			BlockState support = world.getBlockState(pos.up());
 			if(support.getMaterial() == Material.WOOD)
 			{
-				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
+				if(SubWildConfig.GENERATE_FOXFIRES.get() && this.getNoise(noise, pos, 0.1d) > 0.6d)
 					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, Direction.DOWN).with(SubWildProperties.GLOWING, true));
 			}
 			else if(!support.isIn(Tags.Blocks.DIRT))
@@ -100,7 +100,7 @@ public class BasicCaveType extends CaveType
 		{
 			if(world.getBlockState(pos.offset(wallDir)).getMaterial() == Material.WOOD)
 			{
-				if(this.getNoise(noise, pos, 0.1d) > 0.6d)
+				if(SubWildConfig.GENERATE_FOXFIRES.get() && this.getNoise(noise, pos, 0.1d) > 0.6d)
 					this.genBlock(world, pos, FOXFIRE[rand.nextInt(FOXFIRE.length)].get().getDefaultState().with(BlockStateProperties.FACING, wallDir.getOpposite()).with(SubWildProperties.GLOWING, true));
 			}
 			else
