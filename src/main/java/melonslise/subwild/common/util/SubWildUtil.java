@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.state.Property;
+import net.minecraft.state.StateHolder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -70,8 +71,8 @@ public final class SubWildUtil
 			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
 			.entrySet()
 			.stream()
-			.max(Comparator.comparing(Map.Entry::getValue))
-			.map(e -> e.getKey())
+			.max(Map.Entry.comparingByValue())
+			.map(Map.Entry::getKey)
 			.orElse(null);
 	}
 }

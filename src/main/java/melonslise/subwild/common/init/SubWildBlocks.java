@@ -40,7 +40,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public final class SubWildBlocks
 {
-	public static DeferredRegister BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SubWild.ID);
+	public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SubWild.ID);
 
 	// FIXME Speleothem pushreaction
 	public static final RegistryObject<Block>
