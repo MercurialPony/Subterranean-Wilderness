@@ -49,7 +49,7 @@ public class MossyRockyCaveType extends BasicCaveType
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(SubWildConfig.GENERATE_PATCHES.get() && -0.1d < d && d < 0.4d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.1d, 0.4d, 5);
-			if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextInt(14) == 0)
+			if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_ROCKY_BUTTONS_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.random(rand)));
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
