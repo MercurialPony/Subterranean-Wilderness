@@ -11,8 +11,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 @Mod.EventBusSubscriber(modid = SubWild.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class SubWildModEvents
 {
-	private SubWildModEvents() {}
-
 	// FIXME Also event for updating the config when the gui for it is added
 	@SubscribeEvent
 	public static void onSetup(FMLCommonSetupEvent event)

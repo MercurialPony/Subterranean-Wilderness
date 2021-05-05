@@ -13,8 +13,6 @@ import net.minecraftforge.common.Tags;
 // FIXME Use tag sizes for map init
 public final class SubWildLookups
 {
-	private SubWildLookups() {}
-
 	public static HashMap<Block, Block> STAIRS, SLABS, SPELEOS, FROZEN_SPELEOS, MOLTEN, MOSSY, WET, HOT;
 
 	public static HashMap<Block, HashMap<Block, Block>> ORE_TABLE = new HashMap<>(13 + 4); // 4 for ice

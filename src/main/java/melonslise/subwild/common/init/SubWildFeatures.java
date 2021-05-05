@@ -39,8 +39,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildFeatures
 {
-	private SubWildFeatures() {}
-
 	public static final HashMap<ResourceLocation, CaveType> CAVE_TYPES = Maps.newHashMap();
 
 	public static final CaveType

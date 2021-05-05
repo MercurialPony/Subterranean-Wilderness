@@ -24,8 +24,6 @@ public final class SubWildConfiguredFeatures
 		CONFIGURED_MUSHROOM_CAVE_DECO = add("mushroom_cave_deco", SubWildFeatures.CAVE_DECO.get().withConfiguration(CaveRangeConfig.builder().add(SubWildFeatures.FUNGAL_CAVE, 0d, 1d).build()).withPlacement(SubWildConfiguredPlacements.CONFIGURED_AIR_CAVE)),
 		CONFIGURED_ROCKY_CAVE_DECO = add("rockyt_cave_deco", SubWildFeatures.CAVE_DECO.get().withConfiguration(CaveRangeConfig.builder().add(SubWildFeatures.ROCKY_CAVE, 0d, 0.8d).add(SubWildFeatures.VOLCANIC_CAVE, 0.8d, 1d).build()).withPlacement(SubWildConfiguredPlacements.CONFIGURED_AIR_CAVE));
 
-	private SubWildConfiguredFeatures() {}
-
 	public static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> add(String name, ConfiguredFeature<FC, ?> cf)
 	{
 		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, name, cf);

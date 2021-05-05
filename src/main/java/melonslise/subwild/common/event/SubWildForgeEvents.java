@@ -15,8 +15,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = SubWild.ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class SubWildForgeEvents
 {
-	private SubWildForgeEvents() {}
-
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onBiomeLoad(BiomeLoadingEvent event)
 	{

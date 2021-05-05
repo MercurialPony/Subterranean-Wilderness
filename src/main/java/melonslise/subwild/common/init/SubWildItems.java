@@ -13,8 +13,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildItems
 {
-	private SubWildItems( ) {}
-
 	public static DeferredRegister ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SubWild.ID);
 
 	public static final ItemGroup TAB = new ItemGroup(SubWild.ID)

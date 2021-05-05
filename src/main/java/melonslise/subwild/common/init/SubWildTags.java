@@ -9,8 +9,6 @@ import net.minecraft.tags.ItemTags;
 
 public final class SubWildTags
 {
-	private SubWildTags() {}
-
 	public static final ITag.INamedTag<Block>
 		// Expedition
 		FOXFIRE = wrapBlock("foxfire"),

@@ -16,8 +16,6 @@ import net.minecraft.world.IWorldReader;
 
 public final class SubWildUtil
 {
-	private SubWildUtil() {}
-
 	/*
 	public static String stringFromState(BlockState state)
 	{

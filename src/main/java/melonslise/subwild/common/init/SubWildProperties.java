@@ -9,8 +9,6 @@ import net.minecraft.util.Direction;
 
 public final class SubWildProperties
 {
-	private SubWildProperties() {}
-
 	public static final Map<Direction, BooleanProperty> FACING_LOOKUP = SixWayBlock.FACING_TO_PROPERTY_MAP;
 
 	public static final BooleanProperty GLOWING = BooleanProperty.create("glowing");

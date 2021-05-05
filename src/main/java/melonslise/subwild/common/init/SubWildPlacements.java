@@ -19,8 +19,6 @@ public final class SubWildPlacements
 		CAVE = add("cave", new CavePlacement(NoPlacementConfig.CODEC)),
 		LIQUID_CAVE = add("liquid_cave", new LiquidCavePlacement(NoPlacementConfig.CODEC));
 
-	private SubWildPlacements() {}
-
 	public static void register()
 	{
 		PLACEMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());

@@ -13,8 +13,6 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 public final class SubWildCapabilities
 {
-	private SubWildCapabilities() {}
-
 	@CapabilityInject(INoise.class)
 	public static final Capability<INoise> NOISE_CAPABILITY = null;
 
