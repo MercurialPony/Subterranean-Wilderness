@@ -14,7 +14,7 @@ public class SubWildConfig
 	public static final ForgeConfigSpec.BooleanValue
 			EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS,
 			GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS,
-			GENERATE_WALL_CORAL;
+			GENERATE_WALL_CORAL, GENERATE_DEAD_WALL_CORAL;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
 	public static final ForgeConfigSpec.DoubleValue
 			ROCKY_BUTTONS_CHANCE, ICY_ROCKY_BUTTONS_CHANCE, MOSSY_ROCKY_BUTTONS_CHANCE, SANDY_ROCKY_BUTTONS_CHANCE,
@@ -41,6 +41,8 @@ public class SubWildConfig
 			GENERATE_FOXFIRES = cfg.comment("Enable to generate glowing foxfires in cave biomes.").define("Generate Foxfires", true);
 			GENERATE_DEAD_BUSHES = cfg.comment("Enable to generate dead bushes in mesa, sandy and sandy rocky cave biomes.").define("Generate Dead Bushes", true);
 			GENERATE_LILYPADS = cfg.comment("Enable to generate lily pads in lush, mossy and mossy rocky cave biomes.").define("Generate Lily pads", true);
+			GENERATE_WALL_CORAL = cfg.comment("Enable to generate wall coral in coral cave biomes.").define("Generate Wall Coral", true);
+			GENERATE_DEAD_WALL_CORAL = cfg.comment("Enable to generate dead wall coral in dead coral cave biomes.").define("Generate Dead Wall Coral", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");//.comment("Note that frequency calculation varies between different features, so a slope chance of 8 might not match a button chance of 8 for example.");

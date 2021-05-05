@@ -93,7 +93,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(this.getNoise(noise, pos, 0.15d) > 0.5d)
+			if(SubWildConfig.GENERATE_DEAD_WALL_CORAL.get() && this.getNoise(noise, pos, 0.15d) > 0.5d)
 				this.genBlock(world, pos, DEAD_WALL_CORAL[rand.nextInt(DEAD_WALL_CORAL.length)].getDefaultState().with(BlockStateProperties.WATERLOGGED, false).with(BlockStateProperties.HORIZONTAL_FACING, wallDir.getOpposite())); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_WALL_CORAL.length)
 		}
 		super.genWallExtra(world, noise, pos, wallDir, depth, pass, rand);

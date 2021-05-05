@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -100,7 +101,7 @@ public class CoralCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(this.getNoise(noise, pos, 0.15d) > 0.1d || rand.nextInt(18) == 0)
+			if(SubWildConfig.GENERATE_WALL_CORAL.get() && this.getNoise(noise, pos, 0.15d) > 0.1d || rand.nextInt(18) == 0)
 				this.genBlock(world, pos, WALL_CORAL[rand.nextInt(WALL_CORAL.length)].getDefaultState().with(BlockStateProperties.HORIZONTAL_FACING, wallDir.getOpposite()));
 		}
 		super.genWallExtra(world, noise, pos, wallDir, depth, pass, rand);
