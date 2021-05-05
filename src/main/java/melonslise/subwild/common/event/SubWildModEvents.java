@@ -20,11 +20,11 @@ public final class SubWildModEvents
 		CaveDecoFeature.yungHack = ModList.get().isLoaded("bettercaves");
 		if(CaveDecoFeature.yungHack)
 		{
-			System.out.println();
+			SubWild.LOGGER.warn("");
 			SubWild.LOGGER.warn("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			SubWild.LOGGER.warn("Yung's Better Caves Present! Enabling workaround for wall feature placements!");
 			SubWild.LOGGER.warn("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-			System.out.println();
+			SubWild.LOGGER.warn("");
 		}
 	}
 }
