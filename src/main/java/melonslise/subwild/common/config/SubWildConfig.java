@@ -11,9 +11,13 @@ public class SubWildConfig
 {
 	public static final ForgeConfigSpec SPEC;
 
-	public static final ForgeConfigSpec.BooleanValue EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS, GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS;
+	public static final ForgeConfigSpec.BooleanValue
+			EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS,
+			GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
-	public static final ForgeConfigSpec.DoubleValue ROCKY_BUTTONS_CHANCE, ICY_ROCKY_BUTTONS_CHANCE, MOSSY_ROCKY_BUTTONS_CHANCE, SANDY_ROCKY_BUTTONS_CHANCE;
+	public static final ForgeConfigSpec.DoubleValue
+			ROCKY_BUTTONS_CHANCE, ICY_ROCKY_BUTTONS_CHANCE, MOSSY_ROCKY_BUTTONS_CHANCE, SANDY_ROCKY_BUTTONS_CHANCE,
+			MESA_DEAD_BUSHES_CHANCE, SANDY_DEAD_BUSHES_CHANCE, SANDY_ROCKY_DEAD_BUSHES_CHANCE;
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
 
 	static
@@ -41,20 +45,29 @@ public class SubWildConfig
 			SLOPE_CHANCE = cfg.comment("The chance of a slab or stairs generating normally in caves. Higher numbers increase the amount of slabs/stairs/slopes. Zero should stop generating them entirely.").defineInRange("Slope Generation Chance", 6, 0, 8);
 			SLOPE_THRESHOLD_CHANCE = cfg.comment("The chance of a slab or stairs generating when within the Slope Threshold. Should be lower than the Slope Generation Chance.").defineInRange("Slope Threshold Generation Chance", 2, 0, 7);
 
-			cfg.push("Rocky Caves").comment("The chance of things generating in rocky caves, as a percentage. Higher percentages increase the amount.");
-				ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 7.14, 1.00, 100.00);
-			cfg.pop();
-
 			cfg.push("Icy Rocky Caves").comment("The chance of things generating in icy rocky caves, as a percentage. Higher percentages increase the amount.");
 				ICY_ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 25.00, 1.00, 100.00);
+			cfg.pop();
+
+			cfg.push("Mesa Caves").comment("The chance of things generating in mesa caves, as a percentage. Higher percentages increase the amount.");
+				MESA_DEAD_BUSHES_CHANCE = cfg.comment("Use the \"Generate Dead Bushes\" config option to stop generating them entirely.").defineInRange("Dead Bush Generation Chance", 2.94, 1.00, 100.00);
 			cfg.pop();
 
 			cfg.push("Mossy Rocky Caves").comment("The chance of things generating in mossy rocky caves, as a percentage. Higher percentages increase the amount.");
 				MOSSY_ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 7.14, 1.00, 100.00);
 			cfg.pop();
 
+			cfg.push("Rocky Caves").comment("The chance of things generating in rocky caves, as a percentage. Higher percentages increase the amount.");
+				ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 7.14, 1.00, 100.00);
+			cfg.pop();
+
+			cfg.push("Sandy Caves").comment("The chance of things generating in sandy caves, as a percentage. Higher percentages increase the amount.");
+				SANDY_DEAD_BUSHES_CHANCE = cfg.comment("Use the \"Generate Dead Bushes\" config option to stop generating them entirely.").defineInRange("Dead Bush Generation Chance", 3.85, 1.00, 100.00);
+			cfg.pop();
+
 			cfg.push("Sandy Rocky Caves").comment("The chance of things generating in sandy rocky caves, as a percentage. Higher percentages increase the amount.");
 				SANDY_ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 7.14, 1.00, 100.00);
+				SANDY_ROCKY_DEAD_BUSHES_CHANCE = cfg.comment("Use the \"Generate Dead Bushes\" config option to stop generating them entirely.").defineInRange("Dead Bush Generation Chance", 2.38, 1.00, 100.00);
 			cfg.pop();
 		cfg.pop();
 

@@ -50,7 +50,7 @@ public class SandyRockyCaveType extends BasicCaveType
 				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, 0.1d, 0.6d, 5);
 			if(SubWildConfig.GENERATE_PATCHES.get() && -0.3d < d && d < 0.1d)
 				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.3d, 0.1d, 5);
-			if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextInt(42) == 0)
+			if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextFloat() < (SubWildConfig.SANDY_ROCKY_DEAD_BUSHES_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
 			else if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextFloat() < (SubWildConfig.SANDY_ROCKY_BUTTONS_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.random(rand)));

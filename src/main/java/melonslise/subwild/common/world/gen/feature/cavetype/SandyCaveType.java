@@ -46,7 +46,7 @@ public class SandyCaveType extends BasicCaveType
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(SubWildConfig.GENERATE_PATCHES.get() && -0.5d < d && d < 0.5d)
 				this.genLayer(world, pos, (this.red ? SubWildBlocks.RED_SAND_PATCH : SubWildBlocks.SAND_PATCH).get().getDefaultState(), d, -0.5d, 0.5d, 7);
-			if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextInt(26) == 0)
+			if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextFloat() < (SubWildConfig.SANDY_DEAD_BUSHES_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
