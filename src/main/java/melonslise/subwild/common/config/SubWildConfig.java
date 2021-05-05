@@ -13,11 +13,13 @@ public class SubWildConfig
 
 	public static final ForgeConfigSpec.BooleanValue
 			EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS,
-			GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS;
+			GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS,
+			GENERATE_WALL_CORAL;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
 	public static final ForgeConfigSpec.DoubleValue
 			ROCKY_BUTTONS_CHANCE, ICY_ROCKY_BUTTONS_CHANCE, MOSSY_ROCKY_BUTTONS_CHANCE, SANDY_ROCKY_BUTTONS_CHANCE,
-			MESA_DEAD_BUSHES_CHANCE, SANDY_DEAD_BUSHES_CHANCE, SANDY_ROCKY_DEAD_BUSHES_CHANCE;
+			MESA_DEAD_BUSHES_CHANCE, SANDY_DEAD_BUSHES_CHANCE, SANDY_ROCKY_DEAD_BUSHES_CHANCE,
+			LUSH_LILYPADS_CHANCE, MOSSY_LILYPADS_CHANCE, MOSSY_ROCKY_LILYPADS_CHANCE;
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
 
 	static
@@ -38,7 +40,7 @@ public class SubWildConfig
 			GENERATE_SPELEOTHEMS = cfg.comment("Enable to generate speleothems in cave biomes.").define("Generate Speleothems", true);
 			GENERATE_FOXFIRES = cfg.comment("Enable to generate glowing foxfires in cave biomes.").define("Generate Foxfires", true);
 			GENERATE_DEAD_BUSHES = cfg.comment("Enable to generate dead bushes in mesa, sandy and sandy rocky cave biomes.").define("Generate Dead Bushes", true);
-			GENERATE_LILYPADS = cfg.comment("Enable to generate lill pads in lush, lush volcanic, mossy and mossy rocky cave biomes.").define("Generate Lily pads", true);
+			GENERATE_LILYPADS = cfg.comment("Enable to generate lily pads in lush, mossy and mossy rocky cave biomes.").define("Generate Lily pads", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");//.comment("Note that frequency calculation varies between different features, so a slope chance of 8 might not match a button chance of 8 for example.");
@@ -49,12 +51,21 @@ public class SubWildConfig
 				ICY_ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 25.00, 1.00, 100.00);
 			cfg.pop();
 
+			cfg.push("Lush Caves").comment("The chance of things generating in lush caves, as a percentage. Higher percentages increase the amount.");
+				LUSH_LILYPADS_CHANCE = cfg.comment("Use the \"Generate Lily Pads\" config option to stop generating them entirely.").defineInRange("Lily Pad Generation Chance", 8.33, 1.00, 100.00);
+			cfg.pop();
+
 			cfg.push("Mesa Caves").comment("The chance of things generating in mesa caves, as a percentage. Higher percentages increase the amount.");
 				MESA_DEAD_BUSHES_CHANCE = cfg.comment("Use the \"Generate Dead Bushes\" config option to stop generating them entirely.").defineInRange("Dead Bush Generation Chance", 2.94, 1.00, 100.00);
 			cfg.pop();
 
+			cfg.push("Mossy Caves").comment("The chance of things generating in mossy caves, as a percentage. Higher percentages increase the amount.");
+				MOSSY_LILYPADS_CHANCE = cfg.comment("Use the \"Generate Lily Pads\" config option to stop generating them entirely.").defineInRange("Lily Pad Generation Chance", 8.33, 1.00, 100.00);
+			cfg.pop();
+
 			cfg.push("Mossy Rocky Caves").comment("The chance of things generating in mossy rocky caves, as a percentage. Higher percentages increase the amount.");
 				MOSSY_ROCKY_BUTTONS_CHANCE = cfg.comment("Use the \"Generate Buttons\" config option to stop generating them entirely.").defineInRange("Button Generation Chance", 7.14, 1.00, 100.00);
+				MOSSY_ROCKY_LILYPADS_CHANCE = cfg.comment("Use the \"Generate Lily Pads\" config option to stop generating them entirely.").defineInRange("Lily Pad Generation Chance", 8.33, 1.00, 100.00);
 			cfg.pop();
 
 			cfg.push("Rocky Caves").comment("The chance of things generating in rocky caves, as a percentage. Higher percentages increase the amount.");

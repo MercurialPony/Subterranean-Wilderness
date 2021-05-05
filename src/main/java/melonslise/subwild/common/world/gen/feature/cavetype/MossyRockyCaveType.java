@@ -119,7 +119,7 @@ public class MossyRockyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextInt(12) == 0 && world.getBlockState(pos.down()).getBlock() == Blocks.WATER)
+			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_ROCKY_LILYPADS_CHANCE.get().floatValue() / 100) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER)
 				this.genBlock(world, pos, Blocks.LILY_PAD.getDefaultState());
 		}
 	}
