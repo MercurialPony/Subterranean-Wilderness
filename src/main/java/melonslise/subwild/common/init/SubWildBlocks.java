@@ -102,11 +102,12 @@ public final class SubWildBlocks
 		MOLTEN_BASALT = add("molten_basalt", new MoltenBlock(Block.Properties.from(Blocks.BASALT).setLightLevel(state -> 5))),
 
 		// TODO add to mossy tag?
+		// TODO when 1.17 comes out: add extra recipe that uses a moss block instead of vines in line with Vanilla 1.17
 		MOSSY_DIRT = add("mossy_dirt", new Block(Block.Properties.from(Blocks.DIRT))),
 		MOSSY_SAND = add("mossy_sand",  new SandBlock(0xDBD3A0, Block.Properties.from(Blocks.SAND))),
 		MOSSY_RED_SAND = add("mossy_red_sand", new SandBlock(0xA95821, Block.Properties.from(Blocks.RED_SAND))),
 		MOSSY_GRAVEL = add("mossy_gravel", new GravelBlock(Block.Properties.from(Blocks.GRAVEL))),
-		MOSSY_STONE = add("mossy_stone", new Block(Block.Properties.from(Blocks.STONE))),
+		MOSSY_STONE = add("mossy_stone", new Block(Block.Properties.from(Blocks.STONE))), // TODO: make this drop mossy cobble when mined normally, mossy stone when mined with silk touch
 		MOSSY_GRANITE = add("mossy_granite", new Block(Block.Properties.from(Blocks.GRANITE))),
 		MOSSY_DIORITE = add("mossy_diorite", new Block(Block.Properties.from(Blocks.DIORITE))),
 		MOSSY_ANDESITE = add("mossy_andesite", new Block(Block.Properties.from(Blocks.ANDESITE))),
