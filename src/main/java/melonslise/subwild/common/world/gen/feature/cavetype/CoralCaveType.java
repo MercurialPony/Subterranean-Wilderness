@@ -47,7 +47,7 @@ public class CoralCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(this.getNoise(noise, pos, 0.15d) > 0.1d || rand.nextInt(14) == 0)
+			if(SubWildConfig.GENERATE_FLOOR_CORAL.get() && this.getNoise(noise, pos, 0.15d) > 0.1d || rand.nextInt(14) == 0)
 				this.genBlock(world, pos, CORAL[rand.nextInt(CORAL.length)].getDefaultState());
 			final double d = this.getNoise(noise, pos, 0.12d);
 			if(d > 0.5d || rand.nextInt(18) == 0)
