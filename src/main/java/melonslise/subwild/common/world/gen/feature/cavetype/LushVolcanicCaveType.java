@@ -3,6 +3,7 @@ package melonslise.subwild.common.world.gen.feature.cavetype;
 import java.util.Random;
 
 import melonslise.subwild.common.capability.INoise;
+import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildLookups;
 import net.minecraft.block.Blocks;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -46,7 +47,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 				this.genBlock(world, pos, LushCaveType.LEAVES[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) LushCaveType.LEAVES.length)].getDefaultState().with(BlockStateProperties.PERSISTENT, true));
 			if(this.getNoise(noise, pos, 0.16d) > 0.5d)
 				this.genBlock(world, pos, LushCaveType.PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) LushCaveType.PLANTS.length)].getDefaultState());
-			if(rand.nextInt(10) == 0)
+			if(SubWildConfig.GENERATE_SAPLINGS.get() && rand.nextFloat() < (SubWildConfig.LUSH_VOLCANIC_SAPLINGS_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, LushCaveType.SAPLINGS[rand.nextInt(LushCaveType.SAPLINGS.length)].getDefaultState());
 			else if(rand.nextInt(45) == 0)
 				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);

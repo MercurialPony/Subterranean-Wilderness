@@ -55,7 +55,7 @@ public class LushCaveType extends BasicCaveType
 				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
 			if(this.getNoise(noise, pos, 0.125d) > 0d)
 				this.genBlock(world, pos, PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) PLANTS.length)].getDefaultState());
-			if(rand.nextInt(10) == 0)
+			if(SubWildConfig.GENERATE_SAPLINGS.get() && rand.nextFloat() < (SubWildConfig.LUSH_SAPLINGS_CHANCE.get().floatValue() / 100))
 				this.genBlock(world, pos, SAPLINGS[rand.nextInt(SAPLINGS.length)].getDefaultState());
 			else if(rand.nextInt(34) == 0)
 				world.setBlockState(pos, MUSHROOMS[rand.nextInt(MUSHROOMS.length)].getDefaultState(), 2);

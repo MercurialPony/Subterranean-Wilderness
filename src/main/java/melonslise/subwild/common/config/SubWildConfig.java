@@ -14,12 +14,13 @@ public class SubWildConfig
 	public static final ForgeConfigSpec.BooleanValue
 			EXPENSIVE_SCAN, GENERATE_BUTTONS, GENERATE_VINES, GENERATE_PUDDLES, GENERATE_STAIRS, GENERATE_SLABS,
 			GENERATE_PATCHES, GENERATE_SPELEOTHEMS, GENERATE_FOXFIRES, GENERATE_DEAD_BUSHES, GENERATE_LILYPADS,
-			GENERATE_WALL_CORAL, GENERATE_DEAD_WALL_CORAL;
+			GENERATE_WALL_CORAL, GENERATE_DEAD_WALL_CORAL, GENERATE_SAPLINGS;
 	public static final ForgeConfigSpec.IntValue SLOPE_THRESHOLD, SLOPE_CHANCE, SLOPE_THRESHOLD_CHANCE;
 	public static final ForgeConfigSpec.DoubleValue
 			ROCKY_BUTTONS_CHANCE, ICY_ROCKY_BUTTONS_CHANCE, MOSSY_ROCKY_BUTTONS_CHANCE, SANDY_ROCKY_BUTTONS_CHANCE,
 			MESA_DEAD_BUSHES_CHANCE, SANDY_DEAD_BUSHES_CHANCE, SANDY_ROCKY_DEAD_BUSHES_CHANCE,
-			LUSH_LILYPADS_CHANCE, MOSSY_LILYPADS_CHANCE, MOSSY_ROCKY_LILYPADS_CHANCE;
+			LUSH_LILYPADS_CHANCE, MOSSY_LILYPADS_CHANCE, MOSSY_ROCKY_LILYPADS_CHANCE,
+			LUSH_SAPLINGS_CHANCE, LUSH_VOLCANIC_SAPLINGS_CHANCE;
 	public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
 
 	static
@@ -43,6 +44,7 @@ public class SubWildConfig
 			GENERATE_LILYPADS = cfg.comment("Enable to generate lily pads in lush, mossy and mossy rocky cave biomes.").define("Generate Lily pads", true);
 			GENERATE_WALL_CORAL = cfg.comment("Enable to generate wall coral in coral cave biomes.").define("Generate Wall Coral", true);
 			GENERATE_DEAD_WALL_CORAL = cfg.comment("Enable to generate dead wall coral in dead coral cave biomes.").define("Generate Dead Wall Coral", true);
+			GENERATE_SAPLINGS = cfg.comment("Enable to generate saplings in lush and volcanic lush cave biomes.").define("Generate Saplings", true);
 		cfg.pop();
 
 		cfg.push("Frequencies");//.comment("Note that frequency calculation varies between different features, so a slope chance of 8 might not match a button chance of 8 for example.");
@@ -55,6 +57,11 @@ public class SubWildConfig
 
 			cfg.push("Lush Caves").comment("The chance of things generating in lush caves, as a percentage. Higher percentages increase the amount.");
 				LUSH_LILYPADS_CHANCE = cfg.comment("Use the \"Generate Lily Pads\" config option to stop generating them entirely.").defineInRange("Lily Pad Generation Chance", 8.33, 1.00, 100.00);
+				LUSH_SAPLINGS_CHANCE = cfg.comment("Use the \"Generate Saplings\" config option to stop generating them entirely.").defineInRange("Sapling Generation Chance", 10.00, 1.00, 100.00);
+			cfg.pop();
+
+			cfg.push("Lush Volcanic Caves").comment("The chance of things generating in lush volcanic caves, as a percentage. Higher percentages increase the amount.");
+				LUSH_VOLCANIC_SAPLINGS_CHANCE = cfg.comment("Use the \"Generate Saplings\" config option to stop generating them entirely.").defineInRange("Sapling Generation Chance", 10.00, 1.00, 100.00);
 			cfg.pop();
 
 			cfg.push("Mesa Caves").comment("The chance of things generating in mesa caves, as a percentage. Higher percentages increase the amount.");
