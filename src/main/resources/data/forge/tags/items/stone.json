@@ -1,10 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"subwild:molten_stone",
-		"subwild:molten_granite",
-		"subwild:molten_diorite",
-		"subwild:molten_andesite",
 		"subwild:mossy_stone",
 		"subwild:mossy_granite",
 		"subwild:mossy_diorite",
