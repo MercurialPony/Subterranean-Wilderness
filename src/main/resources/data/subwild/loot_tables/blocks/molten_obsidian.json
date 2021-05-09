@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_obsidian",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_obsidian"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:obsidian",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:obsidian"
+							]
 						}
 					]
 				}

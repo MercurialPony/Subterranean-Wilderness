@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_granite",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_granite"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:granite",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:granite"
+							]
 						}
 					]
 				}

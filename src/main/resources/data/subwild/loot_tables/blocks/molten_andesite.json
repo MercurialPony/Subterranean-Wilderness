@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_andesite",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_andesite"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:andesite",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:andesite"
+							]
 						}
 					]
 				}

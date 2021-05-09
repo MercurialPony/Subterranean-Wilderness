@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_smooth_sandstone",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_smooth_sandstone"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:smooth_sandstone",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:smooth_sandstone"
+							]
 						}
 					]
 				}

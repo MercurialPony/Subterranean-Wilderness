@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_basalt",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_basalt"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:basalt",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:basalt"
+							]
 						}
 					]
 				}

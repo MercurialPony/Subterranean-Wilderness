@@ -12,6 +12,7 @@
 					[
 						{
 							"type": "minecraft:item",
+							"name": "subwild:molten_red_sandstone",
 							"conditions":
 							[
 								{
@@ -30,18 +31,17 @@
 										]
 									}
 								}
-							],
-							"name": "subwild:molten_red_sandstone"
+							]
 						},
 						{
 							"type": "minecraft:item",
+							"name": "minecraft:red_sandstone",
 							"conditions":
 							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
-							],
-							"name": "minecraft:red_sandstone"
+							]
 						}
 					]
 				}
