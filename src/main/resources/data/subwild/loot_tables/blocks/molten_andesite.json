@@ -1,22 +1,29 @@
 {
 	"type": "minecraft:block",
-	"pools": [
+	"pools":
+	[
 		{
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "minecraft:alternatives",
-					"children": [
+					"children":
+					[
 						{
 							"type": "minecraft:item",
-							"conditions": [
+							"conditions":
+							[
 								{
 									"condition": "minecraft:match_tool",
-									"predicate": {
-										"enchantments": [
+									"predicate":
+									{
+										"enchantments":
+										[
 											{
 												"enchantment": "minecraft:silk_touch",
-												"levels": {
+												"levels":
+												{
 													"min": 1
 												}
 											}
@@ -28,7 +35,8 @@
 						},
 						{
 							"type": "minecraft:item",
-							"conditions": [
+							"conditions":
+							[
 								{
 									"condition": "minecraft:survives_explosion"
 								}
