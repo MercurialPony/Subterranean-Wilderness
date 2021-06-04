@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tconstruct"
+    }
+  ],
+  "type": "tconstruct:casting_basin",
+  "cast": {
+    "item": "minecraft:smooth_sandstone"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "name": "minecraft:lava",
+    "amount": 1000
+  },
+  "result": "subwild:molten_smooth_sandstone",
+  "cooling_time": 90
+}
