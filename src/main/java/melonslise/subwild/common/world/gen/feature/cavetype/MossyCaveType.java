@@ -36,9 +36,9 @@ public class MossyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			if(SubWildConfig.GENERATE_PUDDLES.get() && this.getNoise(noise, pos, 0.125d) < 0d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 			else if(rand.nextInt(36) == 0)
-				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);
+				world.setBlock(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].defaultBlockState(), 2);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
@@ -84,7 +84,7 @@ public class MossyCaveType extends BasicCaveType
 		if(pass == 1)
 		{
 			double ch = (1f - depth) * 0.3f;
-			if(world.getBlockState(pos.down()).isAir())
+			if(world.getBlockState(pos.below()).isAir())
 				ch *= 2f;
 			if(rand.nextFloat() < ch)
 				this.genVines(world, pos, wallDir, 1 + rand.nextInt((int) (7f - depth * 7f) + 1) + rand.nextInt(2));
@@ -97,8 +97,8 @@ public class MossyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_LILYPADS_CHANCE.get().floatValue() / 100) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER)
-				this.genBlock(world, pos, Blocks.LILY_PAD.getDefaultState());
+			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_LILYPADS_CHANCE.get().floatValue() / 100) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER)
+				this.genBlock(world, pos, Blocks.LILY_PAD.defaultBlockState());
 		}
 	}
 }

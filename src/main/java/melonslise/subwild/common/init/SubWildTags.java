@@ -33,7 +33,7 @@ public final class SubWildTags
 
 	public static ITag.INamedTag<Block> wrapBlock(String id, String name)
 	{
-		return BlockTags.makeWrapperTag(id + ":" + name);
+		return BlockTags.bind(id + ":" + name);
 	}
 
 	public static ITag.INamedTag<Item> wrapItem(String name)
@@ -43,6 +43,6 @@ public final class SubWildTags
 
 	public static ITag.INamedTag<Item> wrapItem(String id, String name)
 	{
-		return ItemTags.makeWrapperTag(id + ":" + name);
+		return ItemTags.bind(id + ":" + name);
 	}
 }

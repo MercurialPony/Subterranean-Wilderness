@@ -16,30 +16,32 @@ import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MeltingPatchBlock extends PatchBlock
 {
 	public MeltingPatchBlock(Properties properties)
 	{
-		super(properties.setAllowsSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
+		super(properties.isValidSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
 	}
 
 	@Override
-	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
+	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
-		super.harvestBlock(world, player, pos, state, te, stack);
-		if (world.getDimensionType().isUltrawarm())
+		super.playerDestroy(world, player, pos, state, te, stack);
+		if (world.dimensionType().ultraWarm())
 		{
 			world.removeBlock(pos, false);
 			return;
 		}
-		Material material = world.getBlockState(pos.down()).getMaterial();
-		if (material.blocksMovement() || material.isLiquid())
-			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+		Material material = world.getBlockState(pos.below()).getMaterial();
+		if (material.blocksMotion() || material.isLiquid())
+			world.setBlockAndUpdate(pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 	}
 
 	public boolean isHot(World world, BlockPos pos, BlockState state)
 	{
-		return world.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos);
+		return world.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(world, pos);
 	}
 
 	@Override
@@ -51,11 +53,11 @@ public class MeltingPatchBlock extends PatchBlock
 
 	public void melt(World world, BlockPos pos, BlockState state)
 	{
-		if (world.getDimensionType().isUltrawarm())
+		if (world.dimensionType().ultraWarm())
 			world.removeBlock(pos, false);
 		else
 		{
-			world.setBlockState(pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+			world.setBlockAndUpdate(pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 			world.neighborChanged(pos, SubWildBlocks.WATER_PUDDLE.get(), pos);
 		}
 	}

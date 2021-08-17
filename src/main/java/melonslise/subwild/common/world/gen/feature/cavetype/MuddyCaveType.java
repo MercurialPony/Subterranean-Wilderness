@@ -25,9 +25,9 @@ public class MuddyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.4d)
-				this.replaceBlock(world, pos, Blocks.FARMLAND.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.FARMLAND.defaultBlockState());
 			else if(d > -0.2d)
-				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).getDefaultState());
+				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).defaultBlockState());
 		}
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
@@ -39,9 +39,9 @@ public class MuddyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < 0d && SubWildConfig.GENERATE_PUDDLES.get())
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 			else if (SubWildConfig.GENERATE_PATCHES.get())
-				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.get().getDefaultState(), d, 0.3d, 1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.DIRT_PATCH.get().defaultBlockState(), d, 0.3d, 1d, 5);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
@@ -52,7 +52,7 @@ public class MuddyCaveType extends BasicCaveType
 		if(pass == 0)
 		{
 			if(this.getNoise(noise, pos, 0.125d) > -0.2d)
-				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).getDefaultState());
+				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).defaultBlockState());
 		}
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
@@ -63,7 +63,7 @@ public class MuddyCaveType extends BasicCaveType
 		if(pass == 0)
 		{
 			if(this.getNoise(noise, pos, 0.125d) > -0.2d)
-				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).getDefaultState());
+				this.replaceBlock(world, pos, (rand.nextBoolean() ? Blocks.COARSE_DIRT : Blocks.DIRT).defaultBlockState());
 		}
 		super.genWall(world, noise, pos, depth, pass, rand);
 	}

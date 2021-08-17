@@ -11,9 +11,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class RootsBlock extends Block
 {
-	public static final VoxelShape SHAPE = Block.makeCuboidShape(3d, 8d, 3d, 13d, 16d, 13d);
+	public static final VoxelShape SHAPE = Block.box(3d, 8d, 3d, 13d, 16d, 13d);
 
 	public RootsBlock(Properties properties)
 	{
@@ -27,15 +29,15 @@ public class RootsBlock extends Block
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
+	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
 	{
-		return !state.isValidPosition(world, pos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(state, side, adjState, world, pos, adjPos);
+		return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, side, adjState, world, pos, adjPos);
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		BlockPos up = pos.up();
-		return world.getBlockState(up).isNormalCube(world, up);
+		BlockPos up = pos.above();
+		return world.getBlockState(up).isRedstoneConductor(world, up);
 	}
 }

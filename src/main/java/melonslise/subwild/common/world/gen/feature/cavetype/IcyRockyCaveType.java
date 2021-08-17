@@ -29,19 +29,19 @@ public class IcyRockyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.9d)
-				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLUE_ICE.defaultBlockState());
 			else if(d > 0.8d)
-				this.replaceBlock(world, pos, Blocks.PACKED_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.PACKED_ICE.defaultBlockState());
 			else if(d > 0.3d)
-				this.replaceBlock(world, pos, Blocks.ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.ICE.defaultBlockState());
 			else if(d > -0.15d)
-				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.defaultBlockState());
 			else if(d > -0.65d);
 				// NO OP - spawn stone
 			else if(d > -0.85d)
-				this.replaceBlock(world, pos, Blocks.GRAVEL.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.GRAVEL.defaultBlockState());
 			else 
-				this.replaceBlock(world, pos, Blocks.COBBLESTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.COBBLESTONE.defaultBlockState());
 		}
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
@@ -53,13 +53,13 @@ public class IcyRockyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(SubWildConfig.GENERATE_PATCHES.get() && d > 0.1d)
-				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().getDefaultState(), d, 0.1d, 1d, 7);
+				this.genLayer(world, pos, SubWildBlocks.SNOW_PATCH.get().defaultBlockState(), d, 0.1d, 1d, 7);
 			else if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.4d)
-				this.genLayer(world, pos, SubWildBlocks.ICE_PATCH.get().getDefaultState(), d, -0.4d, 1d, 5);
+				this.genLayer(world, pos, SubWildBlocks.ICE_PATCH.get().defaultBlockState(), d, -0.4d, 1d, 5);
 			else if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.8d)
-				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().getDefaultState(), d, -0.8d, -0.4d, 4);
+				this.genLayer(world, pos, SubWildBlocks.GRAVEL_PATCH.get().defaultBlockState(), d, -0.8d, -0.4d, 4);
 			else if(SubWildConfig.GENERATE_BUTTONS.get() && rand.nextFloat() < (SubWildConfig.ICY_ROCKY_BUTTONS_CHANCE.get().floatValue() / 100))
-				this.genBlock(world, pos, Blocks.STONE_BUTTON.getDefaultState().with(BlockStateProperties.FACE, AttachFace.FLOOR).with(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.random(rand)));
+				this.genBlock(world, pos, Blocks.STONE_BUTTON.defaultBlockState().setValue(BlockStateProperties.ATTACH_FACE, AttachFace.FLOOR).setValue(BlockStateProperties.HORIZONTAL_FACING, Plane.HORIZONTAL.getRandomDirection(rand)));
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
@@ -71,19 +71,19 @@ public class IcyRockyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.9d)
-				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLUE_ICE.defaultBlockState());
 			else if(d > 0.8d)
-				this.replaceBlock(world, pos, Blocks.PACKED_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.PACKED_ICE.defaultBlockState());
 			else if(d > 0.3d)
-				this.replaceBlock(world, pos, Blocks.ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.ICE.defaultBlockState());
 			else if(d > -0.15d)
-				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.defaultBlockState());
 			else if(d > -0.65d);
 				// NO OP - spawn stone
 			else if(d > -0.85d)
-				this.replaceBlock(world, pos, Blocks.GRAVEL.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.GRAVEL.defaultBlockState());
 			else 
-				this.replaceBlock(world, pos, Blocks.COBBLESTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.COBBLESTONE.defaultBlockState());
 		}
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
@@ -95,19 +95,19 @@ public class IcyRockyCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.9d)
-				this.replaceBlock(world, pos, Blocks.BLUE_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLUE_ICE.defaultBlockState());
 			else if(d > 0.8d)
-				this.replaceBlock(world, pos, Blocks.PACKED_ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.PACKED_ICE.defaultBlockState());
 			else if(d > 0.3d)
-				this.replaceBlock(world, pos, Blocks.ICE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.ICE.defaultBlockState());
 			else if(d > -0.15d)
-				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.SNOW_BLOCK.defaultBlockState());
 			else if(d > -0.65d);
 				// NO OP - spawn stone
 			else if(d > -0.85d)
-				this.replaceBlock(world, pos, Blocks.GRAVEL.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.GRAVEL.defaultBlockState());
 			else 
-				this.replaceBlock(world, pos, Blocks.COBBLESTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.COBBLESTONE.defaultBlockState());
 		}
 		super.genWall(world, noise, pos, depth, pass, rand);
 	}
@@ -120,9 +120,9 @@ public class IcyRockyCaveType extends BasicCaveType
 	{
 		if(pass == 1)
 		{
-			BlockPos down = pos.down();
+			BlockPos down = pos.below();
 			if(world.getBlockState(down).getBlock() == Blocks.WATER)
-				this.genBlock(world, down, Blocks.ICE.getDefaultState());
+				this.genBlock(world, down, Blocks.ICE.defaultBlockState());
 		}
 	}
 }

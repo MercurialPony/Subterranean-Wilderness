@@ -33,26 +33,28 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class FoxfireBlock extends Block implements IPlantable
 {
 	public static final VoxelShape
-		SHAPE_NORTH = Block.makeCuboidShape(5d, 5d, 10d, 11d, 11d, 16d),
-		SHAPE_EAST = Block.makeCuboidShape(0d, 5d, 5d, 6d, 11d, 11d),
-		SHAPE_SOUTH = Block.makeCuboidShape(5d, 5d, 0d, 11d, 11d, 6d),
-		SHAPE_WEST = Block.makeCuboidShape(10d, 5d, 5d, 16d, 11d, 11d),
-		SHAPE_UP = Block.makeCuboidShape(5d, 0d, 5d, 11d, 6d, 11d),
-		SHAPE_DOWN = Block.makeCuboidShape(5d, 10d, 5d, 11d, 16d, 11d);
+		SHAPE_NORTH = Block.box(5d, 5d, 10d, 11d, 11d, 16d),
+		SHAPE_EAST = Block.box(0d, 5d, 5d, 6d, 11d, 11d),
+		SHAPE_SOUTH = Block.box(5d, 5d, 0d, 11d, 11d, 6d),
+		SHAPE_WEST = Block.box(10d, 5d, 5d, 16d, 11d, 11d),
+		SHAPE_UP = Block.box(5d, 0d, 5d, 11d, 6d, 11d),
+		SHAPE_DOWN = Block.box(5d, 10d, 5d, 11d, 16d, 11d);
 
 	public static final int GLOWING_THRESHOLD = 7;
 
 	public FoxfireBlock(Properties properties)
 	{
-		super(properties.tickRandomly().setLightLevel(state -> state.get(SubWildProperties.GLOWING) ? 4 : 0));
-		this.setDefaultState(this.stateContainer.getBaseState().with(SubWildProperties.GLOWING, false).with(BlockStateProperties.FACING, Direction.NORTH));
+		super(properties.randomTicks().lightLevel(state -> state.getValue(SubWildProperties.GLOWING) ? 4 : 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(SubWildProperties.GLOWING, false).setValue(BlockStateProperties.FACING, Direction.NORTH));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(SubWildProperties.GLOWING, BlockStateProperties.FACING);
 	}
@@ -60,7 +62,7 @@ public class FoxfireBlock extends Block implements IPlantable
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
 	{
-		switch(state.get(BlockStateProperties.FACING))
+		switch(state.getValue(BlockStateProperties.FACING))
 		{
 		case NORTH:
 			return SHAPE_NORTH;
@@ -86,14 +88,14 @@ public class FoxfireBlock extends Block implements IPlantable
 	@Override
 	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand)
 	{
-		boolean glowing = state.get(SubWildProperties.GLOWING);
-		if(world.getLightSubtracted(pos, 0) < GLOWING_THRESHOLD != glowing)
-			world.setBlockState(pos, state.with(SubWildProperties.GLOWING, !glowing));
+		boolean glowing = state.getValue(SubWildProperties.GLOWING);
+		if(world.getRawBrightness(pos, 0) < GLOWING_THRESHOLD != glowing)
+			world.setBlockAndUpdate(pos, state.setValue(SubWildProperties.GLOWING, !glowing));
 		if(rand.nextInt(250) == 0)
 		{
 			List<Pair<BlockPos, Direction>> orients = Lists.newArrayList();
 			int shrooms = 5;
-			for(BlockPos pos1 : BlockPos.getAllInBoxMutable(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3))
+			for(BlockPos pos1 : BlockPos.betweenClosed(pos.getX() - 3, pos.getY() - 3, pos.getZ() - 3, pos.getX() + 3, pos.getY() + 3, pos.getZ() + 3))
 			{
 				BlockState state1 = world.getBlockState(pos1);
 				if(SubWildTags.FOXFIRE.contains(state1.getBlock()))
@@ -101,13 +103,13 @@ public class FoxfireBlock extends Block implements IPlantable
 						return;
 				if(this.isValidGround(state1, world, pos1))
 					for(Direction side : Direction.values())
-						if(world.isAirBlock(pos1.offset(side)))
-							orients.add(Pair.of(pos1.offset(side), side));
+						if(world.isEmptyBlock(pos1.relative(side)))
+							orients.add(Pair.of(pos1.relative(side), side));
 			}
 			if(orients.size() <= 0)
 				return;
 			Pair<BlockPos, Direction> orient = orients.get(rand.nextInt(orients.size()));
-			world.setBlockState(orient.getLeft(), SubWildTags.FOXFIRE.getRandomElement(rand).getDefaultState().with(BlockStateProperties.FACING, orient.getRight()), 2);
+			world.setBlock(orient.getLeft(), SubWildTags.FOXFIRE.getRandomElement(rand).defaultBlockState().setValue(BlockStateProperties.FACING, orient.getRight()), 2);
 		}
 	}
 
@@ -115,33 +117,33 @@ public class FoxfireBlock extends Block implements IPlantable
 	@Override
 	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
 	{
-		if(state.get(SubWildProperties.GLOWING) && rand.nextInt(15) == 0)
+		if(state.getValue(SubWildProperties.GLOWING) && rand.nextInt(15) == 0)
 			world.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) pos.getX() + rand.nextDouble(), (double) pos.getY() + 0.5f, (double) pos.getZ() + rand.nextDouble(), 0d, 0d, 0d);
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) 
 	{
-		return this.getDefaultState().with(SubWildProperties.GLOWING, ctx.getWorld().getLightSubtracted(ctx.getPos(), 0) < GLOWING_THRESHOLD).with(BlockStateProperties.FACING, ctx.getFace());
+		return this.defaultBlockState().setValue(SubWildProperties.GLOWING, ctx.getLevel().getRawBrightness(ctx.getClickedPos(), 0) < GLOWING_THRESHOLD).setValue(BlockStateProperties.FACING, ctx.getClickedFace());
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
+	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
 	{
-		return state.isValidPosition(world, pos) ? super.updatePostPlacement(state, side, adjState, world, pos, adjPos) : Blocks.AIR.getDefaultState();
+		return state.canSurvive(world, pos) ? super.updateShape(state, side, adjState, world, pos, adjPos) : Blocks.AIR.defaultBlockState();
 	}
 
 	// TODO Something better than a material check (e.g. tags)
 	// TODO Add forge thing support
 	public boolean isValidGround(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		return state.getMaterial() == Material.WOOD && state.isOpaqueCube(world, pos); //  && state.canSustainPlant(world, pos, side, this)
+		return state.getMaterial() == Material.WOOD && state.isSolidRender(world, pos); //  && state.canSustainPlant(world, pos, side, this)
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		BlockPos adjPos = pos.offset(state.get(BlockStateProperties.FACING).getOpposite());
+		BlockPos adjPos = pos.relative(state.getValue(BlockStateProperties.FACING).getOpposite());
 		return this.isValidGround(world.getBlockState(adjPos), world, adjPos);
 	}
 
@@ -152,9 +154,9 @@ public class FoxfireBlock extends Block implements IPlantable
 	}
 
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader world, BlockPos pos, PathType type)
+	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type)
 	{
-		return type == PathType.AIR && !this.canCollide || super.allowsMovement(state, world, pos, type);
+		return type == PathType.AIR && !this.hasCollision || super.isPathfindable(state, world, pos, type);
 	}
 
 	@Override
@@ -167,6 +169,6 @@ public class FoxfireBlock extends Block implements IPlantable
 	public BlockState getPlant(IBlockReader world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
-		return state.getBlock() != this ? this.getDefaultState() : state;
+		return state.getBlock() != this ? this.defaultBlockState() : state;
 	}
 }

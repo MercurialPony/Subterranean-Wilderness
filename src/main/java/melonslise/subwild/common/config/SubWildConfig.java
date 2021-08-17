@@ -99,7 +99,7 @@ public class SubWildConfig
 
 	public static boolean isAllowed(final World world)
 	{
-		final String name = world.getDimensionKey().getLocation().toString();
+		final String name = world.dimension().location().toString();
 		for(final String key : DIMENSION_WHITELIST.get())
 			if(key.equals(name))
 				return true;

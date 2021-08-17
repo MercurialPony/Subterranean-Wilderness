@@ -14,6 +14,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class PuddleBlock extends Block
 {
 	public PuddleBlock(Properties properties)
@@ -28,9 +30,9 @@ public class PuddleBlock extends Block
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
+	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
 	{
-		return !state.isValidPosition(world, pos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(state, side, adjState, world, pos, adjPos);
+		return !state.canSurvive(world, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, side, adjState, world, pos, adjPos);
 	}
 
 	/*
@@ -43,19 +45,19 @@ public class PuddleBlock extends Block
 	*/
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		BlockState down = world.getBlockState(pos.down());
+		BlockState down = world.getBlockState(pos.below());
 		Block block = down.getBlock();
 		if (block == Blocks.HONEY_BLOCK || block == Blocks.SOUL_SAND)
 			return true;
-		return Block.doesSideFillSquare(down.getCollisionShape(world, pos.down()), Direction.UP);
+		return Block.isFaceFull(down.getBlockSupportShape(world, pos.below()), Direction.UP);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
+	public boolean skipRendering(BlockState state, BlockState adjState, Direction side)
 	{
-		return !state.isSolid() && adjState.getBlock() == this || super.isSideInvisible(state, adjState, side);
+		return !state.canOcclude() && adjState.getBlock() == this || super.skipRendering(state, adjState, side);
 	}
 }

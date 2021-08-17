@@ -27,11 +27,11 @@ public class VolcanicCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
 			else if(d < 0d)
-				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.defaultBlockState());
 			else if(d < 0.6d)
-				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BASALT.defaultBlockState());
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}
@@ -45,11 +45,11 @@ public class VolcanicCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
 			else if(d < 0d)
-				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.defaultBlockState());
 			else if(d < 0.6d)
-				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BASALT.defaultBlockState());
 			if(d < -0.7d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			if(rand.nextFloat() < 0.2f)
@@ -65,11 +65,11 @@ public class VolcanicCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.0625d);
 			if(d < -0.85d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
 			else if(d < 0d)
-				this.replaceBlock(world, pos, Blocks.BLACKSTONE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BLACKSTONE.defaultBlockState());
 			else if(d < 0.6d)
-				this.replaceBlock(world, pos, Blocks.BASALT.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.BASALT.defaultBlockState());
 			if(rand.nextFloat() < 0.2f)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 		}

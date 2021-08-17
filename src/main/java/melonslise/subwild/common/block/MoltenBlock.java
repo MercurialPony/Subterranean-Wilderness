@@ -18,19 +18,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MoltenBlock extends MagmaBlock
 {
 	public MoltenBlock(Properties properties)
 	{
-		super(properties.setAllowsSpawn((state, world, pos, type) -> type.isImmuneToFire()));
+		super(properties.isValidSpawn((state, world, pos, type) -> type.fireImmune()));
 	}
 
 	@Override
-	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack)
+	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack)
 	{
-		super.harvestBlock(world, player, pos, state, te, stack);
+		super.playerDestroy(world, player, pos, state, te, stack);
 		if(!EnchantmentHelper.getEnchantments(stack).containsKey(Enchantments.SILK_TOUCH))
-			world.setBlockState(pos, Blocks.LAVA.getDefaultState());
+			world.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -41,9 +43,9 @@ public class MoltenBlock extends MagmaBlock
 			return;
 		for(Direction dir : Direction.Plane.VERTICAL)
 		{
-			BlockPos adjPos = pos.offset(dir);
+			BlockPos adjPos = pos.relative(dir);
 			BlockState adjState = world.getBlockState(adjPos);
-			if(!adjState.isSolid() || !adjState.isSolidSide(world, adjPos, dir.getOpposite()))
+			if(!adjState.canOcclude() || !adjState.isFaceSturdy(world, adjPos, dir.getOpposite()))
 			{
 				if(dir == Direction.UP)
 					world.addParticle(ParticleTypes.SMOKE, (double) adjPos.getX() + rand.nextDouble(), (double) adjPos.getY() + 0.1, (double) adjPos.getZ() + rand.nextDouble(), 0d, 0d, 0d);

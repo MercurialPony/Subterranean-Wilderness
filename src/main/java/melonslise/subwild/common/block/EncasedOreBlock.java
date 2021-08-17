@@ -9,6 +9,8 @@ import net.minecraft.world.IBlockDisplayReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class EncasedOreBlock extends OreBlock implements ITranslucent
 {
 	public EncasedOreBlock(Properties properties)
@@ -24,8 +26,8 @@ public class EncasedOreBlock extends OreBlock implements ITranslucent
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
+	public boolean skipRendering(BlockState state, BlockState adjState, Direction side)
 	{
-		return ITranslucent.isAdjacentIce(adjState) || super.isSideInvisible(state, adjState, side);
+		return ITranslucent.isAdjacentIce(adjState) || super.skipRendering(state, adjState, side);
 	}
 }

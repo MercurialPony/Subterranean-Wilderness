@@ -83,44 +83,44 @@ public final class SubWildFeatures
 		case BEACH:
 		case OCEAN:
 		case RIVER:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_AIR_CAVE_DECO);
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_LIQUID_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_AIR_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_LIQUID_CAVE_DECO);
 			break;
 		case TAIGA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_TAIGA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_TAIGA_CAVE_DECO);
 			break;
 		case EXTREME_HILLS:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_EXTREME_HILLS_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_EXTREME_HILLS_CAVE_DECO);
 			break;
 		case JUNGLE:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_JUNGLE_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_JUNGLE_CAVE_DECO);
 			break;
 		case MESA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MESA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MESA_CAVE_DECO);
 			break;
 		case PLAINS:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_PLAINS_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_PLAINS_CAVE_DECO);
 			break;
 		case SAVANNA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SAVANNA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SAVANNA_CAVE_DECO);
 			break;
 		case ICY:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ICY_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ICY_CAVE_DECO);
 			break;
 		case FOREST:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_FOREST_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_FOREST_CAVE_DECO);
 			break;
 		case DESERT:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_DESERT_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_DESERT_CAVE_DECO);
 			break;
 		case SWAMP:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SWAMP_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SWAMP_CAVE_DECO);
 			break;
 		case MUSHROOM:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MUSHROOM_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MUSHROOM_CAVE_DECO);
 			break;
 		default:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ROCKY_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ROCKY_CAVE_DECO);
 			break;
 		}
 	}

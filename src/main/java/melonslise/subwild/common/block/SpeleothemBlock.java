@@ -28,25 +28,27 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 {
 	public static final VoxelShape
-		SMALL_STALAGMITE_SHAPE = Block.makeCuboidShape(7d, 0d, 7d, 9d, 6d, 9d),
-		SMALL_STALACTITE_SHAPE = Block.makeCuboidShape(7d, 10d, 7d, 9d, 16d, 9d),
-		MEDIUM_STALAGMITE_SHAPE = VoxelShapes.or(Block.makeCuboidShape(2d, 0d, 2d, 14d, 6d, 14d), Block.makeCuboidShape(5d, 6d, 5d, 11d, 14d, 11d)),
-		MEDIUM_STALACTITE_SHAPE = VoxelShapes.or(Block.makeCuboidShape(2d, 10d, 2d, 14d, 16d, 14d), Block.makeCuboidShape(5d, 2d, 5d, 11d, 10d, 11d)),
-		LARGE_STALAGMITE_SHAPE = VoxelShapes.or(Block.makeCuboidShape(2d, 0d, 2d, 14d, 6d, 14d), Block.makeCuboidShape(5d, 6d, 5d, 11d, 16d, 11d)),
-		LARGE_STALACTITE_SHAPE = VoxelShapes.or(Block.makeCuboidShape(2d, 10d, 2d, 14d, 16d, 14d), Block.makeCuboidShape(5d, 0d, 5d, 11d, 10d, 11d)),
-		COLUMN_SHAPE = Block.makeCuboidShape(6d, 0d, 6d, 10d, 16d, 10d);
+		SMALL_STALAGMITE_SHAPE = Block.box(7d, 0d, 7d, 9d, 6d, 9d),
+		SMALL_STALACTITE_SHAPE = Block.box(7d, 10d, 7d, 9d, 16d, 9d),
+		MEDIUM_STALAGMITE_SHAPE = VoxelShapes.or(Block.box(2d, 0d, 2d, 14d, 6d, 14d), Block.box(5d, 6d, 5d, 11d, 14d, 11d)),
+		MEDIUM_STALACTITE_SHAPE = VoxelShapes.or(Block.box(2d, 10d, 2d, 14d, 16d, 14d), Block.box(5d, 2d, 5d, 11d, 10d, 11d)),
+		LARGE_STALAGMITE_SHAPE = VoxelShapes.or(Block.box(2d, 0d, 2d, 14d, 6d, 14d), Block.box(5d, 6d, 5d, 11d, 16d, 11d)),
+		LARGE_STALACTITE_SHAPE = VoxelShapes.or(Block.box(2d, 10d, 2d, 14d, 16d, 14d), Block.box(5d, 0d, 5d, 11d, 10d, 11d)),
+		COLUMN_SHAPE = Block.box(6d, 0d, 6d, 10d, 16d, 10d);
 
 	public SpeleothemBlock(Properties properties)
 	{
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(BlockStateProperties.UP, false).with(BlockStateProperties.DOWN, false).with(SubWildProperties.VERTICAL_FACING, Direction.UP).with(BlockStateProperties.WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.UP, false).setValue(BlockStateProperties.DOWN, false).setValue(SubWildProperties.VERTICAL_FACING, Direction.UP).setValue(BlockStateProperties.WATERLOGGED, false));
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
 	{
 		builder.add(BlockStateProperties.UP).add(BlockStateProperties.DOWN).add(SubWildProperties.VERTICAL_FACING).add(BlockStateProperties.WATERLOGGED);
 	}
@@ -54,9 +56,9 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
 	{
-		final boolean up = state.get(BlockStateProperties.UP);
-		final boolean down = state.get(BlockStateProperties.DOWN);
-		final boolean stalagmite = state.get(SubWildProperties.VERTICAL_FACING) == Direction.UP;
+		final boolean up = state.getValue(BlockStateProperties.UP);
+		final boolean down = state.getValue(BlockStateProperties.DOWN);
+		final boolean stalagmite = state.getValue(SubWildProperties.VERTICAL_FACING) == Direction.UP;
 		if(!up && down && stalagmite)
 			return SMALL_STALAGMITE_SHAPE;
 		else if(up && !down && !stalagmite)
@@ -81,58 +83,58 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 
 	public boolean canConnect(IWorldReader world, BlockPos pos, BlockState state, BlockPos toPos, BlockState toState)
 	{
-		return toState.isIn(SubWildTags.SPELEOTHEMS) && state.getMaterialColor(world, pos) == toState.getMaterialColor(world, toPos);
+		return toState.is(SubWildTags.SPELEOTHEMS) && state.getMapColor(world, pos) == toState.getMapColor(world, toPos);
 	}
 
 	public boolean canSupport(IWorldReader world, BlockPos pos, BlockState state, BlockPos supPos, BlockState supState)
 	{
-		return this.canConnect(world, pos, state, supPos, supState) || supState.isSolidSide(world, supPos, state.get(SubWildProperties.VERTICAL_FACING));
+		return this.canConnect(world, pos, state, supPos, supState) || supState.isFaceSturdy(world, supPos, state.getValue(SubWildProperties.VERTICAL_FACING));
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
+	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
 	{
 		if(side.getAxis().isVertical() && this.canConnect(world, pos, state, adjPos, adjState))
-			state = state.with(SubWildProperties.FACING_LOOKUP.get(side), true);
-		world.getPendingBlockTicks().scheduleTick(pos, this, 1);
+			state = state.setValue(SubWildProperties.FACING_LOOKUP.get(side), true);
+		world.getBlockTicks().scheduleTick(pos, this, 1);
 		return state;
 	}
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx)
 	{
-		World world = ctx.getWorld();
-		BlockPos pos = ctx.getPos();
-		BlockState state = this.getDefaultState();
-		Direction face = ctx.getFace();
+		World world = ctx.getLevel();
+		BlockPos pos = ctx.getClickedPos();
+		BlockState state = this.defaultBlockState();
+		Direction face = ctx.getClickedFace();
 		if(face.getAxis().isVertical())
-			state = state.with(SubWildProperties.VERTICAL_FACING, face);
+			state = state.setValue(SubWildProperties.VERTICAL_FACING, face);
 		for(Direction dir : Direction.Plane.VERTICAL)
 		{
-			BlockPos adjPos = pos.offset(dir);
+			BlockPos adjPos = pos.relative(dir);
 			BlockState adjState = world.getBlockState(adjPos);
-			state = state.with(SubWildProperties.FACING_LOOKUP.get(dir), this.canConnect(world, pos, state, adjPos, adjState));
+			state = state.setValue(SubWildProperties.FACING_LOOKUP.get(dir), this.canConnect(world, pos, state, adjPos, adjState));
 			if(this.canSupport(world, pos, state, adjPos, adjState))
-				state = state.with(SubWildProperties.VERTICAL_FACING, dir.getOpposite());
+				state = state.setValue(SubWildProperties.VERTICAL_FACING, dir.getOpposite());
 		}
 		return SubWildUtil.waterlog(state, world, pos);
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
 	{
-		BlockPos supPos = pos.offset(state.get(SubWildProperties.VERTICAL_FACING).getOpposite());
+		BlockPos supPos = pos.relative(state.getValue(SubWildProperties.VERTICAL_FACING).getOpposite());
 		return this.canSupport(world, pos, state, supPos, world.getBlockState(supPos));
 	}
 
 	public void tryToFall(World world, BlockPos pos, BlockState state)
 	{
-		if(!this.falling() || this.isValidPosition(state, world, pos))
+		if(!this.falling() || this.canSurvive(state, world, pos))
 			return;
 		FallingBlockEntity falling = new FallingBlockEntity(world, (double) pos.getX() + 0.5d, (double) pos.getY(), (double) pos.getZ() + 0.5d, world.getBlockState(pos));
-		falling.dontSetBlock = true;
-		this.onStartFalling(falling);
-		world.addEntity(falling);
+		falling.cancelDrop = true;
+		this.falling(falling);
+		world.addFreshEntity(falling);
 	}
 
 	public boolean falling()
@@ -141,15 +143,15 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 	}
 
 	@Override
-	protected void onStartFalling(FallingBlockEntity falling)
+	protected void falling(FallingBlockEntity falling)
 	{
-		falling.setHurtEntities(true);
+		falling.setHurtsEntities(true);
 	}
 
 	@Override
 	public void onBroken(World world, BlockPos pos, FallingBlockEntity entity)
 	{
-		world.playEvent(2001, pos, Block.getStateId(this.getDefaultState()));
+		world.levelEvent(2001, pos, Block.getId(this.defaultBlockState()));
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -159,6 +161,6 @@ public class SpeleothemBlock extends FallingBlock implements IWaterLoggable
 	@Override
 	public FluidState getFluidState(BlockState state)
 	{
-		return state.get(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 }

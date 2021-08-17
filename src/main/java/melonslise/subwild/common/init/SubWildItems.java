@@ -19,7 +19,7 @@ public final class SubWildItems
 	{
 		@OnlyIn(Dist.CLIENT)
 		@Override
-		public ItemStack createIcon()
+		public ItemStack makeIcon()
 		{
 			return new ItemStack(SubWildBlocks.LONG_FOXFIRE.get());
 		}

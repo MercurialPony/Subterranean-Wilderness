@@ -33,7 +33,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 		List<BakedQuad> quads = this.originalModel.getQuads(state, side, rand, data);
 		for(BakedQuad quad : quads)
 		{
-			if(quad.getVertexData()[6] == 0x00F00F0)
+			if(quad.getVertices()[6] == 0x00F00F0)
 				break;
 			if(this.filter.test(quad.getSprite().getName()))
 				transformQuad(quad);
@@ -43,7 +43,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 
 	public static void transformQuad(BakedQuad quad)
 	{
-		int[] vertexData = quad.getVertexData();
+		int[] vertexData = quad.getVertices();
 		final int step = vertexData.length / 4;
 		vertexData[6] = 0x00F000F0;
 		vertexData[6 + step] = 0x00F000F0;

@@ -51,13 +51,13 @@ public final class SubWildUtil
 	public static BlockState waterlog(BlockState state, IWorldReader world, BlockPos pos)
 	{
 		FluidState fluidState = world.getFluidState(pos);
-		return state.with(BlockStateProperties.WATERLOGGED, fluidState.isTagged(FluidTags.WATER) && fluidState.getLevel() == 8);
+		return state.setValue(BlockStateProperties.WATERLOGGED, fluidState.is(FluidTags.WATER) && fluidState.getAmount() == 8);
 	}
 
 	public static BlockState copyStateProps(BlockState from, BlockState to)
 	{
 		for(Property prop : from.getProperties()) // getProperties
-			to = to.with(prop, from.get(prop));
+			to = to.setValue(prop, from.getValue(prop));
 		return to;
 	}
 

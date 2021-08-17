@@ -29,6 +29,8 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITranslucent
 {
 	public final Supplier<Block> encased;
@@ -36,14 +38,14 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITransluc
 	// TODO
 	public EncasedSpeleothemBlock(Properties properties, Supplier<Block> encased)
 	{
-		super(properties.tickRandomly().setAllowsSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
+		super(properties.randomTicks().isValidSpawn((state, world, pos, type) -> type == EntityType.POLAR_BEAR));
 		this.encased = encased;
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
 	{
-		return VoxelShapes.fullCube();
+		return VoxelShapes.block();
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITransluc
 
 	public boolean isHot(World world, BlockPos pos, BlockState state)
 	{
-		return world.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos);
+		return world.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(world, pos);
 	}
 
 	public void melt(World world, BlockPos pos, BlockState state)
@@ -76,11 +78,11 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITransluc
 	}
 
 	@Override
-	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
+	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack)
 	{
-		super.harvestBlock(world, player, pos, state, te, stack);
+		super.playerDestroy(world, player, pos, state, te, stack);
 		if(!EnchantmentHelper.getEnchantments(stack).containsKey(Enchantments.SILK_TOUCH))
-			world.setBlockState(pos, SubWildUtil.copyStateProps(state, this.encased.get().getDefaultState()));
+			world.setBlockAndUpdate(pos, SubWildUtil.copyStateProps(state, this.encased.get().defaultBlockState()));
 	}
 
 	@Override
@@ -91,14 +93,14 @@ public class EncasedSpeleothemBlock extends SpeleothemBlock implements ITransluc
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
+	public boolean skipRendering(BlockState state, BlockState adjState, Direction side)
 	{
-		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) || super.isSideInvisible(state, adjState, side);
+		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) || super.skipRendering(state, adjState, side);
 	}
 
 	@Override
 	public boolean isIce(BlockState state)
 	{
-		return !state.isSolid();
+		return !state.canOcclude();
 	}
 }

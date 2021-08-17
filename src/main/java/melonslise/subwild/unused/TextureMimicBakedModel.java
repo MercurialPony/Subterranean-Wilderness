@@ -53,7 +53,7 @@ public class TextureMimicBakedModel extends BakedModelWrapper
 		if(this.mimic != null)
 			for(BakedQuad quad : quads)
 			{
-				if(quad.func_187508_a().getName().equals(this.mimic.getName()))
+				if(quad.getSprite().getName().equals(this.mimic.getName()))
 					break;
 				remap(quad, this.mimic);
 			}
@@ -112,8 +112,8 @@ public class TextureMimicBakedModel extends BakedModelWrapper
 		for (int vertex = 0; vertex < 4; ++vertex)
 		{
 			int shift = DefaultVertexFormats.BLOCK.getIntegerSize() * vertex;
-			vertexData[shift + 4] = Float.floatToRawIntBits(sprite.getInterpolatedU(getUnInterpolatedU(quad.func_187508_a(), Float.intBitsToFloat(vertexData[shift + 4]))));
-			vertexData[shift + 5] = Float.floatToRawIntBits(sprite.getInterpolatedV(getUnInterpolatedV(quad.func_187508_a(), Float.intBitsToFloat(vertexData[shift + 5]))));
+			vertexData[shift + 4] = Float.floatToRawIntBits(sprite.getInterpolatedU(getUnInterpolatedU(quad.getSprite(), Float.intBitsToFloat(vertexData[shift + 4]))));
+			vertexData[shift + 5] = Float.floatToRawIntBits(sprite.getInterpolatedV(getUnInterpolatedV(quad.getSprite(), Float.intBitsToFloat(vertexData[shift + 5]))));
 		}
 		quad.sprite = sprite;
 	}

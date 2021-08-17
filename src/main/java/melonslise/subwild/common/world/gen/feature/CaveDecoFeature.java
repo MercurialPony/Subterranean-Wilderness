@@ -25,7 +25,7 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 	public static boolean yungHack = false;
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
+	public boolean place(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
 	{
 		final float depth = depthAt(world, pos);
 		if(depth < 0f)
@@ -33,13 +33,13 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 		CaveType type = cfg.getCaveTypeAt(depth);
 		if(type == null)
 			return false;
-		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
+		INoise noise = world.getLevel().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
 		BlockPos.Mutable adjPos = new BlockPos.Mutable();
 		for(int pass = 0; pass < type.getPasses(); ++pass)
 		{
 			for(Direction dir : type.getGenOrder(pass))
 			{
-				adjPos.setPos(pos).move(dir);
+				adjPos.set(pos).move(dir);
 				if(type.canGenSide(world, adjPos, world.getBlockState(adjPos), depth, pass, dir))
 					switch (dir)
 					{

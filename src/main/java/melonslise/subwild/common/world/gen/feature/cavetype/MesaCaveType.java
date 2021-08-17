@@ -30,7 +30,7 @@ public class MesaCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.2d)
-				this.replaceBlock(world, pos, Blocks.RED_SAND.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.RED_SAND.defaultBlockState());
 			else
 				this.genTerracotta(world, pos);
 		}
@@ -44,9 +44,9 @@ public class MesaCaveType extends BasicCaveType
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.5d && d < 0.5d)
-				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().getDefaultState(), d, -0.5d, 0.5d, 5);
+				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().defaultBlockState(), d, -0.5d, 0.5d, 5);
 			else if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextFloat() < (SubWildConfig.MESA_DEAD_BUSHES_CHANCE.get().floatValue() / 100))
-				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
+				this.genBlock(world, pos, Blocks.DEAD_BUSH.defaultBlockState());
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
@@ -77,7 +77,7 @@ public class MesaCaveType extends BasicCaveType
 	public void genTerracotta(ISeedReader world, BlockPos pos)
 	{
 		BadlandsSurfaceBuilder builder = (BadlandsSurfaceBuilder) SurfaceBuilder.BADLANDS;
-		builder.setSeed(world.getSeed());
-		this.replaceBlock(world, pos, builder.func_215431_a(pos.getX(), pos.getY(), pos.getZ()));
+		builder.initNoise(world.getSeed());
+		this.replaceBlock(world, pos, builder.getBand(pos.getX(), pos.getY(), pos.getZ()));
 	}
 }

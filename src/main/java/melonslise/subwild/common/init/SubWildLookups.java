@@ -257,7 +257,7 @@ public final class SubWildLookups
 
 	public static <K, V> void put(Map<K, V> lookup, ITag.INamedTag<K> keys, V value)
 	{
-		for(K key : keys.getAllElements())
+		for(K key : keys.getValues())
 			lookup.put(key, value);
 	}
 }

@@ -11,16 +11,18 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class IcicleBlock extends SpeleothemBlock
 {
 	public IcicleBlock(Properties properties)
 	{
-		super(properties.tickRandomly());
+		super(properties.randomTicks());
 	}
 
 	public boolean isHot(World world, BlockPos pos, BlockState state)
 	{
-		return world.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos);
+		return world.getBrightness(LightType.BLOCK, pos) > 11 - state.getLightBlock(world, pos);
 	}
 
 	public void melt(World world, BlockPos pos, BlockState state)
@@ -41,7 +43,7 @@ public class IcicleBlock extends SpeleothemBlock
 	{
 		if(!this.isHot(world, pos, state) || rand.nextInt(5) != 0)
 			return;
-		state.getShape(world, pos).forEachBox((minX, minY, minZ, maxX, maxY, maxZ) ->
+		state.getShape(world, pos).forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
 		{
 			final double x = minX + rand.nextDouble() * (maxX - minX);
 			final double y = minY + rand.nextDouble() * (maxY - minY);

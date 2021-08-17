@@ -11,6 +11,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class XpBlock extends OreBlock implements ITranslucent
 {
 	public final int xpMin, xpMax;
@@ -36,14 +38,14 @@ public class XpBlock extends OreBlock implements ITranslucent
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public boolean isSideInvisible(BlockState state, BlockState adjState, Direction side)
+	public boolean skipRendering(BlockState state, BlockState adjState, Direction side)
 	{
-		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) || super.isSideInvisible(state, adjState, side);
+		return this.isIce(state) && ITranslucent.isAdjacentIce(adjState) || super.skipRendering(state, adjState, side);
 	}
 
 	@Override
 	public boolean isIce(BlockState state)
 	{
-		return !state.isSolid();
+		return !state.canOcclude();
 	}
 }

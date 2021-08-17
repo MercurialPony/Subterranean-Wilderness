@@ -26,11 +26,11 @@ public class LiquidCavePlacement extends Placement<NoPlacementConfig>
 
 	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig cfg, BlockPos pos)
 	{
-		World world = helper.field_242889_a.getWorld();
+		World world = helper.level.getLevel();
 		if(!SubWildConfig.isAllowed(world) || !world.getCapability(SubWildCapabilities.NOISE_CAPABILITY).isPresent())
 			return Stream.empty();
 		ChunkPos chunkpos = new ChunkPos(pos);
-		BitSet bitset = helper.func_242892_a(chunkpos, GenerationStage.Carving.LIQUID);
-		return IntStream.range(0, bitset.length()).filter(bitset::get).mapToObj((bit) -> new BlockPos(chunkpos.getXStart() + (bit & 15), bit >> 8, chunkpos.getZStart() + (bit >> 4 & 15)));
+		BitSet bitset = helper.getCarvingMask(chunkpos, GenerationStage.Carving.LIQUID);
+		return IntStream.range(0, bitset.length()).filter(bitset::get).mapToObj((bit) -> new BlockPos(chunkpos.getMinBlockX() + (bit & 15), bit >> 8, chunkpos.getMinBlockZ() + (bit >> 4 & 15)));
 	}
 }

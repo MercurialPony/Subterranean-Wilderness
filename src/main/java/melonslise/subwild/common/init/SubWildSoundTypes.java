@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.ForgeSoundType;
 public final class SubWildSoundTypes
 {
 	public static final SoundType WATER =
-			new ForgeSoundType(1f, 1f, () -> SoundEvents.ENTITY_GENERIC_SPLASH,
-					() -> SoundEvents.ENTITY_GENERIC_SWIM, () -> SoundEvents.ENTITY_GENERIC_SPLASH,
-					() -> SoundEvents.ENTITY_BOAT_PADDLE_WATER, () -> SoundEvents.ENTITY_GENERIC_SPLASH);
+			new ForgeSoundType(1f, 1f, () -> SoundEvents.GENERIC_SPLASH,
+					() -> SoundEvents.GENERIC_SWIM, () -> SoundEvents.GENERIC_SPLASH,
+					() -> SoundEvents.BOAT_PADDLE_WATER, () -> SoundEvents.GENERIC_SPLASH);
 }

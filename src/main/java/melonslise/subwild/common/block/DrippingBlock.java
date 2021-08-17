@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class DrippingBlock extends Block
 {
 	public final IParticleData particle;
@@ -27,9 +29,9 @@ public class DrippingBlock extends Block
 	{
 		if(rand.nextInt(10) != 1)
 			return;
-		BlockPos down = pos.down();
+		BlockPos down = pos.below();
 		BlockState downState = world.getBlockState(down);
-		if(!downState.isSolid() || !downState.isSolidSide(world, down, Direction.UP))
+		if(!downState.canOcclude() || !downState.isFaceSturdy(world, down, Direction.UP))
 			world.addParticle(this.particle, (double) pos.getX() + rand.nextDouble(), (double) pos.getY() - 0.1d, (double) pos.getZ() + rand.nextDouble(), 0d, 0d, 0d);
 	}
 }
