@@ -7,9 +7,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-public class CaveRangeConfig implements IFeatureConfig
+public class CaveRangeConfig implements FeatureConfiguration
 {
 	public static final Codec<CaveRangeConfig> CODEC = RecordCodecBuilder.create(record -> record
 		.group(

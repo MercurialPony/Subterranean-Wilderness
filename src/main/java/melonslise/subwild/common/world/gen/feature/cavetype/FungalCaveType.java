@@ -5,10 +5,10 @@ import java.util.Random;
 import com.google.common.collect.ImmutableSet;
 
 import melonslise.subwild.common.capability.INoise;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 
 public class FungalCaveType extends BasicCaveType
 {
@@ -19,7 +19,7 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -35,12 +35,12 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1 && rand.nextInt(34) == 0)
 		{
 			int len = -2;
-			BlockPos.Mutable next = new BlockPos.Mutable().set(pos);
+			BlockPos.MutableBlockPos next = new BlockPos.MutableBlockPos().set(pos);
 			for(int a = 0; a < 6; ++a)
 				if(world.getBlockState(next.move(0, 1, 0)).isAir())
 					++len;
@@ -60,7 +60,7 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -78,7 +78,7 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -96,7 +96,7 @@ public class FungalCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		/*
 		if(rand.nextInt(14) == 0 && !world.getBlockState(pos.up()).isAir() || !world.getBlockState(pos.down()).isAir())

@@ -2,23 +2,20 @@ package melonslise.subwild.common.block;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MagmaBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.MagmaBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class MoltenBlock extends MagmaBlock
 {
@@ -28,7 +25,7 @@ public class MoltenBlock extends MagmaBlock
 	}
 
 	@Override
-	public void playerDestroy(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack)
+	public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, BlockEntity te, ItemStack stack)
 	{
 		super.playerDestroy(world, player, pos, state, te, stack);
 		if(!EnchantmentHelper.getEnchantments(stack).containsKey(Enchantments.SILK_TOUCH))
@@ -37,7 +34,7 @@ public class MoltenBlock extends MagmaBlock
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random rand)
 	{
 		if(rand.nextInt(10) != 0)
 			return;

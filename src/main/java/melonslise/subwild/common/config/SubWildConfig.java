@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class SubWildConfig
@@ -97,7 +97,7 @@ public class SubWildConfig
 		SPEC = cfg.build();
 	}
 
-	public static boolean isAllowed(final World world)
+	public static boolean isAllowed(final Level world)
 	{
 		final String name = world.dimension().location().toString();
 		for(final String key : DIMENSION_WHITELIST.get())

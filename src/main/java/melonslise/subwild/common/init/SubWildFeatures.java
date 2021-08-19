@@ -26,14 +26,14 @@ import melonslise.subwild.common.world.gen.feature.cavetype.SandyCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.SandyRockyCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.SandyVolcanicCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.VolcanicCaveType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -76,7 +76,7 @@ public final class SubWildFeatures
 
 	public static void addFeatures(BiomeLoadingEvent event)
 	{
-		GenerationStage.Decoration stage = GenerationStage.Decoration.UNDERGROUND_DECORATION;
+		GenerationStep.Decoration stage = GenerationStep.Decoration.UNDERGROUND_DECORATION;
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 		switch (event.getCategory())
 		{
@@ -125,7 +125,7 @@ public final class SubWildFeatures
 		}
 	}
 
-	public static <T extends IFeatureConfig> RegistryObject<Feature<T>> add(String name, Feature<T> feature)
+	public static <T extends FeatureConfiguration> RegistryObject<Feature<T>> add(String name, Feature<T> feature)
 	{
 		return FEATURES.register(name, () -> feature);
 	}

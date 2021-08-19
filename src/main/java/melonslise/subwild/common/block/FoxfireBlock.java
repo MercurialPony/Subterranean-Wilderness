@@ -9,31 +9,29 @@ import com.google.common.collect.Lists;
 
 import melonslise.subwild.common.init.SubWildProperties;
 import melonslise.subwild.common.init.SubWildTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-
-import net.minecraft.block.AbstractBlock.Properties;
 
 public class FoxfireBlock extends Block implements IPlantable
 {
@@ -54,13 +52,13 @@ public class FoxfireBlock extends Block implements IPlantable
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
 	{
 		builder.add(SubWildProperties.GLOWING, BlockStateProperties.FACING);
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext ctx)
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx)
 	{
 		switch(state.getValue(BlockStateProperties.FACING))
 		{
@@ -77,7 +75,7 @@ public class FoxfireBlock extends Block implements IPlantable
 		case DOWN:
 			return SHAPE_DOWN;
 		default:
-			return VoxelShapes.empty();
+			return Shapes.empty();
 		}
 	}
 
@@ -86,7 +84,7 @@ public class FoxfireBlock extends Block implements IPlantable
 	 *	Block#tick receives scheduled ticks
 	 */
 	@Override
-	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand)
+	public void tick(BlockState state, ServerLevel world, BlockPos pos, Random rand)
 	{
 		boolean glowing = state.getValue(SubWildProperties.GLOWING);
 		if(world.getRawBrightness(pos, 0) < GLOWING_THRESHOLD != glowing)
@@ -115,58 +113,58 @@ public class FoxfireBlock extends Block implements IPlantable
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random rand)
 	{
 		if(state.getValue(SubWildProperties.GLOWING) && rand.nextInt(15) == 0)
 			world.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) pos.getX() + rand.nextDouble(), (double) pos.getY() + 0.5f, (double) pos.getZ() + rand.nextDouble(), 0d, 0d, 0d);
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext ctx) 
+	public BlockState getStateForPlacement(BlockPlaceContext ctx)
 	{
 		return this.defaultBlockState().setValue(SubWildProperties.GLOWING, ctx.getLevel().getRawBrightness(ctx.getClickedPos(), 0) < GLOWING_THRESHOLD).setValue(BlockStateProperties.FACING, ctx.getClickedFace());
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, IWorld world, BlockPos pos, BlockPos adjPos)
+	public BlockState updateShape(BlockState state, Direction side, BlockState adjState, LevelAccessor world, BlockPos pos, BlockPos adjPos)
 	{
 		return state.canSurvive(world, pos) ? super.updateShape(state, side, adjState, world, pos, adjPos) : Blocks.AIR.defaultBlockState();
 	}
 
 	// TODO Something better than a material check (e.g. tags)
 	// TODO Add forge thing support
-	public boolean isValidGround(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean isValidGround(BlockState state, LevelReader world, BlockPos pos)
 	{
 		return state.getMaterial() == Material.WOOD && state.isSolidRender(world, pos); //  && state.canSustainPlant(world, pos, side, this)
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos)
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos)
 	{
 		BlockPos adjPos = pos.relative(state.getValue(BlockStateProperties.FACING).getOpposite());
 		return this.isValidGround(world.getBlockState(adjPos), world, adjPos);
 	}
 
 	@Override
-	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader world, BlockPos pos, PathType type)
+	public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type)
 	{
-		return type == PathType.AIR && !this.hasCollision || super.isPathfindable(state, world, pos, type);
+		return type == PathComputationType.AIR && !this.hasCollision || super.isPathfindable(state, world, pos, type);
 	}
 
 	@Override
-	public PlantType getPlantType(IBlockReader world, BlockPos pos)
+	public PlantType getPlantType(BlockGetter world, BlockPos pos)
 	{
 		return PlantType.CAVE;
 	}
 
 	@Override
-	public BlockState getPlant(IBlockReader world, BlockPos pos)
+	public BlockState getPlant(BlockGetter world, BlockPos pos)
 	{
 		BlockState state = world.getBlockState(pos);
 		return state.getBlock() != this ? this.defaultBlockState() : state;

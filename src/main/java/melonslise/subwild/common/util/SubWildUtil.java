@@ -1,19 +1,18 @@
 package melonslise.subwild.common.util;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.state.Property;
-import net.minecraft.state.StateHolder;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FluidState;
 
 public final class SubWildUtil
 {
@@ -48,7 +47,7 @@ public final class SubWildUtil
 	}
 	*/
 
-	public static BlockState waterlog(BlockState state, IWorldReader world, BlockPos pos)
+	public static BlockState waterlog(BlockState state, LevelReader world, BlockPos pos)
 	{
 		FluidState fluidState = world.getFluidState(pos);
 		return state.setValue(BlockStateProperties.WATERLOGGED, fluidState.is(FluidTags.WATER) && fluidState.getAmount() == 8);

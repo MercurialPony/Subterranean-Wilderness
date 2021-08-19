@@ -10,10 +10,10 @@ import melonslise.subwild.common.world.gen.feature.CaveDecoFeature;
 import melonslise.subwild.common.world.gen.feature.CaveRangeConfig;
 import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DecoratedFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.DecoratedFeatureConfiguration;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,12 +33,12 @@ public final class SubWildClientForgeEvents
 			BlockPos pos = mc.player.blockPosition();
 			CaveType cave = null;
 			List<List<Supplier<ConfiguredFeature<?, ?>>>> stageToFeature = mc.level.getBiome(pos).getGenerationSettings().features();
-			final int stage = GenerationStage.Decoration.UNDERGROUND_DECORATION.ordinal();
+			final int stage = GenerationStep.Decoration.UNDERGROUND_DECORATION.ordinal();
 			if (stageToFeature.size() >= stage)
 				for (Supplier<ConfiguredFeature<?, ?>> supp : stageToFeature.get(stage)) {
 					ConfiguredFeature cf = supp.get();
-					if (cf.config instanceof DecoratedFeatureConfig) {
-						ConfiguredFeature cf1 = ((DecoratedFeatureConfig) cf.config).feature.get();
+					if (cf.config instanceof DecoratedFeatureConfiguration dFConfig) {
+						ConfiguredFeature cf1 = dFConfig.feature.get();
 						if (cf1.feature == SubWildFeatures.CAVE_DECO.get()) {
 							cave = ((CaveRangeConfig) cf1.config).getCaveTypeAt(CaveDecoFeature.depthAt(mc.level, pos));
 							break;

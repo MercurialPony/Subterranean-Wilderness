@@ -6,12 +6,12 @@ import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class DeadCoralCaveType extends BasicCaveType
 {
@@ -29,7 +29,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -43,7 +43,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -56,7 +56,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -75,7 +75,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -89,7 +89,7 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{

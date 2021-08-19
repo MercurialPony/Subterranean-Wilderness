@@ -2,8 +2,8 @@ package melonslise.subwild.common.capability;
 
 import melonslise.subwild.SubWild;
 import melonslise.subwild.common.util.OpenSimplex2F;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.WorldGenLevel;
 
 public class OpenSimplex2FNoise implements INoise
 {
@@ -16,7 +16,7 @@ public class OpenSimplex2FNoise implements INoise
 		this.os2f = new OpenSimplex2F(0);
 	}
 
-	public OpenSimplex2FNoise(ISeedReader world)
+	public OpenSimplex2FNoise(WorldGenLevel world)
 	{
 		this.os2f = new OpenSimplex2F(world.getSeed());
 	}

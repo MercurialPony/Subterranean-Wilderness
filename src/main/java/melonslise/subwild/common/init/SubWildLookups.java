@@ -4,10 +4,10 @@ package melonslise.subwild.common.init;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
 import net.minecraftforge.common.Tags;
 
 // FIXME Use tag sizes for map init
@@ -255,7 +255,7 @@ public final class SubWildLookups
 		put(ORE_TABLE.get(Blocks.BASALT), Tags.Blocks.ORES_EMERALD, SubWildBlocks.BASALT_EMERALD_ORE.get());
 	}
 
-	public static <K, V> void put(Map<K, V> lookup, ITag.INamedTag<K> keys, V value)
+	public static <K, V> void put(Map<K, V> lookup, Tag.Named<K> keys, V value)
 	{
 		for(K key : keys.getValues())
 			lookup.put(key, value);

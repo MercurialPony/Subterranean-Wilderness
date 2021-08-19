@@ -1,11 +1,10 @@
 package melonslise.subwild.common.init;
 
 import melonslise.subwild.common.capability.CapabilityProvider;
-import melonslise.subwild.common.capability.EmptyCapabilityStorage;
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.capability.OpenSimplex2FNoise;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -18,12 +17,12 @@ public final class SubWildCapabilities
 
 	public static void register()
 	{
-		CapabilityManager.INSTANCE.register(INoise.class, new EmptyCapabilityStorage(), OpenSimplex2FNoise::new);
+		CapabilityManager.INSTANCE.register(INoise.class);
 	}
 
-	public static void attachToWorld(AttachCapabilitiesEvent<World> event)
+	public static void attachToWorld(AttachCapabilitiesEvent<Level> event)
 	{
-		if(event.getObject() instanceof ISeedReader)
-			event.addCapability(OpenSimplex2FNoise.ID, new CapabilityProvider(NOISE_CAPABILITY, new OpenSimplex2FNoise((ISeedReader) event.getObject())));
+		if(event.getObject() instanceof WorldGenLevel worldGenLevel)
+			event.addCapability(OpenSimplex2FNoise.ID, new CapabilityProvider(NOISE_CAPABILITY, new OpenSimplex2FNoise(worldGenLevel)));
 	}
 }

@@ -1,10 +1,10 @@
 package melonslise.subwild.common.init;
 
 import melonslise.subwild.common.world.gen.feature.CaveRangeConfig;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 public final class SubWildConfiguredFeatures
 {
@@ -24,8 +24,8 @@ public final class SubWildConfiguredFeatures
 		CONFIGURED_MUSHROOM_CAVE_DECO = add("mushroom_cave_deco", SubWildFeatures.CAVE_DECO.get().configured(CaveRangeConfig.builder().add(SubWildFeatures.FUNGAL_CAVE, 0d, 1d).build()).decorated(SubWildConfiguredPlacements.CONFIGURED_AIR_CAVE)),
 		CONFIGURED_ROCKY_CAVE_DECO = add("rockyt_cave_deco", SubWildFeatures.CAVE_DECO.get().configured(CaveRangeConfig.builder().add(SubWildFeatures.ROCKY_CAVE, 0d, 0.8d).add(SubWildFeatures.VOLCANIC_CAVE, 0.8d, 1d).build()).decorated(SubWildConfiguredPlacements.CONFIGURED_AIR_CAVE));
 
-	public static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> add(String name, ConfiguredFeature<FC, ?> cf)
+	public static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> add(String name, ConfiguredFeature<FC, ?> cf)
 	{
-		return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, name, cf);
+		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, name, cf);
 	}
 }

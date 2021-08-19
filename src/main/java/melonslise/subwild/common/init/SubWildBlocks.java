@@ -13,23 +13,22 @@ import melonslise.subwild.common.block.PuddleBlock;
 import melonslise.subwild.common.block.RootsBlock;
 import melonslise.subwild.common.block.SpeleothemBlock;
 import melonslise.subwild.common.block.XpBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.GravelBlock;
-import net.minecraft.block.OreBlock;
-import net.minecraft.block.RedstoneOreBlock;
-import net.minecraft.block.SandBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GravelBlock;
+import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.RedStoneOreBlock;
+import net.minecraft.world.level.block.SandBlock;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -42,9 +41,10 @@ public final class SubWildBlocks
 {
 	public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, SubWild.ID);
 
+	// TODO Reimplement harvestLevel and harvestTool
 	// FIXME Speleothem pushreaction
 	public static final RegistryObject<Block>
-		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(Blocks.DIRT::defaultBlockState, Block.Properties.copy(Blocks.DIRT))),
+		DIRT_STAIRS = add("dirt_stairs", new StairBlock(Blocks.DIRT::defaultBlockState, Block.Properties.copy(Blocks.DIRT))),
 		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.copy(Blocks.DIRT))),
 
 		SHORT_FOXFIRE = add("short_foxfire", new FoxfireBlock(Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.NETHER_WART))),
@@ -57,14 +57,14 @@ public final class SubWildBlocks
 		DARK_BROWN_ROOTS = add("dark_brown_roots", new RootsBlock(Block.Properties.of(Material.PLANT).noCollission().strength(0.1f).sound(SoundType.NETHER_WART))),
 		ORANGE_ROOTS = add("orange_roots", new RootsBlock(Block.Properties.of(Material.PLANT).noCollission().strength(0.1f).sound(SoundType.NETHER_WART))),
 
-		DIRT_PATCH = add("dirt_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.DIRT).strength(0.1f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		MOSSY_DIRT_PATCH = add("mossy_dirt_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.PLANT).strength(0.1f).sound(SoundType.WET_GRASS).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		PODZOL_PATCH = add("podzol_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.PODZOL).strength(0.1f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		GRAVEL_PATCH = add("gravel_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.STONE).strength(0.15f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		SAND_PATCH = add("sand_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.1f).sound(SoundType.SAND).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		RED_SAND_PATCH = add("red_sand_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE).strength(0.1f).sound(SoundType.SAND).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		SNOW_PATCH = add("snow_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW).randomTicks().strength(0.1f).sound(SoundType.SNOW).requiresCorrectToolForDrops().harvestTool(ToolType.SHOVEL))),
-		ICE_PATCH = add("ice_patch", new MeltingPatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.ICE).friction(0.98f).strength(0.1f).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE))),
+		DIRT_PATCH = add("dirt_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.DIRT).strength(0.1f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops())),
+		MOSSY_DIRT_PATCH = add("mossy_dirt_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.PLANT).strength(0.1f).sound(SoundType.WET_GRASS).requiresCorrectToolForDrops())),
+		PODZOL_PATCH = add("podzol_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.PODZOL).strength(0.1f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops())),
+		GRAVEL_PATCH = add("gravel_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.STONE).strength(0.15f).sound(SoundType.GRAVEL).requiresCorrectToolForDrops())),
+		SAND_PATCH = add("sand_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.1f).sound(SoundType.SAND).requiresCorrectToolForDrops())),
+		RED_SAND_PATCH = add("red_sand_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE).strength(0.1f).sound(SoundType.SAND).requiresCorrectToolForDrops())),
+		SNOW_PATCH = add("snow_patch", new PatchBlock(Block.Properties.of(Material.TOP_SNOW).randomTicks().strength(0.1f).sound(SoundType.SNOW).requiresCorrectToolForDrops())),
+		ICE_PATCH = add("ice_patch", new MeltingPatchBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.ICE).friction(0.98f).strength(0.1f).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops())),
 		WATER_PUDDLE = add("water_puddle", new PuddleBlock(Block.Properties.of(Material.TOP_SNOW, MaterialColor.WATER).noCollission().strength(0f).noDrops().sound(SubWildSoundTypes.WATER))),
 
 		STONE_SPELEOTHEM = add("stone_speleothem", new SpeleothemBlock(Block.Properties.copy(Blocks.STONE))),
@@ -77,15 +77,15 @@ public final class SubWildBlocks
 		BLACKSTONE_SPELEOTHEM = add("blackstone_speleothem", new SpeleothemBlock(Block.Properties.copy(Blocks.BLACKSTONE))),
 		BASALT_SPELEOTHEM = add("basalt_speleothem", new SpeleothemBlock(Block.Properties.copy(Blocks.BASALT))),
 
-		FROZEN_STONE_SPELEOTHEM = add("frozen_stone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.STONE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), STONE_SPELEOTHEM)),
-		FROZEN_GRANITE_SPELEOTHEM = add("frozen_granite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.DIRT).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), GRANITE_SPELEOTHEM)),
-		FROZEN_DIORITE_SPELEOTHEM = add("frozen_diorite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.QUARTZ).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), DIORITE_SPELEOTHEM)),
-		FROZEN_ANDESITE_SPELEOTHEM = add("frozen_andesite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.STONE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), ANDESITE_SPELEOTHEM)),
-		FROZEN_SANDSTONE_SPELEOTHEM = add("frozen_sandstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.SAND).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), SANDSTONE_SPELEOTHEM)),
-		FROZEN_RED_SANDSTONE_SPELEOTHEM = add("frozen_red_sandstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_ORANGE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), RED_SANDSTONE_SPELEOTHEM)),
-		FROZEN_OBSIDIAN_SPELEOTHEM = add("frozen_obsidian_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), OBSIDIAN_SPELEOTHEM)),
-		FROZEN_BLACKSTONE_SPELEOTHEM = add("frozen_blackstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), BLACKSTONE_SPELEOTHEM)),
-		FROZEN_BASALT_SPELEOTHEM = add("frozen_basalt_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion().harvestTool(ToolType.PICKAXE), BASALT_SPELEOTHEM)),
+		FROZEN_STONE_SPELEOTHEM = add("frozen_stone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.STONE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), STONE_SPELEOTHEM)),
+		FROZEN_GRANITE_SPELEOTHEM = add("frozen_granite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.DIRT).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), GRANITE_SPELEOTHEM)),
+		FROZEN_DIORITE_SPELEOTHEM = add("frozen_diorite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.QUARTZ).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), DIORITE_SPELEOTHEM)),
+		FROZEN_ANDESITE_SPELEOTHEM = add("frozen_andesite_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.STONE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), ANDESITE_SPELEOTHEM)),
+		FROZEN_SANDSTONE_SPELEOTHEM = add("frozen_sandstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.SAND).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), SANDSTONE_SPELEOTHEM)),
+		FROZEN_RED_SANDSTONE_SPELEOTHEM = add("frozen_red_sandstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_ORANGE).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), RED_SANDSTONE_SPELEOTHEM)),
+		FROZEN_OBSIDIAN_SPELEOTHEM = add("frozen_obsidian_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), OBSIDIAN_SPELEOTHEM)),
+		FROZEN_BLACKSTONE_SPELEOTHEM = add("frozen_blackstone_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), BLACKSTONE_SPELEOTHEM)),
+		FROZEN_BASALT_SPELEOTHEM = add("frozen_basalt_speleothem", new EncasedSpeleothemBlock(Block.Properties.of(Material.ICE, MaterialColor.COLOR_BLACK).friction(0.98f).strength(0.5f).sound(SoundType.GLASS).noOcclusion(), BASALT_SPELEOTHEM)),
 
 		ICICLE = add("icicle", new IcicleBlock(Block.Properties.copy(Blocks.ICE))),
 
@@ -138,117 +138,117 @@ public final class SubWildBlocks
 		HOT_BLACKSTONE = add("hot_blackstone", new DrippingBlock(Block.Properties.copy(Blocks.BLACKSTONE), ParticleTypes.DRIPPING_LAVA)),
 		HOT_BASALT = add("hot_basalt", new DrippingBlock(Block.Properties.copy(Blocks.BASALT), ParticleTypes.DRIPPING_LAVA)),
 
-		SANDSTONE_COAL_ORE = add("sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		SANDSTONE_IRON_ORE = add("sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SANDSTONE_GOLD_ORE = add("sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SANDSTONE_LAPIS_ORE = add("sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		SANDSTONE_REDSTONE_ORE = add("sandstone_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		SANDSTONE_DIAMOND_ORE = add("sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		SANDSTONE_EMERALD_ORE = add("sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		SANDSTONE_COAL_ORE = add("sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 0, 2)),
+		SANDSTONE_IRON_ORE = add("sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SANDSTONE_GOLD_ORE = add("sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SANDSTONE_LAPIS_ORE = add("sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 2, 5)),
+		SANDSTONE_REDSTONE_ORE = add("sandstone_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SANDSTONE_DIAMOND_ORE = add("sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 3, 7)),
+		SANDSTONE_EMERALD_ORE = add("sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 3, 7)),
 
-		SMOOTH_SANDSTONE_COAL_ORE = add("smooth_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		SMOOTH_SANDSTONE_IRON_ORE = add("smooth_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_SANDSTONE_GOLD_ORE = add("smooth_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_SANDSTONE_LAPIS_ORE = add("smooth_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		SMOOTH_SANDSTONE_REDSTONE_ORE = add("smooth_sandstone_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_SANDSTONE_DIAMOND_ORE = add("smooth_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		SMOOTH_SANDSTONE_EMERALD_ORE = add("smooth_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		SMOOTH_SANDSTONE_COAL_ORE = add("smooth_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 0, 2)),
+		SMOOTH_SANDSTONE_IRON_ORE = add("smooth_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SMOOTH_SANDSTONE_GOLD_ORE = add("smooth_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SMOOTH_SANDSTONE_LAPIS_ORE = add("smooth_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 2, 5)),
+		SMOOTH_SANDSTONE_REDSTONE_ORE = add("smooth_sandstone_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f))),
+		SMOOTH_SANDSTONE_DIAMOND_ORE = add("smooth_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 3, 7)),
+		SMOOTH_SANDSTONE_EMERALD_ORE = add("smooth_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SANDSTONE).strength(1.6f), 3, 7)),
 
-		RED_SANDSTONE_COAL_ORE = add("red_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		RED_SANDSTONE_IRON_ORE = add("red_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		RED_SANDSTONE_GOLD_ORE = add("red_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		RED_SANDSTONE_LAPIS_ORE = add("red_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		RED_SANDSTONE_REDSTONE_ORE = add("red_sandstone_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		RED_SANDSTONE_DIAMOND_ORE = add("red_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		RED_SANDSTONE_EMERALD_ORE = add("red_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		RED_SANDSTONE_COAL_ORE = add("red_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f), 0, 2)),
+		RED_SANDSTONE_IRON_ORE = add("red_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f))),
+		RED_SANDSTONE_GOLD_ORE = add("red_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f))),
+		RED_SANDSTONE_LAPIS_ORE = add("red_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f), 2, 5)),
+		RED_SANDSTONE_REDSTONE_ORE = add("red_sandstone_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f))),
+		RED_SANDSTONE_DIAMOND_ORE = add("red_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f), 3, 7)),
+		RED_SANDSTONE_EMERALD_ORE = add("red_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.RED_SANDSTONE).strength(1.6f), 3, 7)),
 
-		SMOOTH_RED_SANDSTONE_COAL_ORE = add("smooth_red_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		SMOOTH_RED_SANDSTONE_IRON_ORE = add("smooth_red_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_RED_SANDSTONE_GOLD_ORE = add("smooth_red_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_RED_SANDSTONE_LAPIS_ORE = add("smooth_red_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		SMOOTH_RED_SANDSTONE_REDSTONE_ORE = add("smooth_red_sandstone_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		SMOOTH_RED_SANDSTONE_DIAMOND_ORE = add("smooth_red_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		SMOOTH_RED_SANDSTONE_EMERALD_ORE = add("smooth_red_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		SMOOTH_RED_SANDSTONE_COAL_ORE = add("smooth_red_sandstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f), 0, 2)),
+		SMOOTH_RED_SANDSTONE_IRON_ORE = add("smooth_red_sandstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f))),
+		SMOOTH_RED_SANDSTONE_GOLD_ORE = add("smooth_red_sandstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f))),
+		SMOOTH_RED_SANDSTONE_LAPIS_ORE = add("smooth_red_sandstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f), 2, 5)),
+		SMOOTH_RED_SANDSTONE_REDSTONE_ORE = add("smooth_red_sandstone_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f))),
+		SMOOTH_RED_SANDSTONE_DIAMOND_ORE = add("smooth_red_sandstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f), 3, 7)),
+		SMOOTH_RED_SANDSTONE_EMERALD_ORE = add("smooth_red_sandstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).strength(1.6f), 3, 7)),
 
-		TERRACOTTA_COAL_ORE = add("terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		TERRACOTTA_IRON_ORE = add("terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		TERRACOTTA_GOLD_ORE = add("terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		TERRACOTTA_LAPIS_ORE = add("terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		TERRACOTTA_REDSTONE_ORE = add("terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		TERRACOTTA_DIAMOND_ORE = add("terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		TERRACOTTA_EMERALD_ORE = add("terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		TERRACOTTA_COAL_ORE = add("terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 0, 2)),
+		TERRACOTTA_IRON_ORE = add("terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		TERRACOTTA_GOLD_ORE = add("terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		TERRACOTTA_LAPIS_ORE = add("terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 2, 5)),
+		TERRACOTTA_REDSTONE_ORE = add("terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		TERRACOTTA_DIAMOND_ORE = add("terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 3, 7)),
+		TERRACOTTA_EMERALD_ORE = add("terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 3, 7)),
 
-		WHITE_TERRACOTTA_COAL_ORE = add("white_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		WHITE_TERRACOTTA_IRON_ORE = add("white_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		WHITE_TERRACOTTA_GOLD_ORE = add("white_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		WHITE_TERRACOTTA_LAPIS_ORE = add("white_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		WHITE_TERRACOTTA_REDSTONE_ORE = add("white_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		WHITE_TERRACOTTA_DIAMOND_ORE = add("white_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		WHITE_TERRACOTTA_EMERALD_ORE = add("white_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		WHITE_TERRACOTTA_COAL_ORE = add("white_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f), 0, 2)),
+		WHITE_TERRACOTTA_IRON_ORE = add("white_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f))),
+		WHITE_TERRACOTTA_GOLD_ORE = add("white_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f))),
+		WHITE_TERRACOTTA_LAPIS_ORE = add("white_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f), 2, 5)),
+		WHITE_TERRACOTTA_REDSTONE_ORE = add("white_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f))),
+		WHITE_TERRACOTTA_DIAMOND_ORE = add("white_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f), 3, 7)),
+		WHITE_TERRACOTTA_EMERALD_ORE = add("white_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.WHITE_TERRACOTTA).strength(2.5f), 3, 7)),
 
-		ORANGE_TERRACOTTA_COAL_ORE = add("orange_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		ORANGE_TERRACOTTA_IRON_ORE = add("orange_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ORANGE_TERRACOTTA_GOLD_ORE = add("orange_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ORANGE_TERRACOTTA_LAPIS_ORE = add("orange_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		ORANGE_TERRACOTTA_REDSTONE_ORE = add("orange_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		ORANGE_TERRACOTTA_DIAMOND_ORE = add("orange_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		ORANGE_TERRACOTTA_EMERALD_ORE = add("orange_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		ORANGE_TERRACOTTA_COAL_ORE = add("orange_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f), 0, 2)),
+		ORANGE_TERRACOTTA_IRON_ORE = add("orange_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f))),
+		ORANGE_TERRACOTTA_GOLD_ORE = add("orange_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f))),
+		ORANGE_TERRACOTTA_LAPIS_ORE = add("orange_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f), 2, 5)),
+		ORANGE_TERRACOTTA_REDSTONE_ORE = add("orange_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f))),
+		ORANGE_TERRACOTTA_DIAMOND_ORE = add("orange_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f), 3, 7)),
+		ORANGE_TERRACOTTA_EMERALD_ORE = add("orange_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.ORANGE_TERRACOTTA).strength(2.5f), 3, 7)),
 
-		YELLOW_TERRACOTTA_COAL_ORE = add("yellow_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		YELLOW_TERRACOTTA_IRON_ORE = add("yellow_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		YELLOW_TERRACOTTA_GOLD_ORE = add("yellow_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		YELLOW_TERRACOTTA_LAPIS_ORE = add("yellow_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		YELLOW_TERRACOTTA_REDSTONE_ORE = add("yellow_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		YELLOW_TERRACOTTA_DIAMOND_ORE = add("yellow_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		YELLOW_TERRACOTTA_EMERALD_ORE = add("yellow_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		YELLOW_TERRACOTTA_COAL_ORE = add("yellow_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f), 0, 2)),
+		YELLOW_TERRACOTTA_IRON_ORE = add("yellow_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f))),
+		YELLOW_TERRACOTTA_GOLD_ORE = add("yellow_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f))),
+		YELLOW_TERRACOTTA_LAPIS_ORE = add("yellow_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f), 2, 5)),
+		YELLOW_TERRACOTTA_REDSTONE_ORE = add("yellow_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f))),
+		YELLOW_TERRACOTTA_DIAMOND_ORE = add("yellow_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f), 3, 7)),
+		YELLOW_TERRACOTTA_EMERALD_ORE = add("yellow_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.YELLOW_TERRACOTTA).strength(2.5f), 3, 7)),
 
-		LIGHT_GRAY_TERRACOTTA_COAL_ORE = add("light_gray_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		LIGHT_GRAY_TERRACOTTA_IRON_ORE = add("light_gray_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		LIGHT_GRAY_TERRACOTTA_GOLD_ORE = add("light_gray_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		LIGHT_GRAY_TERRACOTTA_LAPIS_ORE = add("light_gray_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		LIGHT_GRAY_TERRACOTTA_REDSTONE_ORE = add("light_gray_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		LIGHT_GRAY_TERRACOTTA_DIAMOND_ORE = add("light_gray_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		LIGHT_GRAY_TERRACOTTA_EMERALD_ORE = add("light_gray_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		LIGHT_GRAY_TERRACOTTA_COAL_ORE = add("light_gray_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 0, 2)),
+		LIGHT_GRAY_TERRACOTTA_IRON_ORE = add("light_gray_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		LIGHT_GRAY_TERRACOTTA_GOLD_ORE = add("light_gray_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		LIGHT_GRAY_TERRACOTTA_LAPIS_ORE = add("light_gray_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 2, 5)),
+		LIGHT_GRAY_TERRACOTTA_REDSTONE_ORE = add("light_gray_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f))),
+		LIGHT_GRAY_TERRACOTTA_DIAMOND_ORE = add("light_gray_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 3, 7)),
+		LIGHT_GRAY_TERRACOTTA_EMERALD_ORE = add("light_gray_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.TERRACOTTA).strength(2.5f), 3, 7)),
 
-		BROWN_TERRACOTTA_COAL_ORE = add("brown_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		BROWN_TERRACOTTA_IRON_ORE = add("brown_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BROWN_TERRACOTTA_GOLD_ORE = add("brown_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BROWN_TERRACOTTA_LAPIS_ORE = add("brown_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		BROWN_TERRACOTTA_REDSTONE_ORE = add("brown_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		BROWN_TERRACOTTA_DIAMOND_ORE = add("brown_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		BROWN_TERRACOTTA_EMERALD_ORE = add("brown_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		BROWN_TERRACOTTA_COAL_ORE = add("brown_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f), 0, 2)),
+		BROWN_TERRACOTTA_IRON_ORE = add("brown_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f))),
+		BROWN_TERRACOTTA_GOLD_ORE = add("brown_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f))),
+		BROWN_TERRACOTTA_LAPIS_ORE = add("brown_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f), 2, 5)),
+		BROWN_TERRACOTTA_REDSTONE_ORE = add("brown_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f))),
+		BROWN_TERRACOTTA_DIAMOND_ORE = add("brown_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f), 3, 7)),
+		BROWN_TERRACOTTA_EMERALD_ORE = add("brown_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BROWN_TERRACOTTA).strength(2.5f), 3, 7)),
 
-		RED_TERRACOTTA_COAL_ORE = add("red_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		RED_TERRACOTTA_IRON_ORE = add("red_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		RED_TERRACOTTA_GOLD_ORE = add("red_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		RED_TERRACOTTA_LAPIS_ORE = add("red_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		RED_TERRACOTTA_REDSTONE_ORE = add("red_terracotta_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		RED_TERRACOTTA_DIAMOND_ORE = add("red_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		RED_TERRACOTTA_EMERALD_ORE = add("red_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		RED_TERRACOTTA_COAL_ORE = add("red_terracotta_coal_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f), 0, 2)),
+		RED_TERRACOTTA_IRON_ORE = add("red_terracotta_iron_ore", new OreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f))),
+		RED_TERRACOTTA_GOLD_ORE = add("red_terracotta_gold_ore", new OreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f))),
+		RED_TERRACOTTA_LAPIS_ORE = add("red_terracotta_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f), 2, 5)),
+		RED_TERRACOTTA_REDSTONE_ORE = add("red_terracotta_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f))),
+		RED_TERRACOTTA_DIAMOND_ORE = add("red_terracotta_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f), 3, 7)),
+		RED_TERRACOTTA_EMERALD_ORE = add("red_terracotta_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.RED_TERRACOTTA).strength(2.5f), 3, 7)),
 
-		ICE_COAL_ORE = add("ice_coal_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		ICE_IRON_ORE = add("ice_iron_ore", new EncasedOreBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ICE_GOLD_ORE = add("ice_gold_ore", new EncasedOreBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		ICE_LAPIS_ORE = add("ice_lapis_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		ICE_REDSTONE_ORE = add("ice_redstone_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(2).harvestTool(ToolType.PICKAXE), 1, 6)),
-		ICE_DIAMOND_ORE = add("ice_diamond_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		ICE_EMERALD_ORE = add("ice_emerald_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops().harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		ICE_COAL_ORE = add("ice_coal_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops(), 0, 2)),
+		ICE_IRON_ORE = add("ice_iron_ore", new EncasedOreBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops())),
+		ICE_GOLD_ORE = add("ice_gold_ore", new EncasedOreBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops())),
+		ICE_LAPIS_ORE = add("ice_lapis_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops(), 2, 5)),
+		ICE_REDSTONE_ORE = add("ice_redstone_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops(), 1, 6)),
+		ICE_DIAMOND_ORE = add("ice_diamond_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops(), 3, 7)),
+		ICE_EMERALD_ORE = add("ice_emerald_ore", new XpBlock(Block.Properties.of(Material.ICE).strength(1f).friction(0.98F).noOcclusion().sound(SoundType.GLASS).requiresCorrectToolForDrops(), 3, 7)),
 
-		BLACKSTONE_COAL_ORE = add("blackstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		BLACKSTONE_IRON_ORE = add("blackstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_GOLD_ORE = add("blackstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_LAPIS_ORE = add("blackstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		BLACKSTONE_REDSTONE_ORE = add("blackstone_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		BLACKSTONE_DIAMOND_ORE = add("blackstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		BLACKSTONE_EMERALD_ORE = add("blackstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
+		BLACKSTONE_COAL_ORE = add("blackstone_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f), 0, 2)),
+		BLACKSTONE_IRON_ORE = add("blackstone_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f))),
+		BLACKSTONE_GOLD_ORE = add("blackstone_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f))),
+		BLACKSTONE_LAPIS_ORE = add("blackstone_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f), 2, 5)),
+		BLACKSTONE_REDSTONE_ORE = add("blackstone_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f))),
+		BLACKSTONE_DIAMOND_ORE = add("blackstone_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f), 3, 7)),
+		BLACKSTONE_EMERALD_ORE = add("blackstone_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BLACKSTONE).strength(3f), 3, 7)),
 
-		BASALT_COAL_ORE = add("basalt_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(0).harvestTool(ToolType.PICKAXE), 0, 2)),
-		BASALT_IRON_ORE = add("basalt_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BASALT_GOLD_ORE = add("basalt_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE))),
-		BASALT_LAPIS_ORE = add("basalt_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(1).harvestTool(ToolType.PICKAXE), 2, 5)),
-		BASALT_REDSTONE_ORE = add("basalt_redstone_ore", new RedstoneOreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE))),
-		BASALT_DIAMOND_ORE = add("basalt_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7)),
-		BASALT_EMERALD_ORE = add("basalt_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f).harvestLevel(2).harvestTool(ToolType.PICKAXE), 3, 7));
+		BASALT_COAL_ORE = add("basalt_coal_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f), 0, 2)),
+		BASALT_IRON_ORE = add("basalt_iron_ore", new OreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f))),
+		BASALT_GOLD_ORE = add("basalt_gold_ore", new OreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f))),
+		BASALT_LAPIS_ORE = add("basalt_lapis_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f), 2, 5)),
+		BASALT_REDSTONE_ORE = add("basalt_redstone_ore", new RedStoneOreBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f))),
+		BASALT_DIAMOND_ORE = add("basalt_diamond_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f), 3, 7)),
+		BASALT_EMERALD_ORE = add("basalt_emerald_ore", new XpBlock(Block.Properties.copy(Blocks.BASALT).strength(2.5f), 3, 7));
 
 	public static void register()
 	{

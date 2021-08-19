@@ -10,44 +10,44 @@ import com.mojang.serialization.Codec;
 
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildCapabilities;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.WorldDecoratingHelper;
-import net.minecraft.world.gen.placement.NoPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ProtoChunk;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.DecorationContext;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
-public class CavePlacement extends Placement<NoPlacementConfig>
+public class CavePlacement extends FeatureDecorator<NoneDecoratorConfiguration>
 {
-	public CavePlacement(Codec<NoPlacementConfig> codec)
+	public CavePlacement(Codec<NoneDecoratorConfiguration> codec)
 	{
 		super(codec);
 	}
 
 	@Override
-	public Stream<BlockPos> getPositions(WorldDecoratingHelper helper, Random rand, NoPlacementConfig cfg, BlockPos pos)
+	public Stream<BlockPos> getPositions(DecorationContext helper, Random rand, NoneDecoratorConfiguration cfg, BlockPos pos)
 	{
-		World world = helper.level.getLevel();
+		Level world = helper.getLevel().getLevel();
 		if(!SubWildConfig.isAllowed(world) || !world.getCapability(SubWildCapabilities.NOISE_CAPABILITY).isPresent())
 			return Stream.empty();
 		Set<BlockPos> set = new HashSet<>(1024);
-		IChunk chunk = helper.level.getChunk(pos);
+		ChunkAccess chunk = helper.getLevel().getChunk(pos);
 		ChunkPos chPos = chunk.getPos();
 		if(SubWildConfig.EXPENSIVE_SCAN.get())
 		{
-			BlockPos.Mutable mut = new BlockPos.Mutable();
+			BlockPos.MutableBlockPos mut = new BlockPos.MutableBlockPos();
 			for(int x = 0; x < 16; ++x)
 				for(int z = 0; z < 16; ++z)
-					for(int y = 0, yMax = chunk.getHeight(Heightmap.Type.OCEAN_FLOOR, x, z); y < yMax; ++y)
+					for(int y = 0, yMax = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR, x, z); y < yMax; ++y)
 						if(chunk.getBlockState(mut.set(x, y, z)).getBlock() == Blocks.CAVE_AIR)
 							set.add(mut.offset(chPos.getMinBlockX(), 0, chPos.getMinBlockZ()).immutable());
 		}
-		BitSet bits = ((ChunkPrimer) chunk).getOrCreateCarvingMask(GenerationStage.Carving.AIR);
+		BitSet bits = ((ProtoChunk) chunk).getOrCreateCarvingMask(GenerationStep.Carving.AIR);
 			for(int a = 0; a < bits.length(); ++a)
 				if(bits.get(a))
 					set.add(new BlockPos(chPos.getMinBlockX() + (a & 15), a >> 8, chPos.getMinBlockZ() + (a >> 4 & 15)));

@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.BakedModelWrapper;
@@ -21,7 +21,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 {
 	public final Predicate<ResourceLocation> filter;
 
-	public BrightnessBakedModel(IBakedModel model, Predicate<ResourceLocation> filter)
+	public BrightnessBakedModel(BakedModel model, Predicate<ResourceLocation> filter)
 	{
 		super(model);
 		this.filter = filter;

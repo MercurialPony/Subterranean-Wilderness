@@ -2,22 +2,20 @@ package melonslise.subwild.common.block;
 
 import java.util.Random;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class DrippingBlock extends Block
 {
-	public final IParticleData particle;
+	public final ParticleOptions particle;
 
-	public DrippingBlock(Properties properties, IParticleData particle)
+	public DrippingBlock(Properties properties, ParticleOptions particle)
 	{
 		super(properties);
 		this.particle = particle;
@@ -25,7 +23,7 @@ public class DrippingBlock extends Block
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random rand)
 	{
 		if(rand.nextInt(10) != 1)
 			return;

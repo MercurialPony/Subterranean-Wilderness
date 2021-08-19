@@ -16,11 +16,11 @@ version = '1.2.1'
 group = 'melonslise.subwild'
 archivesBaseName = 'subwild'
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
+java.toolchain.languageVersion = JavaLanguageVersion.of(16) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.16.5'
+    mappings channel: 'official', version: '1.17.1'
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -74,7 +74,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.2'
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.39'
 	//implementation fg.deobf("curse.maven:yungs_better_caves-340583:3170047")
 }
 

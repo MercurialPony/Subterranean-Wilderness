@@ -12,17 +12,17 @@ import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
 import melonslise.subwild.common.init.SubWildProperties;
 import melonslise.subwild.common.util.SubWildUtil;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.SlabType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.SlabType;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
 
 public class BasicCaveType extends CaveType
@@ -48,10 +48,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -67,10 +67,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -91,10 +91,10 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -109,22 +109,22 @@ public class BasicCaveType extends CaveType
 	}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
+	public void genFill(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand) {}
 
 	@Override
-	public boolean canGenSide(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass, Direction dir)
+	public boolean canGenSide(WorldGenLevel world, BlockPos pos, BlockState state, float depth, int pass, Direction dir)
 	{
 		return pass == 0 && (state.is(Tags.Blocks.STONE) || state.is(Tags.Blocks.DIRT) || state.is(Tags.Blocks.GRAVEL)) || state.is(Tags.Blocks.ORES);
 	}
 
 	@Override
-	public boolean canGenExtra(ISeedReader world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
+	public boolean canGenExtra(WorldGenLevel world, BlockPos pos, BlockState state, BlockPos sidePos, BlockState sideState, float depth, int pass, Direction dir)
 	{
 		return pass == 1 && state.isAir() && (sideState.is(Tags.Blocks.ORES) || sideState.getMaterial() == Material.WOOD || this.isNatural(world, sidePos, sideState));
 	}
 
 	@Override
-	public boolean canGenFill(ISeedReader world, BlockPos pos, BlockState state, float depth, int pass)
+	public boolean canGenFill(WorldGenLevel world, BlockPos pos, BlockState state, float depth, int pass)
 	{
 		return pass == 1 && state.isAir();
 	}
@@ -146,15 +146,15 @@ public class BasicCaveType extends CaveType
 		return (float) rand.nextInt(100) < baseCh + depth * 3f;
 	}
 
-	public void genRandSpel(ISeedReader world, BlockPos pos, BlockState state, float depth, Random rand)
+	public void genRandSpel(WorldGenLevel world, BlockPos pos, BlockState state, float depth, Random rand)
 	{
 		if (SubWildConfig.GENERATE_SPELEOTHEMS.get())
 			this.genSpel(world, pos, state, 1 + rand.nextInt(2) + rand.nextInt((int) (depth * 10f) + 1));
 	}
 
-	public void genSlope(ISeedReader world, BlockPos pos, Direction wallDir, Random rand)
+	public void genSlope(WorldGenLevel world, BlockPos pos, Direction wallDir, Random rand)
 	{
-		BlockPos.Mutable mutPos = new BlockPos.Mutable().set(pos);
+		BlockPos.MutableBlockPos mutPos = new BlockPos.MutableBlockPos().set(pos);
 		Block wall = world.getBlockState(mutPos.set(pos).move(wallDir)).getBlock();
 		final boolean isDown = this.isNatural(world, mutPos.set(pos).move(0, -1, 0), world.getBlockState(mutPos));
 		final boolean isUp = this.isNatural(world, mutPos.set(pos).move(0, 1, 0), world.getBlockState(mutPos));
