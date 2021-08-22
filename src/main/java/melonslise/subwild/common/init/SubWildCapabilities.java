@@ -7,18 +7,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
 public final class SubWildCapabilities
 {
 	@CapabilityInject(INoise.class)
 	public static final Capability<INoise> NOISE_CAPABILITY = null;
-
-	public static void register()
-	{
-		CapabilityManager.INSTANCE.register(INoise.class);
-	}
 
 	public static void attachToWorld(AttachCapabilitiesEvent<Level> event)
 	{

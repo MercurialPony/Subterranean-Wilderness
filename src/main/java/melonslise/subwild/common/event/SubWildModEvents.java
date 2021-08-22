@@ -1,8 +1,9 @@
 package melonslise.subwild.common.event;
 
 import melonslise.subwild.SubWild;
-import melonslise.subwild.common.init.SubWildCapabilities;
+import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.world.gen.feature.CaveDecoFeature;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -15,8 +16,6 @@ public final class SubWildModEvents
 	@SubscribeEvent
 	public static void onSetup(FMLCommonSetupEvent event)
 	{
-		SubWildCapabilities.register();
-
 		CaveDecoFeature.yungHack = ModList.get().isLoaded("bettercaves");
 		if(CaveDecoFeature.yungHack)
 		{
@@ -26,5 +25,11 @@ public final class SubWildModEvents
 			SubWild.LOGGER.warn("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			SubWild.LOGGER.warn("");
 		}
+	}
+
+	@SubscribeEvent
+	public static void registerCapability(RegisterCapabilitiesEvent event)
+	{
+		event.register(INoise.class);
 	}
 }
