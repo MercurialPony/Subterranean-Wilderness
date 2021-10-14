@@ -44,8 +44,8 @@ public final class SubWildBlocks
 
 	// FIXME Speleothem pushreaction
 	public static final RegistryObject<Block>
-		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(Blocks.DIRT::defaultBlockState, Block.Properties.copy(Blocks.DIRT))),
-		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.copy(Blocks.DIRT))),
+		DIRT_STAIRS = add("dirt_stairs", new StairsBlock(Blocks.DIRT::defaultBlockState, Block.Properties.copy(Blocks.DIRT).strength(0.5F).sound(SoundType.GRASS))),
+		DIRT_SLAB = add("dirt_slab", new SlabBlock(Block.Properties.copy(Blocks.DIRT).strength(0.5F).sound(SoundType.GRASS))),
 
 		SHORT_FOXFIRE = add("short_foxfire", new FoxfireBlock(Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.NETHER_WART))),
 		LONG_FOXFIRE = add("long_foxfire", new FoxfireBlock(Block.Properties.of(Material.PLANT).noCollission().strength(0f).sound(SoundType.NETHER_WART))),
@@ -103,21 +103,21 @@ public final class SubWildBlocks
 
 		// TODO add to mossy tag?
 		// TODO when 1.17 comes out: add extra recipe that uses a moss block instead of vines in line with Vanilla 1.17
-		MOSSY_DIRT = add("mossy_dirt", new Block(Block.Properties.copy(Blocks.DIRT))),
-		MOSSY_SAND = add("mossy_sand",  new SandBlock(0xDBD3A0, Block.Properties.copy(Blocks.SAND))),
-		MOSSY_RED_SAND = add("mossy_red_sand", new SandBlock(0xA95821, Block.Properties.copy(Blocks.RED_SAND))),
-		MOSSY_GRAVEL = add("mossy_gravel", new GravelBlock(Block.Properties.copy(Blocks.GRAVEL))),
-		MOSSY_STONE = add("mossy_stone", new Block(Block.Properties.copy(Blocks.STONE))), // TODO: make this drop mossy cobble when mined normally, mossy stone when mined with silk touch
-		MOSSY_GRANITE = add("mossy_granite", new Block(Block.Properties.copy(Blocks.GRANITE))),
-		MOSSY_DIORITE = add("mossy_diorite", new Block(Block.Properties.copy(Blocks.DIORITE))),
-		MOSSY_ANDESITE = add("mossy_andesite", new Block(Block.Properties.copy(Blocks.ANDESITE))),
-		MOSSY_SANDSTONE = add("mossy_sandstone", new Block(Block.Properties.copy(Blocks.SANDSTONE))),
-		MOSSY_SMOOTH_SANDSTONE = add("mossy_smooth_sandstone", new Block(Block.Properties.copy(Blocks.SMOOTH_SANDSTONE))),
-		MOSSY_RED_SANDSTONE = add("mossy_red_sandstone", new Block(Block.Properties.copy(Blocks.RED_SANDSTONE))),
-		MOSSY_SMOOTH_RED_SANDSTONE = add("mossy_smooth_red_sandstone", new Block(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE))),
-		MOSSY_OBSIDIAN = add("mossy_obsidian", new Block(Block.Properties.copy(Blocks.OBSIDIAN))),
-		MOSSY_BLACKSTONE = add("mossy_blackstone", new Block(Block.Properties.copy(Blocks.BLACKSTONE))),
-		MOSSY_BASALT = add("mossy_basalt", new Block(Block.Properties.copy(Blocks.BASALT))),
+		MOSSY_DIRT = add("mossy_dirt", new Block(Block.Properties.copy(Blocks.DIRT).strength(0.5F).sound(SoundType.GRASS))),
+		MOSSY_SAND = add("mossy_sand",  new SandBlock(0xDBD3A0, Block.Properties.copy(Blocks.SAND).strength(0.5F).sound(SoundType.SAND))),
+		MOSSY_RED_SAND = add("mossy_red_sand", new SandBlock(0xA95821, Block.Properties.copy(Blocks.RED_SAND).strength(0.5F).sound(SoundType.SAND))),
+		MOSSY_GRAVEL = add("mossy_gravel", new GravelBlock(Block.Properties.copy(Blocks.GRAVEL).strength(0.6F).sound(SoundType.GRASS))),
+		MOSSY_STONE = add("mossy_stone", new Block(Block.Properties.copy(Blocks.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F))), // TODO: make this drop mossy cobble when mined normally, mossy stone when mined with silk touch
+		MOSSY_GRANITE = add("mossy_granite", new Block(Block.Properties.copy(Blocks.GRANITE).requiresCorrectToolForDrops().strength(1.5F, 6.0F))),
+		MOSSY_DIORITE = add("mossy_diorite", new Block(Block.Properties.copy(Blocks.DIORITE).requiresCorrectToolForDrops().strength(1.5F, 6.0F))),
+		MOSSY_ANDESITE = add("mossy_andesite", new Block(Block.Properties.copy(Blocks.ANDESITE).requiresCorrectToolForDrops().strength(1.5F, 6.0F))),
+		MOSSY_SANDSTONE = add("mossy_sandstone", new Block(Block.Properties.copy(Blocks.SANDSTONE).requiresCorrectToolForDrops().strength(0.8F))),
+		MOSSY_SMOOTH_SANDSTONE = add("mossy_smooth_sandstone", new Block(Block.Properties.copy(Blocks.SMOOTH_SANDSTONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
+		MOSSY_RED_SANDSTONE = add("mossy_red_sandstone", new Block(Block.Properties.copy(Blocks.RED_SANDSTONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
+		MOSSY_SMOOTH_RED_SANDSTONE = add("mossy_smooth_red_sandstone", new Block(Block.Properties.copy(Blocks.SMOOTH_RED_SANDSTONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F))),
+		MOSSY_OBSIDIAN = add("mossy_obsidian", new Block(Block.Properties.copy(Blocks.OBSIDIAN).requiresCorrectToolForDrops().strength(50.0F, 1200.0F))),
+		MOSSY_BLACKSTONE = add("mossy_blackstone", new Block(Block.Properties.copy(Blocks.BLACKSTONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F))),
+		MOSSY_BASALT = add("mossy_basalt", new Block(Block.Properties.copy(Blocks.BASALT).requiresCorrectToolForDrops().strength(1.25F, 4.2F).sound(SoundType.BASALT))),
 
 		// FIXME add the rest of the variants?
 		WET_STONE = add("wet_stone", new DrippingBlock(Block.Properties.copy(Blocks.STONE), ParticleTypes.DRIPPING_WATER)),
