@@ -6,12 +6,12 @@ import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class DeadCoralCaveType extends BasicCaveType
 {
@@ -29,34 +29,34 @@ public class DeadCoralCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
-				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
+				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].defaultBlockState());
 			else if(d > 0.6d)
-				this.replaceBlock(world, pos, Blocks.PRISMARINE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.PRISMARINE.defaultBlockState());
 		}
 		super.genFloor(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			if(SubWildConfig.GENERATE_PUDDLES.get() && this.getNoise(noise, pos, 0.125d) < 0.4d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 			if(SubWildConfig.GENERATE_DEAD_FLOOR_CORAL.get() && this.getNoise(noise, pos, 0.15d) > 0.6d)
-				this.genBlock(world, pos, DEAD_CORAL[rand.nextInt(DEAD_CORAL.length)].getDefaultState().with(BlockStateProperties.WATERLOGGED, false)); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_CORAL.length)
+				this.genBlock(world, pos, DEAD_CORAL[rand.nextInt(DEAD_CORAL.length)].defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false)); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_CORAL.length)
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -66,35 +66,35 @@ public class DeadCoralCaveType extends BasicCaveType
 			{
 				final double d = this.getNoise(noise, pos, 0.125d);
 				if(d < -0.4d)
-					this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
+					this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].defaultBlockState());
 				else if(d > 0.2d)
-					this.replaceBlock(world, pos, Blocks.PRISMARINE.getDefaultState());
+					this.replaceBlock(world, pos, Blocks.PRISMARINE.defaultBlockState());
 			}
 		}
 		super.genCeil(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.2d)
-				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].getDefaultState());
+				this.replaceBlock(world, pos, DEAD_CORAL_BLOCKS[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) DEAD_CORAL_BLOCKS.length)].defaultBlockState());
 			else if(d > 0.4d)
-				this.replaceBlock(world, pos, Blocks.PRISMARINE.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.PRISMARINE.defaultBlockState());
 		}
 		super.genWall(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			if(SubWildConfig.GENERATE_DEAD_WALL_CORAL.get() && this.getNoise(noise, pos, 0.15d) > 0.5d)
-				this.genBlock(world, pos, DEAD_WALL_CORAL[rand.nextInt(DEAD_WALL_CORAL.length)].getDefaultState().with(BlockStateProperties.WATERLOGGED, false).with(BlockStateProperties.HORIZONTAL_FACING, wallDir.getOpposite())); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_WALL_CORAL.length)
+				this.genBlock(world, pos, DEAD_WALL_CORAL[rand.nextInt(DEAD_WALL_CORAL.length)].defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockStateProperties.HORIZONTAL_FACING, wallDir.getOpposite())); // (int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) DEAD_WALL_CORAL.length)
 		}
 		super.genWallExtra(world, noise, pos, wallDir, depth, pass, rand);
 	}

@@ -7,13 +7,13 @@ import com.mojang.serialization.Codec;
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.init.SubWildCapabilities;
 import melonslise.subwild.common.world.gen.feature.cavetype.CaveType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class CaveDecoFeature extends Feature<CaveRangeConfig>
 {
@@ -25,21 +25,26 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 	public static boolean yungHack = false;
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator gen, Random rand, BlockPos pos, CaveRangeConfig cfg)
+	public boolean place(FeaturePlaceContext<CaveRangeConfig> featurePlaceContext)
 	{
+		WorldGenLevel world = featurePlaceContext.level();
+		Random rand = featurePlaceContext.random();
+		BlockPos pos = featurePlaceContext.origin();
+		CaveRangeConfig cfg = featurePlaceContext.config();
+
 		final float depth = depthAt(world, pos);
 		if(depth < 0f)
 			return false;
 		CaveType type = cfg.getCaveTypeAt(depth);
 		if(type == null)
 			return false;
-		INoise noise = world.getWorld().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
-		BlockPos.Mutable adjPos = new BlockPos.Mutable();
+		INoise noise = world.getLevel().getCapability(SubWildCapabilities.NOISE_CAPABILITY).orElse(null);
+		BlockPos.MutableBlockPos adjPos = new BlockPos.MutableBlockPos();
 		for(int pass = 0; pass < type.getPasses(); ++pass)
 		{
 			for(Direction dir : type.getGenOrder(pass))
 			{
-				adjPos.setPos(pos).move(dir);
+				adjPos.set(pos).move(dir);
 				if(type.canGenSide(world, adjPos, world.getBlockState(adjPos), depth, pass, dir))
 					switch (dir)
 					{
@@ -95,8 +100,8 @@ public class CaveDecoFeature extends Feature<CaveRangeConfig>
 		return false;
 	}
 
-	public static float depthAt(IWorld world, BlockPos pos)
+	public static float depthAt(LevelAccessor world, BlockPos pos)
 	{
-		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Type.OCEAN_FLOOR, pos.getX(), pos.getZ());
+		return 1f - (float) pos.getY() / (float) world.getHeight(Heightmap.Types.OCEAN_FLOOR, pos.getX(), pos.getZ());
 	}
 }

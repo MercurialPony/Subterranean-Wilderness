@@ -5,12 +5,12 @@ import java.util.Random;
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.surfacebuilders.BadlandsSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.surfacebuilders.BadlandsSurfaceBuilder;
+import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 
 public class MesaCaveType extends BasicCaveType
 {
@@ -24,13 +24,13 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d > 0.2d)
-				this.replaceBlock(world, pos, Blocks.RED_SAND.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.RED_SAND.defaultBlockState());
 			else
 				this.genTerracotta(world, pos);
 		}
@@ -38,21 +38,21 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			final double d = this.getNoise(noise, pos, 0.1d);
 			if(SubWildConfig.GENERATE_PATCHES.get() && d > -0.5d && d < 0.5d)
-				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().getDefaultState(), d, -0.5d, 0.5d, 5);
+				this.genLayer(world, pos, SubWildBlocks.RED_SAND_PATCH.get().defaultBlockState(), d, -0.5d, 0.5d, 5);
 			else if(SubWildConfig.GENERATE_DEAD_BUSHES.get() && rand.nextFloat() < (SubWildConfig.MESA_DEAD_BUSHES_CHANCE.get().floatValue() / 100))
-				this.genBlock(world, pos, Blocks.DEAD_BUSH.getDefaultState());
+				this.genBlock(world, pos, Blocks.DEAD_BUSH.defaultBlockState());
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -62,7 +62,7 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -72,12 +72,12 @@ public class MesaCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand) {}
 
-	public void genTerracotta(ISeedReader world, BlockPos pos)
+	public void genTerracotta(WorldGenLevel world, BlockPos pos)
 	{
 		BadlandsSurfaceBuilder builder = (BadlandsSurfaceBuilder) SurfaceBuilder.BADLANDS;
-		builder.setSeed(world.getSeed());
-		this.replaceBlock(world, pos, builder.func_215431_a(pos.getX(), pos.getY(), pos.getZ()));
+		builder.initNoise(world.getSeed());
+		this.replaceBlock(world, pos, builder.getBand(pos.getX(), pos.getY(), pos.getZ()));
 	}
 }

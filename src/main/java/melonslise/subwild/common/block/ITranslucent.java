@@ -1,7 +1,7 @@
 package melonslise.subwild.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 public interface ITranslucent
 {
@@ -13,6 +13,6 @@ public interface ITranslucent
 	static boolean isAdjacentIce(BlockState state)
 	{
 		Block block = state.getBlock();
-		return block instanceof ITranslucent && ((ITranslucent) block).isIce(state);
+		return block instanceof ITranslucent iTranslucent && iTranslucent.isIce(state);
 	}
 }

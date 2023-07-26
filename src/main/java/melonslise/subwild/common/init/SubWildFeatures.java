@@ -26,14 +26,14 @@ import melonslise.subwild.common.world.gen.feature.cavetype.SandyCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.SandyRockyCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.SandyVolcanicCaveType;
 import melonslise.subwild.common.world.gen.feature.cavetype.VolcanicCaveType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -76,56 +76,56 @@ public final class SubWildFeatures
 
 	public static void addFeatures(BiomeLoadingEvent event)
 	{
-		GenerationStage.Decoration stage = GenerationStage.Decoration.UNDERGROUND_DECORATION;
+		GenerationStep.Decoration stage = GenerationStep.Decoration.UNDERGROUND_DECORATION;
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 		switch (event.getCategory())
 		{
 		case BEACH:
 		case OCEAN:
 		case RIVER:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_AIR_CAVE_DECO);
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_LIQUID_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_AIR_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_WET_LIQUID_CAVE_DECO);
 			break;
 		case TAIGA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_TAIGA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_TAIGA_CAVE_DECO);
 			break;
 		case EXTREME_HILLS:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_EXTREME_HILLS_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_EXTREME_HILLS_CAVE_DECO);
 			break;
 		case JUNGLE:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_JUNGLE_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_JUNGLE_CAVE_DECO);
 			break;
 		case MESA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MESA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MESA_CAVE_DECO);
 			break;
 		case PLAINS:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_PLAINS_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_PLAINS_CAVE_DECO);
 			break;
 		case SAVANNA:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SAVANNA_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SAVANNA_CAVE_DECO);
 			break;
 		case ICY:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ICY_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ICY_CAVE_DECO);
 			break;
 		case FOREST:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_FOREST_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_FOREST_CAVE_DECO);
 			break;
 		case DESERT:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_DESERT_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_DESERT_CAVE_DECO);
 			break;
 		case SWAMP:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SWAMP_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_SWAMP_CAVE_DECO);
 			break;
 		case MUSHROOM:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MUSHROOM_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_MUSHROOM_CAVE_DECO);
 			break;
 		default:
-			generation.withFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ROCKY_CAVE_DECO);
+			generation.addFeature(stage, SubWildConfiguredFeatures.CONFIGURED_ROCKY_CAVE_DECO);
 			break;
 		}
 	}
 
-	public static <T extends IFeatureConfig> RegistryObject<Feature<T>> add(String name, Feature<T> feature)
+	public static <T extends FeatureConfiguration> RegistryObject<Feature<T>> add(String name, Feature<T> feature)
 	{
 		return FEATURES.register(name, () -> feature);
 	}

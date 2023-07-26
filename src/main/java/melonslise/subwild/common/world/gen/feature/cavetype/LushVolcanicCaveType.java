@@ -5,11 +5,11 @@ import java.util.Random;
 import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildLookups;
-import net.minecraft.block.Blocks;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class LushVolcanicCaveType extends BasicCaveType
 {
@@ -21,17 +21,17 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
 			final double d = this.getNoise(noise, pos, 0.125d);
 			if(d < -0.55d )
-				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.MAGMA_BLOCK.defaultBlockState());
 			else if(d < -0.2d)
 				this.modifyBlock(world, pos, SubWildLookups.MOLTEN);
 			else if(d > 0.4d)
-				this.replaceBlock(world, pos, Blocks.DIRT.getDefaultState());
+				this.replaceBlock(world, pos, Blocks.DIRT.defaultBlockState());
 			else if (d > 0.2d)
 				this.modifyBlock(world, pos, SubWildLookups.MOSSY);
 		}
@@ -39,24 +39,24 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			if(this.getNoise(noise, pos, 0.2d) > 0.4d)
-				this.genBlock(world, pos, LushCaveType.LEAVES[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) LushCaveType.LEAVES.length)].getDefaultState().with(BlockStateProperties.PERSISTENT, true));
+				this.genBlock(world, pos, LushCaveType.LEAVES[(int) (this.getClampedNoise(noise, pos, 0.015625d) * (double) LushCaveType.LEAVES.length)].defaultBlockState().setValue(BlockStateProperties.PERSISTENT, true));
 			if(this.getNoise(noise, pos, 0.16d) > 0.5d)
-				this.genBlock(world, pos, LushCaveType.PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) LushCaveType.PLANTS.length)].getDefaultState());
+				this.genBlock(world, pos, LushCaveType.PLANTS[(int) (this.getClampedNoise(noise, pos, 0.03125d) * (double) LushCaveType.PLANTS.length)].defaultBlockState());
 			if(SubWildConfig.GENERATE_SAPLINGS.get() && rand.nextFloat() < (SubWildConfig.LUSH_VOLCANIC_SAPLINGS_CHANCE.get().floatValue() / 100))
-				this.genBlock(world, pos, LushCaveType.SAPLINGS[rand.nextInt(LushCaveType.SAPLINGS.length)].getDefaultState());
+				this.genBlock(world, pos, LushCaveType.SAPLINGS[rand.nextInt(LushCaveType.SAPLINGS.length)].defaultBlockState());
 			else if(rand.nextInt(45) == 0)
-				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);
+				world.setBlock(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].defaultBlockState(), 2);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -70,7 +70,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -81,7 +81,7 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -95,13 +95,13 @@ public class LushVolcanicCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			int len = 3 + rand.nextInt(2);
 			float ch = 0.2f;
-			if(world.getBlockState(pos.down()).isAir())
+			if(world.getBlockState(pos.below()).isAir())
 			{
 				ch += 0.35f;
 				len += rand.nextInt(8);

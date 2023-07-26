@@ -2,12 +2,12 @@ package melonslise.subwild.common.block;
 
 import java.util.Random;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -15,21 +15,21 @@ public class IcicleBlock extends SpeleothemBlock
 {
 	public IcicleBlock(Properties properties)
 	{
-		super(properties.tickRandomly());
+		super(properties.randomTicks());
 	}
 
-	public boolean isHot(World world, BlockPos pos, BlockState state)
+	public boolean isHot(Level world, BlockPos pos, BlockState state)
 	{
-		return world.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(world, pos);
+		return world.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(world, pos);
 	}
 
-	public void melt(World world, BlockPos pos, BlockState state)
+	public void melt(Level world, BlockPos pos, BlockState state)
 	{
 		this.tryToFall(world, pos, state);
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
+	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random)
 	{
 		if(this.isHot(world, pos, state))
 			this.melt(world, pos, state);
@@ -37,11 +37,11 @@ public class IcicleBlock extends SpeleothemBlock
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand)
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random rand)
 	{
 		if(!this.isHot(world, pos, state) || rand.nextInt(5) != 0)
 			return;
-		state.getShape(world, pos).forEachBox((minX, minY, minZ, maxX, maxY, maxZ) ->
+		state.getShape(world, pos).forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
 		{
 			final double x = minX + rand.nextDouble() * (maxX - minX);
 			final double y = minY + rand.nextDouble() * (maxY - minY);

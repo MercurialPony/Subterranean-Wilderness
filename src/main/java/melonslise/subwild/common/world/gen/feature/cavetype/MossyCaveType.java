@@ -6,10 +6,10 @@ import melonslise.subwild.common.capability.INoise;
 import melonslise.subwild.common.config.SubWildConfig;
 import melonslise.subwild.common.init.SubWildBlocks;
 import melonslise.subwild.common.init.SubWildLookups;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 
 public class MossyCaveType extends BasicCaveType
 {
@@ -20,7 +20,7 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloor(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloor(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -31,20 +31,20 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFloorExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFloorExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			if(SubWildConfig.GENERATE_PUDDLES.get() && this.getNoise(noise, pos, 0.125d) < 0d)
-				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().getDefaultState());
+				this.genBlock(world, pos, SubWildBlocks.WATER_PUDDLE.get().defaultBlockState());
 			else if(rand.nextInt(36) == 0)
-				world.setBlockState(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].getDefaultState(), 2);
+				world.setBlock(pos, LushCaveType.MUSHROOMS[rand.nextInt(LushCaveType.MUSHROOMS.length)].defaultBlockState(), 2);
 		}
 		super.genFloorExtra(world, noise, pos, depth, pass, rand);
 	}
 
 	@Override
-	public void genCeil(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeil(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -57,7 +57,7 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genCeilExtra(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genCeilExtra(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
@@ -68,7 +68,7 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWall(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genWall(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 0)
 		{
@@ -79,12 +79,12 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genWallExtra(ISeedReader world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
+	public void genWallExtra(WorldGenLevel world, INoise noise, BlockPos pos, Direction wallDir, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
 			double ch = (1f - depth) * 0.3f;
-			if(world.getBlockState(pos.down()).isAir())
+			if(world.getBlockState(pos.below()).isAir())
 				ch *= 2f;
 			if(rand.nextFloat() < ch)
 				this.genVines(world, pos, wallDir, 1 + rand.nextInt((int) (7f - depth * 7f) + 1) + rand.nextInt(2));
@@ -93,12 +93,12 @@ public class MossyCaveType extends BasicCaveType
 	}
 
 	@Override
-	public void genFill(ISeedReader world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
+	public void genFill(WorldGenLevel world, INoise noise, BlockPos pos, float depth, int pass, Random rand)
 	{
 		if(pass == 1)
 		{
-			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_LILYPADS_CHANCE.get().floatValue() / 100) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER)
-				this.genBlock(world, pos, Blocks.LILY_PAD.getDefaultState());
+			if(SubWildConfig.GENERATE_LILYPADS.get() && rand.nextFloat() < (SubWildConfig.MOSSY_LILYPADS_CHANCE.get().floatValue() / 100) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER)
+				this.genBlock(world, pos, Blocks.LILY_PAD.defaultBlockState());
 		}
 	}
 }

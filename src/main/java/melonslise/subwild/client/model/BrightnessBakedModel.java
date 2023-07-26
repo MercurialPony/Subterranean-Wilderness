@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.BakedModelWrapper;
@@ -21,7 +21,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 {
 	public final Predicate<ResourceLocation> filter;
 
-	public BrightnessBakedModel(IBakedModel model, Predicate<ResourceLocation> filter)
+	public BrightnessBakedModel(BakedModel model, Predicate<ResourceLocation> filter)
 	{
 		super(model);
 		this.filter = filter;
@@ -33,7 +33,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 		List<BakedQuad> quads = this.originalModel.getQuads(state, side, rand, data);
 		for(BakedQuad quad : quads)
 		{
-			if(quad.getVertexData()[6] == 0x00F00F0)
+			if(quad.getVertices()[6] == 0x00F00F0)
 				break;
 			if(this.filter.test(quad.getSprite().getName()))
 				transformQuad(quad);
@@ -43,7 +43,7 @@ public class BrightnessBakedModel extends BakedModelWrapper
 
 	public static void transformQuad(BakedQuad quad)
 	{
-		int[] vertexData = quad.getVertexData();
+		int[] vertexData = quad.getVertices();
 		final int step = vertexData.length / 4;
 		vertexData[6] = 0x00F000F0;
 		vertexData[6 + step] = 0x00F000F0;

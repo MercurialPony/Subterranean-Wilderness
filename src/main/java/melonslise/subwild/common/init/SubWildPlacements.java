@@ -3,28 +3,28 @@ package melonslise.subwild.common.init;
 import melonslise.subwild.SubWild;
 import melonslise.subwild.common.world.gen.feature.CavePlacement;
 import melonslise.subwild.common.world.gen.feature.LiquidCavePlacement;
-import net.minecraft.world.gen.placement.IPlacementConfig;
-import net.minecraft.world.gen.placement.NoPlacementConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.levelgen.feature.configurations.DecoratorConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public final class SubWildPlacements
 {
-	public static final DeferredRegister<Placement<?>> PLACEMENTS = DeferredRegister.create(ForgeRegistries.DECORATORS, SubWild.ID);
+	public static final DeferredRegister<FeatureDecorator<?>> PLACEMENTS = DeferredRegister.create(ForgeRegistries.DECORATORS, SubWild.ID);
 
-	public static final RegistryObject<Placement<NoPlacementConfig>>
-		CAVE = add("cave", new CavePlacement(NoPlacementConfig.CODEC)),
-		LIQUID_CAVE = add("liquid_cave", new LiquidCavePlacement(NoPlacementConfig.CODEC));
+	public static final RegistryObject<FeatureDecorator<NoneDecoratorConfiguration>>
+		CAVE = add("cave", new CavePlacement(NoneDecoratorConfiguration.CODEC)),
+		LIQUID_CAVE = add("liquid_cave", new LiquidCavePlacement(NoneDecoratorConfiguration.CODEC));
 
 	public static void register()
 	{
 		PLACEMENTS.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	public static <T extends IPlacementConfig> RegistryObject<Placement<T>> add(String name, Placement<T> pl)
+	public static <T extends DecoratorConfiguration> RegistryObject<FeatureDecorator<T>> add(String name, FeatureDecorator<T> pl)
 	{
 		return PLACEMENTS.register(name, () -> pl);
 	}
